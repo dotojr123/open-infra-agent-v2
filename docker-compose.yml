@@ -1,0 +1,18 @@
+services:
+  iagencia-desktop:
+    build:
+      context: .
+      dockerfile: iagenciad/Dockerfile
+    image: iagencia-desktop:latest
+    container_name: iagencia-desktop
+    ports:
+      - "9990:9990"
+    restart: unless-stopped
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - iagencia-data:/home/user
+    shm_size: '2gb'
+
+volumes:
+  iagencia-data:
