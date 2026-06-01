@@ -147,9 +147,9 @@ A single active agent session can be monitored simultaneously by multiple roles 
 
 ## 🔒 Defense-in-Depth Security Model
 
-Deploying autonomous execution requires secure, enterprise-grade guardrails:
+Deploying autonomous execution requires production-grade safeguards:
 
-* **🛡️ execFile-only Execution**: The agent daemon uses zero system shell wrapping. By calling system commands through direct binary execution (`execFile`), we eliminate entire classes of shell injection vulnerabilities.
+* **🛡️ execFile-only Execution**: The agent daemon uses zero system shell wrapping. By calling system commands through direct binary execution (`execFile`), we eliminate an entire class of shell injection vulnerabilities by avoiding shell invocation entirely.
 * **🐳 Namespace & Kernel Isolation**: Container boundaries ensure the agent can never break out into host processes.
 * **🔍 Audit Trail Logs**: Complete logs of every visual change, filesystem read/write, and terminal execution are preserved for post-incident reviews.
 * **📥 Schema Constraints**: Coordinate parameters and typed strings are parsed against strict JSON schemas before being executed by virtual drivers.
@@ -191,19 +191,16 @@ Watch how you can converse with agents operating inside the secure workspace:
 
 ---
 
-## 📊 Comparison
+## 📊 Why Open Infra Agent is Different
 
-| Capability | Open Infra Agent | Browser Use | Open Interpreter |
-| :--- | :---: | :---: | :---: |
-| **Primary Category** | **Agent Operating Environment** | Web Agent Framework | Local Terminal CLI |
-| **Corporate Governance Focus** | **✅ Yes (Visibility & Control)** | ❌ No | ❌ No |
-| **Strict Docker Sandbox** | **✅ Yes** | ⚠️ Requires Custom Setup | ❌ Host-Based Execution |
-| **Shellless execFile Architecture**| **✅ Yes** | ⚠️ Depends | ❌ Host Shell Execution |
-| **Live Human Takeover** | **✅ Yes (noVNC Native)** | ❌ No | ❌ No |
-| **Multi-Stakeholder Streaming** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No |
-| **Model Context Protocol (MCP)** | **✅ Yes (Native)** | ❌ No | ❌ No |
-| **Visual XFCE Linux Desktop** | **✅ Yes** | ⚠️ Browser Only | ❌ No |
-| **Open Source** | **✅ Yes (Apache 2.0)** | ✅ Yes | ✅ Yes |
+Instead of comparing features against specific transient frameworks, the core difference lies in architectural focus:
+
+✓ **Governance-First** — Designed from the ground up to enforce strict security boundaries, rigid schema validation, and complete container isolation.
+✓ **Human-in-the-Loop** — Built so humans can visually monitor and override inputs instantly, eliminating execution anxiety in production environments.
+✓ **Visual Supervision** — Direct low-latency real-time video streaming of agent activities, not just basic text logs.
+✓ **Multi-Stakeholder Access** — Multiple roles (DevOps, Security, Compliance, Management) can monitor and audit the exact same execution session simultaneously.
+✓ **Isolated Workspaces** — Disposable containerized desktop environments preventing any threat of host filesystem compromise.
+✓ **MCP-Native** — Native, standard integration with the Model Context Protocol.
 
 ---
 
