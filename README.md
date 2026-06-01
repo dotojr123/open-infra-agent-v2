@@ -147,9 +147,9 @@ A single active agent session can be monitored simultaneously by multiple roles 
 
 ## 🔒 Defense-in-Depth Security Model
 
-Deploying autonomous execution requires military-grade guardrails:
+Deploying autonomous execution requires secure, enterprise-grade guardrails:
 
-* **🛡️ execFile-only Execution**: The agent daemon uses zero system shell wrapping. By calling system commands through direct binary execution (`execFile`), shell command injection is mathematically mitigated.
+* **🛡️ execFile-only Execution**: The agent daemon uses zero system shell wrapping. By calling system commands through direct binary execution (`execFile`), we eliminate entire classes of shell injection vulnerabilities.
 * **🐳 Namespace & Kernel Isolation**: Container boundaries ensure the agent can never break out into host processes.
 * **🔍 Audit Trail Logs**: Complete logs of every visual change, filesystem read/write, and terminal execution are preserved for post-incident reviews.
 * **📥 Schema Constraints**: Coordinate parameters and typed strings are parsed against strict JSON schemas before being executed by virtual drivers.
@@ -197,8 +197,8 @@ Watch how you can converse with agents operating inside the secure workspace:
 | :--- | :---: | :---: | :---: |
 | **Primary Category** | **Agent Operating Environment** | Web Agent Framework | Local Terminal CLI |
 | **Corporate Governance Focus** | **✅ Yes (Visibility & Control)** | ❌ No | ❌ No |
-| **Strict Docker Sandbox** | **✅ Yes** | ⚠️ Custom Setup | ❌ No (Highly Dangerous) |
-| **Shellless execFile Architecture**| **✅ Yes** | ⚠️ Depends | ❌ No |
+| **Strict Docker Sandbox** | **✅ Yes** | ⚠️ Requires Custom Setup | ❌ Host-Based Execution |
+| **Shellless execFile Architecture**| **✅ Yes** | ⚠️ Depends | ❌ Host Shell Execution |
 | **Live Human Takeover** | **✅ Yes (noVNC Native)** | ❌ No | ❌ No |
 | **Multi-Stakeholder Streaming** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No |
 | **Model Context Protocol (MCP)** | **✅ Yes (Native)** | ❌ No | ❌ No |
@@ -223,12 +223,14 @@ Everything runs strictly isolated in the Docker container namespace. Even if the
 
 ---
 
-## 🏎️ Benchmarks
+## 🏎️ Performance Profile (Typical Specifications)
 
-* **⚡ Start Latency**: `< 3.5 seconds` from zero to a fully responsive, visual MCP-accessible operating environment.
-* **📉 RAM Footprint**: `~240MB RAM` baseline memory utilization for the entire X11+XFCE4+noVNC+NestJS stack.
-* **🔄 Execution Roundtrip**: `< 12ms` trigger speed from tool call parser to OS virtual input driver.
-* **🖥️ Context Ingestion Compression**: Integrated with `sharp` to scale and compress frame buffers, cutting context window ingestion payloads by `65%`.
+These representative metrics illustrate the highly optimized nature of the runtime stack under standard hardware environments:
+
+* **⚡ Start Latency**: `~3.5 seconds` baseline from zero to a fully responsive, visual MCP-accessible operating environment.
+* **📉 RAM Footprint**: `~240MB RAM` baseline memory utilization for the entire inactive/active X11+XFCE4+noVNC+NestJS stack.
+* **🔄 Execution Roundtrip**: `~12ms` trigger speed from tool call parser to OS virtual input driver.
+* **🖥️ Context Ingestion Compression**: Integrated with `sharp` to scale and compress frame buffers, cutting context window ingestion payloads by `65%` on multimodal models.
 
 ---
 
@@ -256,6 +258,24 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 ---
 
+## 📡 API & MCP Tool Reference
+
+### REST Endpoints
+| Endpoint | Method | Purpose |
+| :--- | :--- | :--- |
+| `/vnc` | `GET` | Redirects to the integrated noVNC web view |
+| `/health` | `GET` | Container health probe check |
+| `/computer-use` | `POST` | Exposes low-level OS automation APIs |
+| `/mcp` | `GET/POST` | Standard MCP connection endpoint (SSE) |
+
+### Exposes High-Performance OS Automation Tools:
+* 🖱️ **Cursor Automation**: `computer_move_mouse`, `computer_click_mouse`, `computer_press_mouse`, `computer_drag_mouse`, `computer_cursor_position`, `computer_scroll`.
+* ⌨️ **Keyboard Automation**: `computer_type_text` (typing effect), `computer_paste_text` (instant clipboard injection), `computer_type_keys` (shortcuts like `Ctrl+C`, `Alt+Tab`).
+* 🖥️ **Application Controllers**: `computer_application` (launches/focuses VS Code, Terminal, Firefox, 1Password, etc.).
+* 📁 **Secure File System Tools**: `computer_write_file`, `computer_read_file` (handles base64 encoded streams safely).
+
+---
+
 ## 🗺️ Roadmap
 
 ### **2026**
@@ -271,6 +291,22 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 ### **Future**
 * [ ] **Autonomous AI Infrastructure Operators**: Full agentic squads running complex hybrid-cloud networks autonomously with guardrails and validation gates.
+
+---
+
+## ⚡ Why This Matters
+
+Software was designed for humans.
+
+Applications expect clicks. Browsers expect navigation. Terminals expect commands. Operating systems expect users.
+
+AI agents are now capable of reasoning about complex tasks, but they still lack a standardized operating environment.
+
+**Open Infra Agent introduces a missing layer:**
+
+A secure operational workspace where agents can execute tasks, humans can supervise every action, and organizations can deploy autonomous systems safely.
+
+Just as containers standardized application deployment (Docker/Kubernetes), Agent Operating Environments may standardize autonomous execution.
 
 ---
 
