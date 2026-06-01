@@ -2,7 +2,7 @@
 
 # 🌌 Open Infra Agent
 
-### **Give AI Agents a Real Linux Computer.**
+### **The Operating Environment for Autonomous AI Agents.**
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agentc/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white)](https://github.com/dotojr123/open-infro-agentc/actions)
 [![License](https://img.shields.io/badge/License-Apache_2.0-F5A623?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
@@ -10,21 +10,20 @@
 [![Docker Support](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
 
 <p align="center">
-  <b>An open-source computer use runtime that gives Claude, GPT, Gemini, and any MCP client a complete, secure Linux desktop they can actually operate.</b>
+  <b>Run AI agents inside fully isolated Linux workspaces with complete visibility, human supervision, live intervention, and enterprise-grade control.</b>
 </p>
 
-✓ **Browser Control** — Run and automate full browsers (Firefox, Chrome) natively.  
-✓ **Terminal Access** — Execute shell commands and scripting inside a secure sandbox.  
-✓ **File Management** — Manipulate raw files, datasets, and filesystems safely.  
-✓ **Desktop Applications** — Automate IDEs (VS Code), visual tools, and custom software.  
-✓ **Native MCP Integration** — Built from the ground up for the Model Context Protocol.  
-✓ **Docker Isolation** — Complete security with defense-in-depth sandboxing.
+✓ **Total Visibility** — Watch every click, keystroke, and terminal operation in real-time.  
+✓ **Human-in-the-Loop** — Seamlessly intervene, pause, or take over keyboard and mouse control instantly.  
+✓ **Strict Isolation** — Run agents in disposable Docker-sandboxed environments with zero host exposure.  
+✓ **Multi-Stakeholder VNC** — Let DevOps, Security, and Compliance audit the same session simultaneously.  
+✓ **Native MCP Integration** — Direct standard connection via Model Context Protocol.
 
 <br/>
 
 ![Open Infra Agent Demo](demo.gif)
 
-*(A demonstração animada acima ilustra o agente operando de forma autônoma. O arquivo original em alta definição está disponível em [Open Infro Agentc.mp4](Open%20Infro%20Agentc.mp4))*
+*(A demonstração animada acima ilustra a execução sob observabilidade total. O vídeo original em alta definição está disponível como [Open Infro Agentc.mp4](Open%20Infro%20Agentc.mp4))*
 
 [🇺🇸 English](README.md) | [🇧🇷 Português (Brasil)](#-resumo-em-português)
 
@@ -34,35 +33,66 @@
 
 ## ⚡ Why Open Infra Agent Exists
 
-Most AI agents can call simple APIs or run isolated code snippets in basic terminal mockups.
+In 2026, building an AI agent has become a commodity. 
 
-**But real workflows don't happen in a sandbox vacuum. They happen inside the operating system.**
+**The real challenge is governance.** 
 
-They require navigating web consoles, debugging visually inside an IDE, managing local file structures, executing system binaries, and running local scripts. **Open Infra Agent is the infrastructure layer between AI agents and operating systems.** We bridge this gap by giving LLMs a high-performance, fully functional, and secure Linux workstation—enabling them to interact with the digital world exactly like a human operator.
+How do organizations deploy autonomous agents to operate complex, real-world software without:
+* Losing visual visibility of their actions?
+* Risking catastrophic commands executing directly on host production servers?
+* Lacking standard audit trails and compliance reports?
+* Losing the ability for a human engineer to step in and take over when a pipeline goes wrong?
 
----
-
-## ⚠️ The Problem
-
-Infrastructure, development, and operations teams spend thousands of hours every year switching between:
-
-* 💻 Terminals and CLI shells
-* 📊 Monitoring dashboards (Grafana, Datadog)
-* ☁️ Cloud provider consoles (AWS, GCP, Azure)
-* 📝 Local documentation and filesystems
-* 🛡️ Security scanners and alerts
-
-The entire modern software ecosystem was designed exclusively for humans to operate visually and interactively. **AI agents still lack a real, safe, and integrated operational environment.** Without a runtime, agents cannot visually verify what they are doing, manage local files, debug visual layouts, or interact with desktop interface barriers.
+Existing agent frameworks focus on APIs, browsers, or local execution. **Open Infra Agent focuses on providing a complete, secure operating environment where AI agents can work safely, transparently, and under strict human supervision.**
 
 ---
 
-## 🛡️ The Solution: The Agent Computer Runtime
+## ⚠️ The Paradigm Shift: The Governance Layer
 
-**Open Infra Agent gives AI models an actual Linux workstation. Not a command simulation. Not a basic browser plugin. A real desktop.**
+In the traditional setup, agents connect directly to sensitive environments through raw tool calls:
 
-By combining a full XFCE4 desktop environment with a native **Model Context Protocol (MCP)** server, any LLM (like Claude 3.5, GPT-4o, or Gemini) can seamlessly interact with the OS using natural language. 
+```
+  ┌───────────┐      Exposes direct access      ┌────────────────┐
+  │ AI Agent  ├────────────────────────────────►│ Production OS  │
+  └───────────┘    (Unsupervised, raw exec)    └────────────────┘
+```
+* **Critical Risks**: Command injections, black-box execution, zero visual verification, zero rollback control, and strict liability on compliance.
 
-The runtime translates agent requests directly into secure virtual mouse clicks, keyboard strokes, system launches, and file operations inside a **strictly isolated Docker container**.
+Open Infra Agent introduces the **Operational Governance Layer**:
+
+```
+  ┌───────────┐      Controlled MCP Tools      ┌───────────────────────┐
+  │ AI Agent  ├───────────────────────────────►│  Open Infra Agent     │
+  └───────────┘                                │  (Docker Sandbox Workspace)
+                                               └──────────┬────────────┘
+                                                          │ 
+                                                          ├─► [Real-Time VNC Stream] ──► DevOps & Audit
+                                                          ├─► [Human Intervention]  ───► Live Takeover
+                                                          ▼
+                                               ┌───────────────────────┐
+                                               │ Secure Remote Actions │
+                                               └───────────────────────┘
+```
+This guarantees absolute isolation, real-time supervision, multi-stakeholder monitoring, and human-in-the-loop override capability.
+
+---
+
+## 🚀 Key Governance Pillars
+
+### 👁️ Complete Visibility
+**See everything the agent sees.** Open Infra Agent records and streams the virtual environment in real-time. DevOps and audit teams can inspect every cursor movement, active terminal keystroke, active browser session, and modified filesystem directory.
+
+### 🤝 Human-in-the-Loop (Live Intervention)
+**Take control whenever needed.** The system doesn't run in a black box. If an agent gets stuck, enters an infinite loop, or is about to execute an unintended operation, a human operator can instantly step into the session, override mouse/keyboard inputs, resolve the block, and let the agent continue.
+
+### 🐳 Isolated Execution Workspaces
+Agents work in disposable, containerized Linux workspaces. The agent cannot reach your host network, filesystems, or cloud keys unless you explicitly grant permission.
+
+### 👥 Multi-Stakeholder Access
+A single active agent session can be monitored simultaneously by multiple roles inside your company:
+* **DevOps Team**: Monitors workflow execution correctness.
+* **Security & Compliance Team**: Audits commands and permission boundaries live.
+* **Management**: Tracks task completion status visually.
 
 ---
 
@@ -70,7 +100,7 @@ The runtime translates agent requests directly into secure virtual mouse clicks,
 
 ```
   ┌─────────────────┐
-  │   User Prompt   │  "Fix the database migration and verify via browser"
+  │   User Prompt   │  "Diagnose staging build and configure visual assets"
   └────────┬────────┘
            │
            ▼
@@ -82,15 +112,15 @@ The runtime translates agent requests directly into secure virtual mouse clicks,
   ┌─────────────────┐
   │   MCP Server    │  Model Context Protocol (SSE / Stdio)
   └────────┬────────┘
-           │ Translates commands into native OS coordinates & keys
+           │ Translates commands into secure virtual OS actions
            ▼
   ┌─────────────────┐
   │Open Infra Agent │  Daemon running inside isolated Docker Container
   └────────┬────────┘
-           │ Coordinates virtual input & frame compression
+           │ Coordinates input hook translation & frame compression
            ▼
   ┌─────────────────┐
-  │  Linux Desktop  │  Virtual Xvfb Screen (:0) / x11vnc / noVNC
+  │ Linux Workspace │  Virtual Xvfb Screen (:0) / x11vnc / noVNC
   │  ───────┬───────  │
   │  [Terminal] [Browser] [VS Code] [Filesystem]
   └─────────────────┘
@@ -98,123 +128,107 @@ The runtime translates agent requests directly into secure virtual mouse clicks,
 
 ---
 
-## 🚀 What Agents Can Do (Capabilities)
+## 📦 What Agents Can Do (Capabilities)
 
 ### 🖱️ Human-Like Computer Control
-* **Virtual Mouse Operations**: Precision movement, click, drag, scroll, and real-time cursor tracking.
-* **Virtual Keyboard Operations**: Human-like typing, custom keystrokes, combinations (`Ctrl+C`, `Alt+Tab`, `Super`), and instant clipboard injection.
-* **Visual Verification Buffer**: Captures screenshots in real-time, compressing and passing them to multimodal LLMs for instant visual auditing.
+* **Virtual Mouse & Keyboard**: Execute clicking, dragging, scrolling, natural typing, and system shortcuts (`Ctrl+C`, `Alt+Tab`).
+* **Visual Verification Buffer**: Captures X11 framebuffers in real-time, compressing frames into highly optimized payloads to feed multimodal LLMs for instant visual validation.
 
-### 🌐 Multi-Application Automation
-* **Terminals**: Safe, controlled shell executions with output capture.
-* **Browsers**: Autonomously logs into portals, navigates consoles, and interacts with web elements via Firefox.
-* **Visual IDEs**: Navigates complex codebases and edits code using an integrated VS Code instance.
+### 🌐 Multi-Application Orchestration
+* **Secure Terminal sessions**: Execute shell commands, isolate execution outputs, and parse logs safely.
+* **Full Browser Control**: Autonomously browse documentation, log into administration portals, and audit dashboards using Firefox.
+* **Integrated VS Code**: Browse directories and modify local configuration files visually inside an active IDE session.
 
-### 🔌 Native Model Context Protocol (MCP)
-* **Standard Integration**: Ready to connect out-of-the-box with Claude Desktop, Cursor IDE, LangGraph, or custom agent frameworks.
-* **Self-Documenting Schemas**: Exposes structural parameter schemas so models know exactly how to execute computer actions.
-
----
-
-## 🔒 Security Model
-
-Operating an agent runtime in production requires strict boundaries. Open Infra Agent is designed on a **defense-in-depth security model**:
-
-* **🐳 Strict Docker Isolation**: The entire desktop, terminal, and browser stack runs strictly inside a container. It cannot access your host machine's resources, files, or networks unless explicitly allowed.
-* **🛡️ execFile-only Execution**: The daemon has been entirely refactored to eliminate shell command vulnerabilities. Every tool executes binary arguments directly without spawning an active system shell, making command injection mathematically impossible.
-* **❌ Zero Host Access**: Absolute separation from the host environment. 
-* **🔍 Live Visual Auditing**: Monitor the agent in real-time. Use the built-in noVNC viewer to inspect every single click and action through your browser.
-* **📥 Input Sanitization**: Rigid schema enforcement validates coordinates, keys, and file paths before execution.
+### 🔌 Standardized Model Context Protocol (MCP)
+* Connects instantly with Claude Desktop, Cursor IDE, LangGraph, CrewAI, or custom orchestrators.
+* Self-documenting tool definitions enforce strict schema validation on coordinates, text inputs, and files.
 
 ---
 
-## 💬 Real-World Examples & Prompts
+## 🔒 Defense-in-Depth Security Model
 
-Here are some actual prompts you can feed into Claude or any LLM connected to Open Infra Agent to watch it work:
+Deploying autonomous execution requires military-grade guardrails:
 
-### 🛠️ Infrastructure
-> *"Open the Terminal app, check if Docker is running, list all containers, find the postgres container, check its logs for connection errors, and report what you find."*
-
-### 🌐 Browser
-> *"Launch Firefox, go to 'http://localhost:9990/health', verify if the response JSON contains status 'ok', take a screenshot of the browser window, and confirm if the service is online."*
-
-### 📁 Filesystem
-> *"Locate all log files inside the /var/log directory that were modified in the last 2 hours. Search for the term 'critical' inside them and write a summary markdown file on the desktop."*
-
-### 💻 Development
-> *"Open VS Code in the workspace directory, read the active configuration file, locate the API keys placeholder, and verify if the corresponding example environment file is documented."*
+* **🛡️ execFile-only Execution**: The agent daemon uses zero system shell wrapping. By calling system commands through direct binary execution (`execFile`), shell command injection is mathematically mitigated.
+* **🐳 Namespace & Kernel Isolation**: Container boundaries ensure the agent can never break out into host processes.
+* **🔍 Audit Trail Logs**: Complete logs of every visual change, filesystem read/write, and terminal execution are preserved for post-incident reviews.
+* **📥 Schema Constraints**: Coordinate parameters and typed strings are parsed against strict JSON schemas before being executed by virtual drivers.
 
 ---
 
-## 🎯 Real-World Use Cases
+## 💬 Live Operational Examples
 
-### 🛠️ DevOps & Infrastructure
-* **Incident Response**: Autonomously inspect systemd services, read crash logs, identify exceptions, and safely restart services.
-* **Reverse Proxy Setup**: Install Nginx, configure site templates, test configurations visually, and restart Nginx.
-* **Database Troubleshooting**: Debug Prisma or database connection locks, inspect local schemas, and check database containers.
-* **CI/CD Debugging**: Spin up failed pipeline states inside the container, run tests locally, and fix bugs.
+Watch how you can converse with agents operating inside the secure workspace:
 
-### ☁️ Cloud Operations
-* **Cloud Resource Auditing**: Navigate cloud dashboards via browser, list active resources, and audit security configurations.
-* **Cost Optimization**: Clean up unused docker images, locate memory-heavy idle services, and optimize local deployments.
-* **Certificate Automation**: Handle Let's Encrypt certificates expiration, run challenge renewals, and reload reverse proxies.
+### 🛠️ System Diagnostics
+> *"Open the Terminal app, check if local PostgreSQL service is accepting connections, find any active query locks, and output a diagnostic report to the desktop."*
 
-### 🌐 Browser & Web Automation
-* **E2E Visual Testing**: Write Cypress/Playwright scripts inside VS Code, execute them, and visually audit if layouts broke.
-* **Dashboard Data Scraping**: Log into enterprise metrics consoles, export CSV reports, and structure them.
-* **API Documentation Sync**: Browse official SDK documentations, retrieve updated endpoints, and refactor local classes.
+### 🌐 Cloud Portal Audit
+> *"Launch Firefox, go to local console dashboard, verify that all SSL configurations are green, take a screenshot of the main status widget, and notify me if there are active errors."*
 
-### 📊 Desktop RPA & Testing
-* **Layout QA Auditing**: Take screenshots across dynamic window sizes, detect overlapping text, and report rendering bugs.
-* **APM Auditing**: Open Firefox, inspect the network performance tab, record slow resources, and profile loading speeds.
-* **Local Bootstrapping**: Standardize the configuration of heavy local repos, run initial migrations, and seed environments.
-* **Vulnerability Scans**: Run security scripts or OWASP scanners against local targets and build visual audit reports.
-* **Log Rotation & Maintenance**: Monitor low disk warnings, compress stale logs, and safely clean up system cache.
+### 📁 Filesystem Cleanups
+> *"Search the /var/log directory for raw log files modified in the past hour. If there are massive trace files, archive them, clean the cache directory, and verify disk space stats."*
+
+### 💻 Code Review & Local Hotfix
+> *"Open VS Code in /workspace, check why the main server integration test is failing, locate the syntax error in the configuration class, fix it, and rerun the test suite visually."*
+
+---
+
+## 🎯 Enterprise Use Cases
+
+### 🛠️ Safe DevOps & Operations
+* **Autonomous Incident Resolution**: Safely inspect system logs, restart failed systemd units, and run visual recovery playbooks.
+* **Automated Environment Verification**: Spin up dependencies locally, run tests, and check status dashboards through the virtual browser.
+* **Local Proxy Bootstrapping**: Deploy local Nginx configurations, verify reverse proxies visually, and audit active ports.
+
+### ☁️ Cloud & Resource Governance
+* **Security & Port Auditing**: Run automated scanners against sandboxed configurations, compile logs, and identify potential vulnerabilities.
+* **Resource Optimization**: Locate dormant docker containers and idle memory processes, compiling performance charts.
+
+### 🌐 Browser RPA & Auditing
+* **End-to-End Visual QA**: Validate user onboarding flows, screenshot responsiveness layouts, and capture rendering errors.
+* **Governance Log Integration**: Access internal management dashboards, download reports, compile records, and sync documentation safely.
 
 ---
 
 ## 📊 Comparison
 
-How does Open Infra Agent compare to other agentic frameworks?
-
 | Capability | Open Infra Agent | Browser Use | Open Interpreter |
 | :--- | :---: | :---: | :---: |
-| **Primary Category** | **Agent Computer Runtime** | Web Agent | Local Terminal |
-| **MCP Native** | **✅ Yes (Out of the Box)** | ❌ No | ❌ No |
-| **Real Linux Desktop** | **✅ Yes (XFCE4/VNC)** | ⚠️ Browser Only | ❌ No (Local Host) |
-| **Strict Docker Isolation** | **✅ Yes** | ⚠️ Requires Custom Setup | ❌ No (Dangerous) |
-| **Shell-Injection Proof** | **✅ Yes (execFile-only)** | ⚠️ Depends | ❌ No |
-| **Browser Control** | **✅ Yes** | ✅ Yes | ❌ No |
-| **Terminal Control** | **✅ Yes (Sandboxed)** | ❌ No | ✅ Yes (Local Host) |
-| **noVNC Live View** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No |
+| **Primary Category** | **Agent Operating Environment** | Web Agent Framework | Local Terminal CLI |
+| **Corporate Governance Focus** | **✅ Yes (Visibility & Control)** | ❌ No | ❌ No |
+| **Strict Docker Sandbox** | **✅ Yes** | ⚠️ Custom Setup | ❌ No (Highly Dangerous) |
+| **Shellless execFile Architecture**| **✅ Yes** | ⚠️ Depends | ❌ No |
+| **Live Human Takeover** | **✅ Yes (noVNC Native)** | ❌ No | ❌ No |
+| **Multi-Stakeholder Streaming** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No |
+| **Model Context Protocol (MCP)** | **✅ Yes (Native)** | ❌ No | ❌ No |
+| **Visual XFCE Linux Desktop** | **✅ Yes** | ⚠️ Browser Only | ❌ No |
 | **Open Source** | **✅ Yes (Apache 2.0)** | ✅ Yes | ✅ Yes |
 
 ---
 
 ## ❓ FAQ
 
-### Is Open Infra Agent a Virtual Machine (VM)?
-No. It runs entirely inside a lightweight Docker container based on Ubuntu 22.04. It utilizes a virtual framebuffer (Xvfb) to run X11 desktop applications without needing high VM overheads.
+### Is Open Infra Agent a heavy Virtual Machine (VM)?
+No. It runs entirely inside an optimized Docker container utilizing a virtual X11 framebuffer (Xvfb). You get the operational visual workspace of a full Ubuntu desktop at a fraction of VM system resources (`~240MB RAM`).
+
+### Can a human take over the agent's work mid-execution?
+Yes. That is the core pillar of our operational model. Through the VNC stream (`http://localhost:9990/vnc`), a human operator can watch the agent work and immediately type or click to override inputs, fix a block, and let the agent resume.
 
 ### Does it require MCP to run?
-No. While it comes with a native Model Context Protocol (MCP) server ready to integrate with AI clients, you can also control it directly through its standardized REST APIs.
+No. The platform comes with a native MCP server for SSE or Stdio connections, but also fully exposes standard REST APIs for custom orchestrations.
 
-### Can I run it headlessly?
-Yes. The container is completely headless out-of-the-box. The noVNC browser connection on port `9990` is optional and purely for real-time visual auditing by humans.
-
-### Is it safe to execute arbitrary commands generated by AI?
-Yes. The container acts as a strong sandbox. The agent has no access to your host machine's resources, files, or network unless you explicitly mount them. Furthermore, our `execFile`-only backend prevents shell command injections.
+### How is it safe from malicious scripts?
+Everything runs strictly isolated in the Docker container namespace. Even if the agent attempts to delete root directories, it only impacts its disposable environment, leaving your host system and production data completely untouched.
 
 ---
 
-## 🏎️ Performance & Benchmarks
+## 🏎️ Benchmarks
 
-Our stack is highly optimized to ensure rapid response loops for LLM decision-making:
-
-* **⚡ Container Startup**: `< 3.5 seconds` to spin up the virtual framebuffer, desktop environment, VNC proxy, and MCP server.
-* **📉 Memory Footprint**: `~240MB RAM` baseline memory usage for the complete active stack.
-* **🔄 MCP Action Latency**: `< 12ms` execution roundtrip (from tool call parsed to virtual OS action triggered).
-* **🖥️ Dynamic Compression**: Integrates with `sharp` to compress captured visual buffers into highly optimized JPEGs, lowering context window ingestion latency by `65%`.
+* **⚡ Start Latency**: `< 3.5 seconds` from zero to a fully responsive, visual MCP-accessible operating environment.
+* **📉 RAM Footprint**: `~240MB RAM` baseline memory utilization for the entire X11+XFCE4+noVNC+NestJS stack.
+* **🔄 Execution Roundtrip**: `< 12ms` trigger speed from tool call parser to OS virtual input driver.
+* **🖥️ Context Ingestion Compression**: Integrated with `sharp` to scale and compress frame buffers, cutting context window ingestion payloads by `65%`.
 
 ---
 
@@ -231,32 +245,14 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
    cd open-infro-agentc
    ```
 
-2. **Spin up the isolated runtime:**
+2. **Spin up the environment:**
    ```bash
    docker compose up --build -d
    ```
 
-3. **Access the Desktop visually in real-time:**
+3. **Access the session visually:**
    Open your browser and navigate to:
    👉 **`http://localhost:9990/vnc`**
-
----
-
-## 📡 API & MCP Tool Reference
-
-### REST Endpoints
-| Endpoint | Method | Purpose |
-| :--- | :--- | :--- |
-| `/vnc` | `GET` | Redirects to the integrated noVNC web view |
-| `/health` | `GET` | Container health probe check |
-| `/computer-use` | `POST` | Exposes low-level OS automation APIs |
-| `/mcp` | `GET/POST` | Standard MCP connection endpoint (SSE) |
-
-### Exposes High-Performance OS Automation Tools:
-* 🖱️ **Cursor Automation**: `computer_move_mouse`, `computer_click_mouse`, `computer_press_mouse`, `computer_drag_mouse`, `computer_cursor_position`, `computer_scroll`.
-* ⌨️ **Keyboard Automation**: `computer_type_text` (typing effect), `computer_paste_text` (instant clipboard injection), `computer_type_keys` (shortcuts like `Ctrl+C`, `Alt+Tab`).
-* 🖥️ **Application Controllers**: `computer_application` (launches/focuses VS Code, Terminal, Firefox, 1Password, etc.).
-* 📁 **Secure File System Tools**: `computer_write_file`, `computer_read_file` (handles base64 encoded streams safely).
 
 ---
 
@@ -280,17 +276,15 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 ## 🌟 Vision
 
-The command-line interface transformed how we operate computers.
+The first wave of AI focused on generating content.
 
-The browser transformed how we access human information.
+The second wave focused on calling isolated API tools.
 
-**AI agents will transform how we automate operations.**
+**The third wave is about autonomous execution.**
 
-We believe that AI agents should not be limited to interacting with isolated API endpoints. They should be fully capable of operating inside the same environments humans use every day. 
+But autonomous execution requires something that does not exist today: a secure, auditable, and human-supervised operating environment designed specifically for AI agents.
 
-Browsers. Terminals. Files. Applications. Complete operating systems. 
-
-**Open Infra Agent is building the infrastructure layer that makes that future possible.**
+Open Infra Agent was created to become that environment. A place where agents can operate real software, human operators can supervise every single action, and organizations can deploy AI agents safely at scale.
 
 ---
 
@@ -306,9 +300,9 @@ We are building a global movement to redefine operations. We welcome developers,
 
 ## 🇧🇷 Resumo em Português
 
-**Open Infra Agent** é um ambiente de execução de computador para IAs de código aberto (AI Computer Use Runtime) que permite a modelos como Claude, GPT-4 e Gemini controlar um desktop Linux completo e seguro via **Model Context Protocol (MCP)**.
+**Open Infra Agent** é um ambiente operacional completo de código aberto para agentes autônomos (Agent Operating Environment). Ele permite rodar agentes de IA dentro de espaços de trabalho Linux (`Ubuntu 22.04`) totalmente isolados via Docker, com visibilidade completa, supervisão humana (Human-in-the-Loop), intervenção em tempo real e controle corporativo.
 
-Diferente de interpretadores locais ou extensões de navegador simples que trazem riscos graves de segurança à sua máquina principal, o Open Infra Agent roda em um container Docker totalmente isolado. Ele fornece terminal, navegador Firefox e editores de código reais, utilizando execução à prova de injeção de comandos (`execFile`). É a infraestrutura ideal para conectar agentes autônomos às operações reais do dia a dia.
+Diferente de interpretadores locais ou plugins simples de navegador que abrem brechas de segurança críticas em suas máquinas, o Open Infra Agent roda em um container seguro usando execução `execFile` sem shell. Ele expõe uma área de trabalho real (terminal, navegador Firefox, VS Code) controlável por linguagem natural via **Model Context Protocol (MCP)**, permitindo que múltiplos setores de uma empresa (Segurança, DevOps e Auditoria) monitorem visualmente as ações do agente simultaneamente no navegador.
 
 ---
 
