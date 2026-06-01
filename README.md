@@ -1,150 +1,188 @@
-# IAgencia Desktop
+<div align="center">
 
-**Agente de desktop AI** que automatiza tarefas de computador através de comandos em linguagem natural, operando dentro de um ambiente Linux desktop containerizado.
+# 🌌 Open Infro Agentc
 
-> Baseado no projeto open-source [Bytebot](https://github.com/bytebot-ai/bytebot) (Apache-2.0), customizado e mantido pela **IAgencia**.
+### **A World-Class, Sandboxed AI Agent Desktop Automation Platform & MCP Server**
 
----
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agentc/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white)](https://github.com/dotojr123/open-infro-agentc/actions)
+[![License](https://img.shields.io/badge/License-Apache_2.0-F5A623?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
+[![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_20.0.0-68A063?style=for-the-badge&logo=node.js&logoColor=white)](package.json)
+[![Docker Support](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
 
-## 🚀 Quick Start
-
-### Com Docker Compose (recomendado)
-
-```bash
-git clone https://github.com/iagencia/iagencia-desktop.git
-cd iagencia-desktop
-docker compose up --build -d
-```
-
-Acesse o desktop no navegador:
-```
-http://localhost:9990/vnc
-```
-
-### Com Docker direto
-
-```bash
-docker build -t iagencia-desktop:latest -f iagenciad/Dockerfile .
-docker run -d --name iagencia-desktop -p 9990:9990 iagencia-desktop:latest
-```
+<p align="center">
+  <b>Empower any LLM to control, automate, and interact with a full Linux Desktop securely, seamlessly, and inside a robustly sandboxed environment.</b>
+</p>
 
 ---
 
-## 🏗️ Arquitetura
+[🇺🇸 English](README.md) | [🇧🇷 Português (Brasil)](#-resumo-em-português)
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   Container Linux                    │
-│                                                      │
-│  ┌──────────┐  ┌──────────┐  ┌───────────────────┐  │
-│  │   Xvfb   │→ │  x11vnc  │→ │  noVNC/websockify │  │
-│  │ Display  │  │  VNC srv │  │   :6080 → :5900   │  │
-│  └──────────┘  └──────────┘  └───────────────────┘  │
-│       ↓                              ↑               │
-│  ┌──────────┐                  ┌─────────────┐       │
-│  │  XFCE4   │                  │  iagenciad  │       │
-│  │ Desktop  │    ←──────────── │  NestJS API │       │
-│  │          │    mouse/kbd     │   :9990     │       │
-│  └──────────┘    via libnut    │  + MCP SSE  │       │
-│                                └─────────────┘       │
-│  Apps: Firefox, VS Code, 1Password, Thunderbird      │
-└─────────────────────────────────────────────────────┘
-         ↕ porta 9990
-    ┌──────────┐
-    │ Browser  │  ← Usuário / Agente AI
-    │  ou LLM  │
-    └──────────┘
-```
+</div>
 
 ---
 
-## 📡 API Endpoints
+## 📺 See it in Action
 
-| Endpoint | Método | Descrição |
-|---|---|---|
-| `/vnc` | GET | Redireciona para o desktop noVNC |
-| `/novnc/` | GET | Serve arquivos estáticos do noVNC |
-| `/computer-use` | POST | Executa ações de mouse/teclado/screenshot |
-| `/input-tracking/start` | POST | Inicia rastreamento de input do usuário |
-| `/input-tracking/stop` | POST | Para rastreamento de input |
-| `/mcp` | SSE | Endpoint MCP (Model Context Protocol) |
+<video src="demo.mp4" width="100%" controls autoplay loop muted></video>
 
-### Ações disponíveis via `/computer-use`
+*(Caso o vídeo não renderize no seu leitor de markdown, o arquivo de demonstração está disponível na raiz como [demo.mp4](demo.mp4))*
 
-| Ação | Descrição |
-|---|---|
-| `move_mouse` | Move o cursor para coordenadas x,y |
-| `click_mouse` | Clique simples/duplo/triplo |
-| `drag_mouse` | Arrastar e soltar |
-| `scroll` | Scroll em qualquer direção |
-| `type_text` | Digita texto caractere por caractere |
-| `paste_text` | Cola texto via clipboard |
-| `type_keys` | Atalhos de teclado (ex: Ctrl+C) |
-| `screenshot` | Captura screenshot do desktop |
-| `cursor_position` | Retorna posição atual do cursor |
-| `application` | Abre/foca aplicação (firefox, vscode, etc.) |
-| `write_file` | Escreve arquivo (base64) |
-| `read_file` | Lê arquivo (retorna base64) |
+---
 
-### MCP Tools
+## 💡 Why Open Infro Agentc?
 
-O endpoint `/mcp` expõe as mesmas ações como **MCP tools**, permitindo integração direta com LLMs compatíveis (Claude, etc.):
+### The Problem
+Large Language Models (LLMs) are incredibly smart, but they are trapped. To perform real-world office tasks, they need a way to **interact with real applications** (browsers, terminals, text editors, file systems). However:
+1. **Security Risks**: Running arbitrary terminal commands (`exec`) on a host machine exposes it to catastrophic vulnerabilities.
+2. **Infrastructure Complexity**: Setting up virtual framebuffers (Xvfb), VNC servers, audio/video channels, and high-performance system triggers requires deep Linux expertise.
+3. **Execution Latency**: Dynamic coordinate translation and heavy resource footprints lead to slow, fragile automation.
 
-```
-computer_move_mouse, computer_click_mouse, computer_scroll,
-computer_type_text, computer_paste_text, computer_type_keys,
-computer_screenshot, computer_cursor_position, computer_application,
-computer_write_file, computer_read_file, computer_drag_mouse,
-computer_trace_mouse, computer_press_mouse, computer_press_keys,
-computer_wait
+### The Solution
+**Open Infro Agentc** solves all of this out-of-the-box. It provides a secure, fully sandboxed Ubuntu container complete with an XFCE4 desktop environment, pre-installed tools (Firefox, VS Code, etc.), and a highly optimized **Model Context Protocol (MCP)** server. 
+
+Any LLM (such as Claude, GPT-4, or Gemini) can seamlessly control the desktop using natural language commands translated directly into mouse clicks, keyboard strokes, and secure file operations.
+
+---
+
+## ⚡ Core Pillars & Key Features
+
+* **🛡️ Sandboxed Security (Zero-Shell execution)**: Custom refactored using shellless, direct arguments execution (`execFile`). Even if an LLM generates potentially malicious file names or path inputs, the sandbox remains completely bulletproof.
+* **🌐 Native Model Context Protocol (MCP)**: Native integration via Server-Sent Events (SSE). Seamlessly exposes high-performance OS automation directly as tools for compatible AI clients (like Claude Desktop).
+* **🖥️ Complete Display & Interactive Stack**: Includes **Xvfb virtual display**, **x11vnc server**, and **noVNC/websockify proxy** to stream the desktop directly to your web browser with close-to-zero latency.
+* **📦 Monorepo Orchestration**: Standardized with **npm workspaces** to allow single-command dependencies resolution (`npm install`) and ultra-fast builds.
+* **📊 Visual Feedback Engine**: Rapid, non-blocking frame buffer capturing via highly optimized native module builds for `uiohook-napi` and `@nut-tree-fork/nut-js`.
+
+---
+
+## 🏗️ Architectural Blueprint
+
+```mermaid
+graph TB
+    subgraph "🐳 Secure Docker Container (Ubuntu 22.04)"
+        subgraph "Display & Audio Stack"
+            XVFB["Xvfb :0<br>Virtual Framebuffer"]
+            XFCE["XFCE4<br>Desktop Environment"]
+            VNC["x11vnc<br>VNC Server :5900"]
+            WS["websockify<br>:6080"]
+        end
+        
+        subgraph "Core Integration Layer"
+            NEST["iagenciad<br>NestJS Daemon (:9990)"]
+            NUT["NutService<br>@nut-tree-fork/nut-js"]
+            UIOHOOK["uiohook-napi<br>Global Key Hooks"]
+            SHARP["sharp<br>Image Compressor"]
+        end
+        
+        XVFB --> XFCE
+        XVFB --> VNC
+        VNC --> WS
+        NEST --> |"proxy tunnel"| WS
+        NEST --> NUT
+        NEST --> UIOHOOK
+        NUT --> XVFB
+    end
+
+    subgraph "Client Layer"
+        BROWSER["Web Browser<br>(VNC View)"]
+        LLM["AI Agent / LLM Client<br>(Claude, etc.)"]
+    end
+
+    BROWSER --> |"HTTP GET :9990/vnc"| NEST
+    LLM --> |"MCP over SSE :9990/mcp"| NEST
 ```
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🚀 Quick Start (1-Minute Launch)
 
-```
-iagencia-desktop/
-├── shared/              ← Tipos e utilitários compartilhados
-│   └── src/
-│       ├── types/       ← ComputerAction, MessageContent types
-│       └── utils/       ← Type guards e conversores
-├── iagenciad/           ← Daemon principal (NestJS)
-│   ├── Dockerfile       ← Build da imagem completa
-│   ├── src/
-│   │   ├── mcp/         ← MCP server tools
-│   │   ├── computer-use/← Serviço de automação desktop
-│   │   ├── input-tracking/← WebSocket de rastreamento
-│   │   └── nut/         ← Interface com libnut (mouse/kbd)
-│   └── root/            ← Overlay do filesystem
-│       ├── etc/         ← Configs (supervisor, firefox, etc.)
-│       └── usr/share/   ← Backgrounds, .desktop files
-├── docker-compose.yml
-└── assets/              ← Logos e ícones
-```
+### Prerequisites
+Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on your machine.
 
----
+### Launch with Docker Compose (Recommended)
 
-## 🔧 Desenvolvimento
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/dotojr123/open-infro-agentc.git
+   cd open-infro-agentc
+   ```
 
-### Pré-requisitos
-- Docker & Docker Compose
-- Node.js 20+ (para desenvolvimento local)
+2. **Spin up the sandboxed environment:**
+   ```bash
+   docker compose up --build -d
+   ```
 
-### Build local (sem Docker)
-```bash
-# Shared
-cd shared && npm install && npm run build
-
-# Daemon
-cd ../iagenciad && npm install && npm run build
-npm run start:dev
-```
+3. **Access the Desktop:**
+   Open your browser and navigate to:
+   👉 **`http://localhost:9990/vnc`**
 
 ---
 
-## 📄 Licença
+## 📡 API & MCP Tool Reference
 
-Este projeto é distribuído sob a licença **Apache-2.0**.
+### REST Endpoints
 
-Baseado no [Bytebot](https://github.com/bytebot-ai/bytebot) — Copyright Bytebot AI, Apache-2.0.
+| Endpoint | Method | Purpose |
+| :--- | :--- | :--- |
+| `/vnc` | `GET` | Redirects to the integrated noVNC web view |
+| `/health` | `GET` | Container health probe check |
+| `/computer-use` | `POST` | Exposes low-level OS automation APIs |
+| `/mcp` | `GET/POST` | Standard MCP connection endpoint (SSE) |
+
+### Available Automations (MCP Tools)
+
+Every action exposes a highly detailed type schema ensuring your LLM understands the coordinates, buttons, and keys:
+
+* 🖱️ **Cursor Automation**: `computer_move_mouse`, `computer_click_mouse`, `computer_press_mouse`, `computer_drag_mouse`, `computer_cursor_position`, `computer_scroll`.
+* ⌨️ **Keyboard Automation**: `computer_type_text` (typewriter effect), `computer_paste_text` (instant clipboard injection), `computer_type_keys` (shortcuts like `Ctrl+C`, `Alt+Tab`).
+* 🖥️ **Application Controllers**: `computer_application` (launches/focuses VS Code, Terminal, Firefox, 1Password, etc.).
+* 📁 **Secure File System Tools**: `computer_write_file`, `computer_read_file` (handles base64 encoded streams safely).
+
+---
+
+## 🛠️ Local Development (Outside Docker)
+
+If you are on a compatible Linux environment and wish to develop outside of Docker, follow these steps:
+
+1. **Install required system dev dependencies:**
+   ```bash
+   sudo apt-get install -y cmake build-essential git \
+     libx11-dev libxtst-dev libxinerama-dev libxi-dev \
+     libxt-dev libxrandr-dev libxkbcommon-dev libxkbcommon-x11-dev \
+     xclip
+   ```
+
+2. **Install monorepo workspace dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Build the packages:**
+   ```bash
+   npm run build
+   ```
+
+4. **Launch development daemon:**
+   ```bash
+   npm run start:dev
+   ```
+
+---
+
+## 🇧🇷 Resumo em Português
+
+**Open Infro Agentc** é uma plataforma de nível mundial para automação de desktop por Inteligência Artificial dentro de um ambiente Linux (`Ubuntu 22.04`) completamente isolado via Docker. 
+
+O projeto conta com um servidor **Model Context Protocol (MCP)** nativo, permitindo que LLMs como Claude e GPT-4 controlem navegadores (Firefox), editores de código (VS Code) e executem tarefas complexas com total segurança.
+
+### Por que se destaca?
+* **Segurança Reforçada**: Desenvolvido com execução sem shell (`execFile`) para evitar riscos de injeção de comandos.
+* **Monorepo Otimizado**: Utiliza npm workspaces para instalação com comando único (`npm install`).
+* **Visualização Fluida**: Servidor noVNC integrado permitindo monitorar o agente em tempo real pelo navegador na porta `9990`.
+
+---
+
+## 📄 License & Attribution
+
+Distributed under the **Apache-2.0 License**. See [LICENSE](LICENSE) for details.
+
+This project is a premium, hardened fork of [Bytebot](https://github.com/bytebot-ai/bytebot) — Copyright Bytebot AI, Apache-2.0. We thank the original authors for their outstanding contribution to the open-source community.

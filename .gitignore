@@ -43,3 +43,6 @@ pnpm-lock.yaml
 # Temp
 tmp/
 temp/
+
+# Original large raw video files
+Open Infro Agentc.mp4
