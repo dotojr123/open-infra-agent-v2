@@ -23,9 +23,9 @@
 
 ## 📺 See it in Action
 
-![Open Infro Agentc Demo](demo.mp4)
+![Open Infro Agentc Demo](demo.gif)
 
-*(Caso o vídeo não renderize no seu leitor de markdown, o arquivo de demonstração está disponível na raiz como [demo.mp4](demo.mp4))*
+*(A demonstração animada está disponível na raiz como [demo.gif](demo.gif). Caso prefira, o vídeo original em alta qualidade está disponível como [Open Infro Agentc.mp4](Open%20Infro%20Agentc.mp4))*
 
 ---
 
