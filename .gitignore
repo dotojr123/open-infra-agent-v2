@@ -32,11 +32,9 @@ coverage/
 # Docker
 .docker/
 
-# Compiled
-*.js
-*.d.ts
-*.js.map
-!eslint.config.mjs
+# Compiled TypeScript output
+iagenciad/dist/
+shared/dist/
 
 # Lock files (keep package-lock.json)
 yarn.lock

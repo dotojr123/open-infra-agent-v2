@@ -146,9 +146,9 @@ RUN pip3 install --upgrade pip
 # -----------------------------------------------------------------------------
 # 4. VNC and remote access setup
 # -----------------------------------------------------------------------------
-# Install noVNC and websockify
-RUN git clone https://github.com/novnc/noVNC.git /opt/noVNC \
-    && git clone https://github.com/novnc/websockify.git /opt/websockify \
+# Install noVNC and websockify (pinned to stable releases for reproducibility)
+RUN git clone --branch v1.5.0 --depth 1 https://github.com/novnc/noVNC.git /opt/noVNC \
+    && git clone --branch v0.12.0 --depth 1 https://github.com/novnc/websockify.git /opt/websockify \
     && cd /opt/websockify \
     && pip3 install --break-system-packages .
 
@@ -168,20 +168,29 @@ RUN apt-get update && \
         libxkbcommon-dev \
         libxkbcommon-x11-dev \
         xclip \
-        git build-essential && \
+        build-essential && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ./shared/ /iagencia/shared/
 COPY ./iagenciad/ /iagencia/iagenciad/
 WORKDIR /iagencia/iagenciad
-RUN npm install --build-from-source
+
+# IMPORTANT: Do NOT use --build-from-source here!
+# sharp ships pre-built binaries that work out of the box.
+# Using --build-from-source forces sharp to compile from source,
+# which fails because Ubuntu 22.04's libvips (8.12) is too old
+# for sharp@0.34.x (requires libvips >= 8.15).
+RUN npm install
+
+# Selectively rebuild ONLY the native modules that need source compilation
 RUN npm rebuild uiohook-napi --build-from-source
 
 RUN npm run build
 
+# Build custom libnut-core for better X11 integration
 WORKDIR /compile
 
-RUN git clone https://github.com/ZachJW34/libnut-core.git && \
+RUN git clone --depth 1 https://github.com/ZachJW34/libnut-core.git && \
     cd libnut-core && \
     npm install && \
     npm run build:release
@@ -222,8 +231,8 @@ RUN chmod -R 755 /home/user
 RUN mkdir -p /home/user/Desktop && \
     cp -f /usr/share/applications/firefox.desktop /home/user/Desktop/ && \
     cp -f /usr/share/applications/thunderbird.desktop /home/user/Desktop/ && \
-    cp -f /usr/share/applications/1password.desktop /home/user/Desktop/ && \
-    cp -f /usr/share/applications/code.desktop /home/user/Desktop/ && \
+    cp -f /usr/share/applications/1password.desktop /home/user/Desktop/ 2>/dev/null || true && \
+    cp -f /usr/share/applications/code.desktop /home/user/Desktop/ 2>/dev/null || true && \
     cp -f /usr/share/applications/terminal.desktop /home/user/Desktop/ && \
     chmod +x /home/user/Desktop/*.desktop && \
     chown user:user /home/user/Desktop/*.desktop
@@ -239,6 +248,10 @@ WORKDIR /home/user
 # - Port 9990: iagenciad and external noVNC websocket
 EXPOSE 9990
 
+# Health check to verify the NestJS API is responding
+HEALTHCHECK --interval=30s --timeout=10s --start-period=45s --retries=3 \
+  CMD curl -f http://localhost:9990/health || exit 1
+
 # IAgencia Desktop metadata
 LABEL org.opencontainers.image.title="iagencia-desktop"
 LABEL org.opencontainers.image.description="IAgencia Desktop - AI-powered desktop automation agent in a containerized Linux environment"
@@ -248,3 +261,4 @@ LABEL org.opencontainers.image.vendor="IAgencia"
 
 # Start supervisor to manage all services
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf", "-n"]
+

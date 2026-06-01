@@ -1,0 +1,40 @@
+{
+  "name": "iagencia-desktop",
+  "version": "1.0.0",
+  "description": "IAgencia Desktop - AI-powered desktop automation agent in a containerized Linux environment",
+  "private": true,
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/iagencia/iagencia-desktop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iagencia/iagencia-desktop.git"
+  },
+  "author": {
+    "name": "IAgencia",
+    "email": "contato@iagencia.com.br"
+  },
+  "workspaces": [
+    "shared",
+    "iagenciad"
+  ],
+  "scripts": {
+    "build": "npm run build -w @iagencia/shared && npm run build -w iagenciad",
+    "build:shared": "npm run build -w @iagencia/shared",
+    "build:daemon": "npm run build -w iagenciad",
+    "start": "npm run start -w iagenciad",
+    "start:dev": "npm run start:dev -w iagenciad",
+    "start:prod": "npm run start:prod -w iagenciad",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "npm run format --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:cov": "npm run test:cov --workspaces --if-present",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { exec, spawn } from 'child_process';
+import { exec, execFile, spawn } from 'child_process';
 import { promisify } from 'util';
 import * as fs from 'fs/promises';
 import * as path from 'path';
@@ -262,7 +262,7 @@ export class ComputerUseService {
   }
 
   private async application(action: ApplicationAction): Promise<void> {
-    const execAsync = promisify(exec);
+    const execFileAsync = promisify(execFile);
 
     // Helper to spawn a command and forget about it
     const spawnAndForget = (
@@ -306,15 +306,15 @@ export class ComputerUseService {
     // check if the application is already open using wmctrl -lx
     let appOpen = false;
     try {
-      const { stdout } = await execAsync(
-        `sudo -u user wmctrl -lx | grep ${processMap[action.application]}`,
+      const { stdout } = await execFileAsync(
+        'sudo',
+        ['-u', 'user', 'wmctrl', '-lx'],
         { timeout: 5000 }, // 5 second timeout
       );
-      appOpen = stdout.trim().length > 0;
+      appOpen = stdout.includes(processMap[action.application]);
     } catch (error: any) {
-      // grep returns exit code 1 when no match is found – treat as "not open"
-      // Also handle timeout errors
-      if (error.code !== 1 && !error.message?.includes('timeout')) {
+      // Handle timeout or other errors gracefully
+      if (!error.message?.includes('timeout')) {
         throw error;
       }
     }
@@ -365,7 +365,7 @@ export class ComputerUseService {
     action: WriteFileAction,
   ): Promise<{ success: boolean; message: string }> {
     try {
-      const execAsync = promisify(exec);
+      const execFileAsync = promisify(execFile);
 
       // Decode base64 data
       const buffer = Buffer.from(action.data, 'base64');
@@ -379,7 +379,7 @@ export class ComputerUseService {
       // Ensure directory exists using sudo
       const dir = path.dirname(targetPath);
       try {
-        await execAsync(`sudo mkdir -p "${dir}"`);
+        await execFileAsync('sudo', ['mkdir', '-p', dir]);
       } catch (error) {
         // Directory might already exist, which is fine
         this.logger.debug(`Directory creation: ${error.message}`);
@@ -391,9 +391,9 @@ export class ComputerUseService {
 
       // Move the file to the target location using sudo
       try {
-        await execAsync(`sudo cp "${tempFile}" "${targetPath}"`);
-        await execAsync(`sudo chown user:user "${targetPath}"`);
-        await execAsync(`sudo chmod 644 "${targetPath}"`);
+        await execFileAsync('sudo', ['cp', tempFile, targetPath]);
+        await execFileAsync('sudo', ['chown', 'user:user', targetPath]);
+        await execFileAsync('sudo', ['chmod', '644', targetPath]);
         // Clean up temp file
         await fs.unlink(tempFile).catch(() => {});
       } catch (error) {
@@ -425,7 +425,7 @@ export class ComputerUseService {
     message?: string;
   }> {
     try {
-      const execAsync = promisify(exec);
+      const execFileAsync = promisify(execFile);
 
       // Resolve path - if relative, make it relative to user's home directory
       let targetPath = action.path;
@@ -438,16 +438,19 @@ export class ComputerUseService {
 
       try {
         // Copy the file to a temporary location we can read
-        await execAsync(`sudo cp "${targetPath}" "${tempFile}"`);
-        await execAsync(`sudo chmod 644 "${tempFile}"`);
+        await execFileAsync('sudo', ['cp', targetPath, tempFile]);
+        await execFileAsync('sudo', ['chmod', '644', tempFile]);
 
         // Read file as buffer from temp location
         const buffer = await fs.readFile(tempFile);
 
         // Get file stats for size using sudo
-        const { stdout: statOutput } = await execAsync(
-          `sudo stat -c "%s" "${targetPath}"`,
-        );
+        const { stdout: statOutput } = await execFileAsync('sudo', [
+          'stat',
+          '-c',
+          '%s',
+          targetPath,
+        ]);
         const fileSize = parseInt(statOutput.trim(), 10);
 
         // Clean up temp file

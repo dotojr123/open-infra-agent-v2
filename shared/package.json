@@ -6,6 +6,10 @@
   "types": "dist/index.d.ts",
   "private": true,
   "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -13,10 +17,7 @@
     "prepublishOnly": "npm run build"
   },
   "exports": {
-    ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
-    }
+    ".": "./dist/index.js"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
