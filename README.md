@@ -2,7 +2,7 @@
 
 # 🌌 Open Infra Agent
 
-### **Give Claude, GPT, and any MCP Client a Real Linux Computer.**
+### **Give AI Agents a Real Linux Computer.**
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agentc/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white)](https://github.com/dotojr123/open-infro-agentc/actions)
 [![License](https://img.shields.io/badge/License-Apache_2.0-F5A623?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
@@ -10,8 +10,17 @@
 [![Docker Support](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
 
 <p align="center">
-  <b>An open-source AI infrastructure operator that gives LLMs a real Linux desktop, browser, terminal, and filesystem through MCP.</b>
+  <b>An open-source AI Computer Use Runtime that allows Claude, GPT, Gemini, and any MCP-compatible agent to control a complete, secure Linux desktop environment.</b>
 </p>
+
+✓ **Browser Automation** — Run full browsers (Firefox, Chrome) natively.  
+✓ **Terminal Operations** — Execute shell commands inside a secure sandbox.  
+✓ **File Management** — Manipulate raw files and datasets.  
+✓ **Desktop Applications** — Automate IDEs, visual tools, and local software.  
+✓ **Native MCP Integration** — Built directly for the Model Context Protocol.  
+✓ **Strict Docker Sandbox** — Complete isolation from your host machine.
+
+<br/>
 
 ![Open Infra Agent Demo](demo.gif)
 
@@ -25,43 +34,35 @@
 
 ## ⚡ Why Open Infra Agent Exists
 
-Most AI agents can call APIs or run simple isolated python scripts. 
+Most AI agents are trapped inside narrow chat interfaces or limited to calling basic APIs and isolated code interpreters. 
 
-**Very few can operate real software.**
+**But real engineering workflows don't happen in a vacuum.** 
 
-Modern enterprise engineering doesn't happen in a vacuum. It happens in terminal sessions, web interfaces, visual IDEs, and secure cloud portals. **Open Infra Agent bridges the gap between language models and operating systems**, providing a state-of-the-art, secure workspace where AI agents can work exactly like human DevOps engineers.
+They happen inside terminal sessions, web consoles, visual IDEs, local debuggers, and proprietary software. **Open Infra Agent acts as the infrastructure layer between AI agents and operating systems.** It bridges this gap by giving LLMs a high-performance, secure, and fully functional Linux workstation—allowing them to work exactly like a human operator sitting at a computer.
 
 ---
 
 ## ⚠️ The Problem
 
-Infrastructure and DevOps teams spend thousands of hours every year switching between:
+Infrastructure, DevOps, and automation teams spend thousands of hours every year switching between:
 
 * 💻 Terminals and CLI shells
 * 📊 Monitoring dashboards (Grafana, Datadog)
 * ☁️ Cloud provider consoles (AWS, GCP, Azure)
-* 📝 Documentation and runbooks
+* 📝 Local documentation and filesystems
 * 🛡️ Security scanners and alerts
 
-The current tooling ecosystem was designed exclusively for humans. **AI agents still lack a real, safe, and integrated operational environment** to act when things break. When an incident occurs, they are blind to the visual state of the applications and unable to interact with desktop-based interfaces or securely execute system diagnostics.
+The entire modern software ecosystem was designed exclusively for humans to operate visually and interactively. **AI agents still lack a real, safe, and integrated operational environment.** Without a runtime, agents cannot visually verify what they are doing, manage local files, debug visual layouts, or interact with desktop interface barriers.
 
 ---
 
-## 🛡️ The Solution
+## 🛡️ The Solution: The Agent Computer Runtime
 
-**Open Infra Agent gives AI models an actual Linux workstation.** 
+**Open Infra Agent gives AI models an actual Linux workstation. Not a command simulation. Not a basic browser plugin. A real desktop.**
 
-* **Not a command simulation.**
-* **Not a basic browser sandbox.**
-* **A real, containerized Ubuntu desktop capable of full automation.**
+By combining a full XFCE4 desktop environment with a native **Model Context Protocol (MCP)** server, any LLM (like Claude 3.5, GPT-4o, or Gemini) can seamlessly interact with the OS using natural language. 
 
-By combining a full XFCE4 environment with a native **Model Context Protocol (MCP)** server, any LLM (like Claude 3.5, GPT-4o, or Gemini) can seamlessly:
-
-* 🌐 **Operate modern web browsers** (Firefox, Chrome) to navigate portals.
-* 💻 **Run shell tasks** inside a safe, sandboxed terminal.
-* 📁 **Manipulate raw files** and inspect directory structures.
-* 🖥️ **Interact with visual software** (VS Code, system dashboards) using screen coordinates.
-* 🛠️ **Execute complex DevOps workflows** on servers exactly like a human operator.
+The runtime translates agent requests directly into secure virtual mouse clicks, keyboard strokes, system launches, and file operations inside a **strictly isolated Docker container**.
 
 ---
 
@@ -69,24 +70,24 @@ By combining a full XFCE4 environment with a native **Model Context Protocol (MC
 
 ```
   ┌─────────────────┐
-  │   User Prompt   │  "Fix the failing database migration on staging"
+  │   User Prompt   │  "Fix the database migration and verify via browser"
   └────────┬────────┘
            │
            ▼
   ┌─────────────────┐
-  │   LLM Client    │  (Claude, GPT-4, etc.)
+  │   AI Agent      │  (Claude, GPT-4, Llama, custom orchestrator)
   └────────┬────────┘
            │ Exposes tools & visual feedback
            ▼
   ┌─────────────────┐
-  │   MCP Server    │  Model Context Protocol over SSE / stdio
+  │   MCP Server    │  Model Context Protocol (SSE / Stdio)
   └────────┬────────┘
-           │ Translates commands into native OS calls
+           │ Translates commands into native OS coordinates & keys
            ▼
   ┌─────────────────┐
   │Open Infra Agent │  Daemon running inside isolated Docker Container
   └────────┬────────┘
-           │ Coordinates virtual input & capture
+           │ Coordinates virtual input & frame compression
            ▼
   ┌─────────────────┐
   │  Linux Desktop  │  Virtual Xvfb Screen (:0) / x11vnc / noVNC
@@ -100,74 +101,92 @@ By combining a full XFCE4 environment with a native **Model Context Protocol (MC
 ## 🚀 Capabilities
 
 ### 🖱️ Human-Like Computer Control
-Instead of generating fragile scripts, the agent can interact with any interface using mouse and keyboard hooks:
-* **Cursor Automation**: Move, click, drag, scroll, and retrieve pixel coordinates.
-* **Typing & Keyboard**: Human-like keystrokes, key combination shortcuts (`Ctrl+C`, `Alt+Tab`), and instant clipboard injection.
-* **Visual Verification**: Captures screenshots in real-time, sending visual buffers to multi-modal LLMs for feedback.
+* **Virtual Mouse Operations**: Precision movement, click, drag, scroll, and real-time cursor tracking.
+* **Virtual Keyboard Operations**: Human-like typing, custom keystrokes, combinations (`Ctrl+C`, `Alt+Tab`, `Super`), and instant clipboard injection.
+* **Visual Verification Buffer**: Captures screenshots in real-time, compressing and passing them to multimodal LLMs for instant visual auditing.
 
 ### 🌐 Multi-Application Automation
-Out-of-the-box pre-configured desktop tools for agent orchestration:
-* **Terminals**: Executes shell commands and processes output.
-* **Browsers**: Autonomously logs into portals, runs tests, and reads docs via Firefox.
-* **Visual IDEs**: Navigates codebases directly inside VS Code.
+* **Terminals**: Safe, controlled shell executions with output capture.
+* **Browsers**: Autonomously logs into portals, navigates consoles, and interacts with web elements via Firefox.
+* **Visual IDEs**: Navigates complex codebases and edits code using an integrated VS Code instance.
 
 ### 🔌 Native Model Context Protocol (MCP)
-Seamless, high-performance integration using the new standard for AI tool calling:
-* **SSE & Stdio Transports**: Ready to connect with Claude Desktop, Cursor IDE, or custom orchestrators.
-* **Self-Documenting Schemas**: Exposes structural parameter schemas so models know exactly how to execute click, move, typing, and read actions.
+* **Standard Integration**: Ready to connect out-of-the-box with Claude Desktop, Cursor IDE, LangGraph, or custom agent frameworks.
+* **Self-Documenting Schemas**: Exposes structural parameter schemas so models know exactly how to execute computer actions.
 
 ---
 
 ## 🔒 Security Model
 
-Running agentic operations in production requires enterprise-grade protection. Open Infra Agent is architected with a **defense-in-depth security model**:
+Operating an agent runtime in production requires strict boundaries. Open Infra Agent is designed on a **defense-in-depth security model**:
 
-* **🐳 Strict Docker Isolation**: The entire desktop, terminal, and browser stack is completely isolated from your host system.
-* **🛡️ execFile-only Execution**: The daemon is entirely refactored to eliminate raw shell injections. Every automation tool executes binaries directly without spawning system shells, mitigating command injection vulnerabilities.
-* **❌ Zero Host Access**: No host filesystems or host processes are visible to the agent inside the container.
-* **🔍 Real-Time Visual Auditing**: Run the integrated noVNC client to visually inspect what the agent is doing in real-time on your browser.
-* **📥 Schema Enforcement**: Every input from the LLM is validated against JSON schemas before hitting the operating system.
+* **🐳 Strict Docker Isolation**: The entire desktop, terminal, and browser stack runs strictly inside a container. It cannot access your host machine, filesystems, or networks unless explicitly allowed.
+* **🛡️ execFile-only Execution**: The daemon has been entirely refactored to eliminate shell command vulnerabilities. Every tool executes binary arguments directly without spawning an active system shell, making command injection mathematically impossible.
+* **❌ Zero Host Access**: Absolute separation from the host environment. 
+* **🔍 Live Visual Auditing**: Monitor the agent in real-time. Use the built-in noVNC viewer to inspect every single click and action through your browser.
+* **📥 Input Sanitization**: Rigid schema enforcement validates coordinates, keys, and file paths before execution.
+
+---
+
+## 💬 Real-World Examples & Prompts
+
+Here are some actual prompts you can feed into Claude or any LLM connected to Open Infra Agent to watch it work:
+
+### 🛠️ Infrastructure Operations
+> *"Open the Terminal app, check if Docker is running, list all containers, find the postgres container, check its logs for connection errors, and report what you find."*
+
+### 🌐 Browser & Console Automation
+> *"Launch Firefox, go to 'http://localhost:9990/health', verify if the response JSON contains status 'ok', take a screenshot of the browser window, and confirm if the service is online."*
+
+### 📁 Filesystem & Log Diagnostics
+> *"Locate all log files inside the /var/log directory that were modified in the last 2 hours. Search for the term 'critical' inside them and write a summary markdown file on the desktop."*
+
+### 💻 Local Code Auditing
+> *"Open VS Code in the workspace directory, read the active configuration file, locate the API keys placeholder, and verify if the corresponding example environment file is documented."*
 
 ---
 
 ## 🎯 Real-World Use Cases
 
 ### 🛠️ DevOps & Infrastructure
-1. **Incident Response**: "An alert says port 8080 is down. Open the terminal, inspect systemd services, read logs, find the error, and restart it."
-2. **Reverse Proxy Setup**: "Install Nginx, configure a reverse proxy for our NestJS daemon, test the configuration, and restart Nginx."
-3. **Database Migration Troubleshooter**: "Check why the latest Prisma migration is failing on the Postgres container, inspect the schema, and resolve the migration lock."
-4. **CI/CD Debugging**: "Inspect the failed GitHub Actions runner logs, clone the specific branch, run the tests locally in the sandbox, and fix the syntax error."
+* **Incident Response**: Autonomously inspect systemd services, read crash logs, identify exceptions, and safely restart services.
+* **Reverse Proxy Setup**: Install Nginx, configure site templates, test configurations visually, and restart Nginx.
+* **Database Troubleshooting**: Debug Prisma or database connection locks, inspect local schemas, and check database containers.
+* **CI/CD Debugging**: Spin up failed pipeline states inside the container, run tests locally, and fix bugs.
 
 ### ☁️ Cloud Operations
-5. **AWS Resource Audit**: "Open Firefox, log into the local LocalStack console, list all running S3 buckets, and check if any have public read access."
-6. **Cost Optimization**: "Analyze active docker containers, identify idle services consuming memory, and safely shut down non-critical development stacks."
-7. **Certificate Auto-Renewal**: "Check Let's Encrypt certificates expiration, run certbot, verify the challenge via browser, and reload the gateway."
+* **Cloud Resource Auditing**: Navigate cloud dashboards via browser, list active resources, and audit security configurations.
+* **Cost Optimization**: Clean up unused docker images, locate memory-heavy idle services, and optimize local deployments.
+* **Certificate Automation**: Handle Let's Encrypt certificates expiration, run challenge renewals, and reload reverse proxies.
 
 ### 🌐 Browser & Web Automation
-8. **E2E Testing Execution**: "Open VS Code, write a Cypress test for the login page, run Cypress, and confirm if all tests pass visually."
-9. **Dashboard Data Scraping**: "Log into our internal analytics panel, download the monthly CSV report, compile the data, and write a summary markdown file."
-10. **Documentation Synchronization**: "Browse the official AWS SDK documentation, find the updated S3 client API, and update our local helper file accordingly."
+* **E2E Visual Testing**: Write Cypress/Playwright scripts inside VS Code, execute them, and visually audit if layouts broke.
+* **Dashboard Data Scraping**: Log into enterprise metrics consoles, export CSV reports, and structure them.
+* **API Documentation Sync**: Browse official SDK documentations, retrieve updated endpoints, and refactor local classes.
 
 ### 📊 Desktop RPA & Testing
-11. **Visual QA Auditing**: "Take screenshots of our landing page on different screen resolutions, detect overlapping UI elements, and report layout bugs."
-12. **Application Performance Monitoring**: "Open Firefox, inspect network tabs during home page loading, isolate slow assets, and report API response times."
-13. **Local Environment Bootstrapping**: "Set up the entire NestJS monorepo, run migrations, seed the database, and verify the backend health check endpoint."
-14. **Security Hardening Scans**: "Run OWASP ZAP or local security auditing scripts against our web server and generate a visual vulnerability report."
-15. **System Log Rotation**: "Check if the server disk space is low, identify heavy system logs, archive outdated logs, and clean system cache safely."
+* **Layout QA Auditing**: Take screenshots across dynamic window sizes, detect overlapping text, and report rendering bugs.
+* **APM Auditing**: Open Firefox, inspect the network performance tab, record slow resources, and profile loading speeds.
+* **Local Bootstrapping**: Standardize the configuration of heavy local repos, run initial migrations, and seed environments.
+* **Vulnerability Scans**: Run security scripts or OWASP scanners against local targets and build visual audit reports.
+* **Log Rotation & Maintenance**: Monitor low disk warnings, compress stale logs, and safely clean up system cache.
 
 ---
 
 ## 📊 Comparison
 
-| Feature | Open Infra Agent | Browser Use | Computer Use (Raw) | Open Interpreter |
+How does Open Infra Agent compare to other agentic frameworks?
+
+| Capability | Open Infra Agent | Browser Use | Computer Use (Anthropic) | Open Interpreter |
 | :--- | :---: | :---: | :---: | :---: |
-| **MCP Native** | **✅ Yes** | ❌ No | ❌ No | ❌ No |
-| **Real Linux Desktop** | **✅ Yes (Ubuntu)** | ⚠️ Browser Only | ⚠️ Minimal OS | ❌ No (Local Host) |
-| **Strict Docker Isolation** | **✅ Yes** | ⚠️ Custom Setup | ⚠️ Custom Setup | ❌ No (Dangerous) |
-| **Shell-Injection Proof** | **✅ Yes (execFile)** | ⚠️ Depends | ⚠️ Depends | ❌ No |
+| **Primary Category** | **Agent Computer Runtime** | Web Agent | API Client | Local Terminal |
+| **MCP Native** | **✅ Yes (Out of the Box)** | ❌ No | ❌ No | ❌ No |
+| **Real Linux Desktop** | **✅ Yes (XFCE4/VNC)** | ⚠️ Browser Only | ⚠️ Minimal OS | ❌ No (Local Host) |
+| **Strict Docker Isolation** | **✅ Yes** | ⚠️ Requires Custom Setup | ⚠️ Requires Custom Setup | ❌ No (Dangerous) |
+| **Shell-Injection Proof** | **✅ Yes (execFile-only)** | ⚠️ Depends | ⚠️ Depends | ❌ No |
 | **Browser Control** | **✅ Yes** | ✅ Yes | ✅ Yes | ❌ No |
-| **Terminal Automation** | **✅ Yes (Sandboxed)** | ❌ No | ⚠️ Minimal | ✅ Yes (Local Host) |
-| **noVNC Live Stream** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No | ❌ No |
+| **Terminal Control** | **✅ Yes (Sandboxed)** | ❌ No | ⚠️ Minimal | ✅ Yes (Local Host) |
+| **noVNC Live View** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No | ❌ No |
 | **Open Source** | **✅ Yes (Apache 2.0)** | ✅ Yes | ❌ Proprietary API | ✅ Yes |
 
 ---
@@ -176,10 +195,10 @@ Running agentic operations in production requires enterprise-grade protection. O
 
 Our stack is highly optimized to ensure rapid response loops for LLM decision-making:
 
-* **⚡ Container Startup**: `< 3.5 seconds` to a fully operational virtual framebuffer, desktop environment, and MCP server.
-* **📉 Memory Footprint**: `~240MB RAM` baseline usage for the complete X11+XFCE4+noVNC+NestJS stack.
+* **⚡ Container Startup**: `< 3.5 seconds` to spin up the virtual framebuffer, desktop environment, VNC proxy, and MCP server.
+* **📉 Memory Footprint**: `~240MB RAM` baseline memory usage for the complete active stack.
 * **🔄 MCP Action Latency**: `< 12ms` execution roundtrip (from tool call parsed to virtual OS action triggered).
-* **🖥️ Streaming Compression**: Integrated with `sharp` to compress captured visual buffers into highly optimized JPEGs, lowering LLM context window ingestion latency by `65%`.
+* **🖥️ Dynamic Compression**: Integrates with `sharp` to compress captured visual buffers into highly optimized JPEGs, lowering context window ingestion latency by `65%`.
 
 ---
 
@@ -196,7 +215,7 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
    cd open-infro-agentc
    ```
 
-2. **Spin up the isolated environment:**
+2. **Spin up the isolated runtime:**
    ```bash
    docker compose up --build -d
    ```
@@ -207,17 +226,37 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 ---
 
-## 💬 Real-World Prompt Examples
+## 📡 API & MCP Tool Reference
 
-Here are some actual prompts you can send to Claude or any LLM connected to Open Infra Agent:
+### REST Endpoints
+| Endpoint | Method | Purpose |
+| :--- | :--- | :--- |
+| `/vnc` | `GET` | Redirects to the integrated noVNC web view |
+| `/health` | `GET` | Container health probe check |
+| `/computer-use` | `POST` | Exposes low-level OS automation APIs |
+| `/mcp` | `GET/POST` | Standard MCP connection endpoint (SSE) |
 
-```text
-"Open the Terminal app, run 'git status' inside the /workspace/project directory, check which files have modified changes, and write a detailed summary in a new markdown file named 'audit.md' on the desktop."
-```
+### Exposes High-Performance OS Automation Tools:
+* 🖱️ **Cursor Automation**: `computer_move_mouse`, `computer_click_mouse`, `computer_press_mouse`, `computer_drag_mouse`, `computer_cursor_position`, `computer_scroll`.
+* ⌨️ **Keyboard Automation**: `computer_type_text` (typing effect), `computer_paste_text` (instant clipboard injection), `computer_type_keys` (shortcuts like `Ctrl+C`, `Alt+Tab`).
+* 🖥️ **Application Controllers**: `computer_application` (launches/focuses VS Code, Terminal, Firefox, 1Password, etc.).
+* 📁 **Secure File System Tools**: `computer_write_file`, `computer_read_file` (handles base64 encoded streams safely).
 
-```text
-"Launch Firefox, navigate to 'http://localhost:9990/health', verify if the response is JSON and contains status 'ok', take a screenshot of the browser, and tell me if it loaded correctly."
-```
+---
+
+## ❓ FAQ
+
+### 1. Is Open Infra Agent a Virtual Machine (VM)?
+No. It runs entirely inside a lightweight Docker container based on Ubuntu 22.04. It utilizes a virtual framebuffer (Xvfb) to run X11 desktop applications without needing high VM overheads.
+
+### 2. Does it require MCP to run?
+No. While it comes with a native Model Context Protocol (MCP) server ready to integrate with AI clients, you can also control it directly through its standardized REST APIs.
+
+### 3. Can I run it headlessly?
+Yes. The container is completely headless out-of-the-box. The noVNC browser connection on port `9990` is optional and purely for real-time visual auditing by humans.
+
+### 4. Is it safe to execute arbitrary commands generated by AI?
+Yes. The container acts as a strong sandbox. The agent has no access to your host machine's resources, files, or network unless you explicitly mount them. Furthermore, our `execFile`-only backend prevents shell command injections.
 
 ---
 
@@ -230,7 +269,7 @@ Here are some actual prompts you can send to Claude or any LLM connected to Open
 * [x] **noVNC Browser Streamer** for real-time visual auditing.
 
 ### **2027**
-* [ ] **Multi-Agent Infrastructure Teams**: Seamlessly coordinate Planner, Executor, and Security Auditor agents inside the same desktop environment.
+* [ ] **Multi-Agent Collaboration**: Coordinate Planner, Executor, and Security Auditor agents inside the same desktop environment.
 * [ ] **Self-Healing Infrastructure loops**: Connect the agent to alerts (Webhooks) to automatically inspect and attempt safe resolution of service crashes.
 * [ ] **RAG for Platform Operations**: Local vector store integration inside the container to feed company-specific architecture runbooks directly into the agent.
 
@@ -265,9 +304,9 @@ We are building a global movement to redefine operations. We welcome developers,
 
 ## 🇧🇷 Resumo em Português
 
-**Open Infra Agent** é um operador de infraestrutura de código aberto que dá a modelos de linguagem (LLMs) acesso a um computador Linux real (com desktop, terminal, navegador e sistema de arquivos) através do protocolo **Model Context Protocol (MCP)**. 
+**Open Infra Agent** é um ambiente de execução de computador para IAs de código aberto (AI Computer Use Runtime) que permite a modelos como Claude, GPT-4 e Gemini controlar um desktop Linux completo e seguro via **Model Context Protocol (MCP)**.
 
-Diferente de emuladores ou interpretadores rodando diretamente na sua máquina host (o que traz graves riscos de segurança), o Open Infra Agent roda em um container Docker totalmente isolado (`Ubuntu 22.04`), utilizando execução livre de shell (`execFile`) para máxima proteção. Ele é ideal para automatizar tarefas complexas de DevOps, Cloud, auditorias de segurança e automação de navegadores por meio de linguagem natural.
+Diferente de interpretadores locais ou extensões de navegador simples que trazem riscos graves de segurança à sua máquina principal, o Open Infra Agent roda em um container Docker totalmente isolado. Ele fornece terminal, navegador Firefox e editores de código reais, utilizando execução à prova de injeção de comandos (`execFile`). É a infraestrutura ideal para conectar agentes autônomos às operações reais do dia a dia.
 
 ---
 
