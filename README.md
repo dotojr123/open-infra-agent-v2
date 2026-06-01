@@ -10,15 +10,15 @@
 [![Docker Support](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
 
 <p align="center">
-  <b>An open-source AI Computer Use Runtime that allows Claude, GPT, Gemini, and any MCP-compatible agent to control a complete, secure Linux desktop environment.</b>
+  <b>An open-source computer use runtime that gives Claude, GPT, Gemini, and any MCP client a complete, secure Linux desktop they can actually operate.</b>
 </p>
 
-✓ **Browser Automation** — Run full browsers (Firefox, Chrome) natively.  
-✓ **Terminal Operations** — Execute shell commands inside a secure sandbox.  
-✓ **File Management** — Manipulate raw files and datasets.  
-✓ **Desktop Applications** — Automate IDEs, visual tools, and local software.  
-✓ **Native MCP Integration** — Built directly for the Model Context Protocol.  
-✓ **Strict Docker Sandbox** — Complete isolation from your host machine.
+✓ **Browser Control** — Run and automate full browsers (Firefox, Chrome) natively.  
+✓ **Terminal Access** — Execute shell commands and scripting inside a secure sandbox.  
+✓ **File Management** — Manipulate raw files, datasets, and filesystems safely.  
+✓ **Desktop Applications** — Automate IDEs (VS Code), visual tools, and custom software.  
+✓ **Native MCP Integration** — Built from the ground up for the Model Context Protocol.  
+✓ **Docker Isolation** — Complete security with defense-in-depth sandboxing.
 
 <br/>
 
@@ -34,17 +34,17 @@
 
 ## ⚡ Why Open Infra Agent Exists
 
-Most AI agents are trapped inside narrow chat interfaces or limited to calling basic APIs and isolated code interpreters. 
+Most AI agents can call simple APIs or run isolated code snippets in basic terminal mockups.
 
-**But real engineering workflows don't happen in a vacuum.** 
+**But real workflows don't happen in a sandbox vacuum. They happen inside the operating system.**
 
-They happen inside terminal sessions, web consoles, visual IDEs, local debuggers, and proprietary software. **Open Infra Agent acts as the infrastructure layer between AI agents and operating systems.** It bridges this gap by giving LLMs a high-performance, secure, and fully functional Linux workstation—allowing them to work exactly like a human operator sitting at a computer.
+They require navigating web consoles, debugging visually inside an IDE, managing local file structures, executing system binaries, and running local scripts. **Open Infra Agent is the infrastructure layer between AI agents and operating systems.** We bridge this gap by giving LLMs a high-performance, fully functional, and secure Linux workstation—enabling them to interact with the digital world exactly like a human operator.
 
 ---
 
 ## ⚠️ The Problem
 
-Infrastructure, DevOps, and automation teams spend thousands of hours every year switching between:
+Infrastructure, development, and operations teams spend thousands of hours every year switching between:
 
 * 💻 Terminals and CLI shells
 * 📊 Monitoring dashboards (Grafana, Datadog)
@@ -98,7 +98,7 @@ The runtime translates agent requests directly into secure virtual mouse clicks,
 
 ---
 
-## 🚀 Capabilities
+## 🚀 What Agents Can Do (Capabilities)
 
 ### 🖱️ Human-Like Computer Control
 * **Virtual Mouse Operations**: Precision movement, click, drag, scroll, and real-time cursor tracking.
@@ -120,7 +120,7 @@ The runtime translates agent requests directly into secure virtual mouse clicks,
 
 Operating an agent runtime in production requires strict boundaries. Open Infra Agent is designed on a **defense-in-depth security model**:
 
-* **🐳 Strict Docker Isolation**: The entire desktop, terminal, and browser stack runs strictly inside a container. It cannot access your host machine, filesystems, or networks unless explicitly allowed.
+* **🐳 Strict Docker Isolation**: The entire desktop, terminal, and browser stack runs strictly inside a container. It cannot access your host machine's resources, files, or networks unless explicitly allowed.
 * **🛡️ execFile-only Execution**: The daemon has been entirely refactored to eliminate shell command vulnerabilities. Every tool executes binary arguments directly without spawning an active system shell, making command injection mathematically impossible.
 * **❌ Zero Host Access**: Absolute separation from the host environment. 
 * **🔍 Live Visual Auditing**: Monitor the agent in real-time. Use the built-in noVNC viewer to inspect every single click and action through your browser.
@@ -132,16 +132,16 @@ Operating an agent runtime in production requires strict boundaries. Open Infra 
 
 Here are some actual prompts you can feed into Claude or any LLM connected to Open Infra Agent to watch it work:
 
-### 🛠️ Infrastructure Operations
+### 🛠️ Infrastructure
 > *"Open the Terminal app, check if Docker is running, list all containers, find the postgres container, check its logs for connection errors, and report what you find."*
 
-### 🌐 Browser & Console Automation
+### 🌐 Browser
 > *"Launch Firefox, go to 'http://localhost:9990/health', verify if the response JSON contains status 'ok', take a screenshot of the browser window, and confirm if the service is online."*
 
-### 📁 Filesystem & Log Diagnostics
+### 📁 Filesystem
 > *"Locate all log files inside the /var/log directory that were modified in the last 2 hours. Search for the term 'critical' inside them and write a summary markdown file on the desktop."*
 
-### 💻 Local Code Auditing
+### 💻 Development
 > *"Open VS Code in the workspace directory, read the active configuration file, locate the API keys placeholder, and verify if the corresponding example environment file is documented."*
 
 ---
@@ -177,17 +177,33 @@ Here are some actual prompts you can feed into Claude or any LLM connected to Op
 
 How does Open Infra Agent compare to other agentic frameworks?
 
-| Capability | Open Infra Agent | Browser Use | Computer Use (Anthropic) | Open Interpreter |
-| :--- | :---: | :---: | :---: | :---: |
-| **Primary Category** | **Agent Computer Runtime** | Web Agent | API Client | Local Terminal |
-| **MCP Native** | **✅ Yes (Out of the Box)** | ❌ No | ❌ No | ❌ No |
-| **Real Linux Desktop** | **✅ Yes (XFCE4/VNC)** | ⚠️ Browser Only | ⚠️ Minimal OS | ❌ No (Local Host) |
-| **Strict Docker Isolation** | **✅ Yes** | ⚠️ Requires Custom Setup | ⚠️ Requires Custom Setup | ❌ No (Dangerous) |
-| **Shell-Injection Proof** | **✅ Yes (execFile-only)** | ⚠️ Depends | ⚠️ Depends | ❌ No |
-| **Browser Control** | **✅ Yes** | ✅ Yes | ✅ Yes | ❌ No |
-| **Terminal Control** | **✅ Yes (Sandboxed)** | ❌ No | ⚠️ Minimal | ✅ Yes (Local Host) |
-| **noVNC Live View** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No | ❌ No |
-| **Open Source** | **✅ Yes (Apache 2.0)** | ✅ Yes | ❌ Proprietary API | ✅ Yes |
+| Capability | Open Infra Agent | Browser Use | Open Interpreter |
+| :--- | :---: | :---: | :---: |
+| **Primary Category** | **Agent Computer Runtime** | Web Agent | Local Terminal |
+| **MCP Native** | **✅ Yes (Out of the Box)** | ❌ No | ❌ No |
+| **Real Linux Desktop** | **✅ Yes (XFCE4/VNC)** | ⚠️ Browser Only | ❌ No (Local Host) |
+| **Strict Docker Isolation** | **✅ Yes** | ⚠️ Requires Custom Setup | ❌ No (Dangerous) |
+| **Shell-Injection Proof** | **✅ Yes (execFile-only)** | ⚠️ Depends | ❌ No |
+| **Browser Control** | **✅ Yes** | ✅ Yes | ❌ No |
+| **Terminal Control** | **✅ Yes (Sandboxed)** | ❌ No | ✅ Yes (Local Host) |
+| **noVNC Live View** | **✅ Yes (:9990/vnc)** | ❌ No | ❌ No |
+| **Open Source** | **✅ Yes (Apache 2.0)** | ✅ Yes | ✅ Yes |
+
+---
+
+## ❓ FAQ
+
+### Is Open Infra Agent a Virtual Machine (VM)?
+No. It runs entirely inside a lightweight Docker container based on Ubuntu 22.04. It utilizes a virtual framebuffer (Xvfb) to run X11 desktop applications without needing high VM overheads.
+
+### Does it require MCP to run?
+No. While it comes with a native Model Context Protocol (MCP) server ready to integrate with AI clients, you can also control it directly through its standardized REST APIs.
+
+### Can I run it headlessly?
+Yes. The container is completely headless out-of-the-box. The noVNC browser connection on port `9990` is optional and purely for real-time visual auditing by humans.
+
+### Is it safe to execute arbitrary commands generated by AI?
+Yes. The container acts as a strong sandbox. The agent has no access to your host machine's resources, files, or network unless you explicitly mount them. Furthermore, our `execFile`-only backend prevents shell command injections.
 
 ---
 
@@ -244,22 +260,6 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 ---
 
-## ❓ FAQ
-
-### 1. Is Open Infra Agent a Virtual Machine (VM)?
-No. It runs entirely inside a lightweight Docker container based on Ubuntu 22.04. It utilizes a virtual framebuffer (Xvfb) to run X11 desktop applications without needing high VM overheads.
-
-### 2. Does it require MCP to run?
-No. While it comes with a native Model Context Protocol (MCP) server ready to integrate with AI clients, you can also control it directly through its standardized REST APIs.
-
-### 3. Can I run it headlessly?
-Yes. The container is completely headless out-of-the-box. The noVNC browser connection on port `9990` is optional and purely for real-time visual auditing by humans.
-
-### 4. Is it safe to execute arbitrary commands generated by AI?
-Yes. The container acts as a strong sandbox. The agent has no access to your host machine's resources, files, or network unless you explicitly mount them. Furthermore, our `execFile`-only backend prevents shell command injections.
-
----
-
 ## 🗺️ Roadmap
 
 ### **2026**
@@ -286,9 +286,11 @@ The browser transformed how we access human information.
 
 **AI agents will transform how we automate operations.**
 
-We believe that infrastructure management should evolve from memorizing complex CLI arguments and navigating complex dashboards to defining clear **objectives** in conversational interfaces. Instead of telling systems *HOW* to do something, humans should simply describe *WHAT* they want to achieve. 
+We believe that AI agents should not be limited to interacting with isolated API endpoints. They should be fully capable of operating inside the same environments humans use every day. 
 
-**Open Infra Agent is the standard operational foundation for this future.**
+Browsers. Terminals. Files. Applications. Complete operating systems. 
+
+**Open Infra Agent is building the infrastructure layer that makes that future possible.**
 
 ---
 
