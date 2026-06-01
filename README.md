@@ -23,7 +23,7 @@
 
 ## 📺 See it in Action
 
-<video src="https://github.com/dotojr123/open-infro-agentc/raw/main/demo.mp4" width="100%" controls autoplay loop muted></video>
+![Open Infro Agentc Demo](demo.mp4)
 
 *(Caso o vídeo não renderize no seu leitor de markdown, o arquivo de demonstração está disponível na raiz como [demo.mp4](demo.mp4))*
 
