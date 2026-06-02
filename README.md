@@ -127,7 +127,7 @@ for autonomous AI systems.
 Observe every action, terminal command, and browser click in real-time. The visual workspace is streamed natively to any device, allowing immediate takeover and seamless human-in-the-loop governance.
 
 <p align="center">
-  <img src="./assets/agent-session.jpg" alt="Live Agent Session Monitoring" width="100%">
+  <img src="./assets/agent-session.png" alt="Live Agent Session Monitoring" width="100%">
 </p>
 
 <sub>☝️ <em>A live agent session running <strong>Claude</strong> inside a sandboxed Linux terminal, fully monitored and interactive via the web interface.</em></sub>
