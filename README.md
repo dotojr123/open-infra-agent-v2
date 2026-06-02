@@ -2,16 +2,33 @@
 
 # 🌌 Open Infra Agent
 
-## **The Control Plane for Autonomous AI Operations**
+### The Autonomous Operating Environment (AOE) for AI Agents
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agentc/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white)](https://github.com/dotojr123/open-infro-agentc/actions)
-[![License](https://img.shields.io/badge/License-Apache_2.0-F5A623?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
-[![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_20.0.0-68A063?style=for-the-badge&logo=node.js&logoColor=white)](package.json)
-[![Docker Support](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
+**Deploy, supervise, and govern autonomous AI agents inside secure operational environments.**
 
-<p align="center">
-  <b>Deploy autonomous AI agents with complete visibility, human supervision, operational governance, and secure execution environments.</b>
+<p>
+
+<a href="https://github.com/dotojr123/open-infro-agentc/stargazers">
+<img src="https://img.shields.io/github/stars/dotojr123/open-infro-agentc?style=for-the-badge&logo=github&color=F59E0B">
+</a>
+
+<a href="LICENSE">
+<img src="https://img.shields.io/github/license/dotojr123/open-infro-agentc?style=for-the-badge&logo=apache&color=10B981">
+</a>
+
+<a href="https://github.com/dotojr123/open-infro-agentc/issues">
+<img src="https://img.shields.io/github/issues/dotojr123/open-infro-agentc?style=for-the-badge&logo=github&color=3B82F6">
+</a>
+
+<a href="https://github.com/dotojr123/open-infro-agentc/actions">
+<img src="https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agentc/ci.yml?style=for-the-badge&logo=github-actions&color=8B5CF6">
+</a>
+
 </p>
+
+### 🚀 The Infrastructure Layer For Autonomous AI
+
+<br/>
 
 ![Open Infra Agent Demo](demo.gif)
 
@@ -20,20 +37,6 @@
 [🇺🇸 English](README.md) | [🇧🇷 Português (Brasil)](#-resumo-em-português)
 
 </div>
-
----
-
-Open Infra Agent is an open-source operational platform that provides AI agents with fully isolated Linux workspaces where they can interact with browsers, terminals, IDEs, files, enterprise systems, and internal tools exactly like a human operator.
-
-Unlike traditional agent frameworks that focus on orchestration and tool calling, Open Infra Agent focuses on something enterprises actually need before deploying agents at scale:
-
-**Control.**
-
-Every click, keystroke, command, file modification, browser interaction, and system action can be monitored, audited, and supervised in real time.
-
-Human operators can intervene instantly, take control of the workspace, resolve issues, and return execution back to the agent without interrupting the workflow.
-
-Nenhuma solução combina isolamento, observabilidade, governança, intervenção humana e execução operacional de agentes da forma como o Open Infra Agent faz.
 
 ---
 
@@ -58,164 +61,146 @@ Very few solve governance.
 
 ---
 
-# The Missing Layer
+# Why Now
 
-Today's AI stack looks like this:
+AI already solved intelligence.
 
-`User` → `Agent` → `Tools` → `Production Systems`
+* GPT-5
+* Claude 3.5
+* Gemini 1.5 / 2.0
+* Qwen / DeepSeek
 
-This creates a major operational blind spot. Agents execute actions, but organizations often lack visual observability, human oversight, operational governance, intervention capabilities, shared monitoring, and auditability.
+The bottleneck is no longer reasoning.
 
-Open Infra Agent introduces a new layer:
+**The bottleneck is execution.**
 
-`User` → `Agent` → **`Open Infra Agent`** → `Enterprise Systems`
+Organizations need a safe way to deploy agents into real operational environments. Without losing control, breaking compliance, or creating security risks.
 
-This layer provides:
-* **Execution isolation** (disposable environments)
-* **Real-time supervision** (low-latency streaming)
-* **Human-in-the-loop operations** (live mouse/keyboard takeover)
-* **Audit trails** (complete action logging)
-* **Shared visibility** (multi-stakeholder access)
-* **Operational governance** (strict runtime validation)
+The industry has frameworks. The industry lacks infrastructure.
 
----
-
-# What Open Infra Agent Is
-
-Open Infra Agent is an **Agent Operating Environment**. It provides:
-
-* Complete Linux desktop workspace (Ubuntu-based)
-* Native web browser automation (Firefox, Chrome)
-* Secure terminal shell access
-* Integrated IDE access (VS Code)
-* Controlled file management and data processing
-* Visual frame feedback engine
-* Native Model Context Protocol (MCP) integration
-* Human supervision and live takeover interface
-* Enterprise-grade operational governance
-
-All inside a secure and strictly isolated containerized sandbox.
+Open Infra Agent exists to fill that gap.
 
 ---
 
-# Core Principles
+# Introducing AOE
 
-## Complete Visibility
-Watch every action performed by the agent. Monitor mouse movements, keyboard inputs, terminal commands, browser activities, file operations, and application launches. Everything happens inside a visual environment that can be observed in real time.
+### Autonomous Operating Environment
 
-## Human-in-the-Loop
-Humans remain in control. Operators can observe execution, pause workflows, take over the keyboard and mouse, resolve issues, and resume agent execution. The system is designed to prevent black-box automation.
+AOE is a new category of infrastructure.
 
-## Isolated Workspaces
-Each agent runs inside a dedicated, lightweight Linux workspace container. This ensures environmental isolation, safe experimentation, disposable execution runtimes, reduced operational risk, and the complete protection of your host infrastructure.
+The same way:
+* **Docker** standardized containers
+* **Kubernetes** standardized orchestration
 
-## Multi-Stakeholder Monitoring
-A single active session can be viewed simultaneously by DevOps teams, Security teams, Compliance teams, Engineering managers, and Business stakeholders. Everyone sees the same execution environment in real time.
+**AOE** standardizes:
+* **Agent execution** (secure operating system layer)
+* **Agent supervision** (real-time visual control)
+* **Agent governance** (policy and permissions management)
+* **Agent observability** (auditable operations tracking)
 
-## Enterprise Governance
-Open Infra Agent transforms autonomous agent execution into an auditable operational process. Organizations gain complete traceability, absolute accountability, structural audit logs, human approvals, and operational oversight.
-
----
-
-# Capabilities
-
-## Human-Level Computer Interaction
-Agents can move the mouse, click, drag and drop, scroll, type naturally, use keyboard shortcuts, and control local applications just like a human operator.
-
-## Browser Operations
-Agents can navigate websites, access enterprise dashboards, use internal portals, perform web-based workflows, download files, and process pages securely via Firefox.
-
-## Terminal Operations
-Agents can execute shell commands, analyze system logs, run automation scripts, inspect network services, and troubleshoot environments inside safe, isolated workspaces.
-
-## Development Workflows
-Agents can open VS Code, edit code files, review project filesystems, execute local test suites, fix bugs, and validate results before deployment.
-
-## File Management
-Agents can read files, write files, organize directories, process structured documents, and generate operational markdown reports safely.
-
-## MCP Native
-Built from the ground up for the Model Context Protocol. Open Infra Agent is fully compatible with Claude Desktop, Cursor IDE, LangGraph, CrewAI, custom orchestrators, and MCP-compatible systems.
+for autonomous AI systems. Nenhuma solução combina isolamento, observabilidade, governança, intervenção humana e execução operacional de agentes da forma como o Open Infra Agent faz.
 
 ---
 
-# Architecture
+# Architecture Diagram
 
-```mermaid
-graph TB
-    subgraph "🐳 Secure Docker Container (Ubuntu 22.04)"
-        subgraph "Display & Audio Stack"
-            XVFB["Xvfb :0<br>Virtual Framebuffer"]
-            XFCE["XFCE4<br>Desktop Environment"]
-            VNC["x11vnc<br>VNC Server :5900"]
-            WS["websockify<br>:6080"]
-        end
-        
-        subgraph "Core Integration Layer"
-            NEST["iagenciad<br>NestJS Daemon (:9990)"]
-            NUT["NutService<br>@nut-tree-fork/nut-js"]
-            UIOHOOK["uiohook-napi<br>Global Key Hooks"]
-        end
-        
-        XVFB --> XFCE
-        XVFB --> VNC
-        VNC --> WS
-        NEST --> |"proxy tunnel"| WS
-        NEST --> NUT
-        NEST --> UIOHOOK
-        NUT --> XVFB
-    end
-
-    subgraph "Client Layer"
-        BROWSER["Web Browser<br>(VNC View)"]
-        LLM["AI Agent / LLM Client<br>(Claude, etc.)"]
-    end
-
-    BROWSER --> |"HTTP GET :9990/vnc"| NEST
-    LLM --> |"MCP over SSE :9990/mcp"| NEST
-```
+<p align="center">
+  <img src="./assets/architecture.svg" alt="Open Infra Agent Architecture" width="100%">
+</p>
 
 ---
 
-# Security Model
+# Screenshots
 
-Security is a foundational design principle.
+### Agent Operations Dashboard
+![Dashboard](./assets/dashboard.png)
 
-* **Isolation** — Every workspace runs inside an isolated, containerized Docker environment with zero default access to the host machine.
-* **Human Supervision** — Humans can visually monitor and override inputs instantly at any point during execution.
-* **Auditability** — All system actions, visual changes, terminal logs, and file operations are recorded and reviewable.
-* **Execution Controls** — Strict schema validation is applied via the MCP layer before any action is executed.
-* **Workspace Containment** — Failures, system crashes, or unintended operations remain completely isolated within the disposable workspace.
-* **execFile Execution** — Command execution is processed directly using binary arguments without shell wrapping, eliminating entire classes of shell injection vulnerabilities.
+### Live Agent Monitoring
+![Monitoring](./assets/live-monitoring.png)
+
+### Linux Workspace
+![Workspace](./assets/agent-session.png)
 
 ---
 
-# Enterprise Use Cases
+# Features
+
+## 👁️ Complete Visibility
+Watch every action performed by the agent. Monitor mouse movements, keyboard inputs, terminal commands, browser activities, file operations, and application launches. Everything happens inside a visual environment that can be observed in real-time.
+
+## 🤝 Human-in-the-Loop
+Humans remain in control. Operators can observe execution, pause workflows, take over keyboard and mouse controls, resolve intermediate issues, and resume agent execution seamlessly. The system is designed to prevent black-box automation.
+
+## 🐳 Isolated Workspaces
+Each agent runs inside a dedicated, lightweight, and disposable Linux workspace container. This ensures absolute environment isolation, safe experimentation, reduced operational risks, and robust protection of host infrastructures.
+
+## 👥 Multi-Stakeholder Monitoring
+A single active session can be viewed simultaneously by DevOps, Security, Compliance, and Management teams in real-time. This provides shared visibility of the same workspace session to align multiple stakeholders.
+
+## 🛡️ Enterprise Governance
+Open Infra Agent transforms autonomous agent execution into an auditable operational process. Organizations gain complete traceability, absolute accountability, structural audit logs, and human-in-the-loop approvals.
+
+---
+
+# Comparison
+
+| Platform | Browser | Linux Workspace | Human Supervision | Governance | Enterprise Operations |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Browser Use** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Open Interpreter** | ✅ | Partial | ❌ | ❌ | ❌ |
+| **Manus** | ✅ | Partial | ❌ | ❌ | ❌ |
+| **Stagehand** | Browser only | ❌ | ❌ | ❌ | ❌ |
+| **Open Infra Agent** | **✅** | **✅** | **✅** | **✅** | **✅** |
+
+---
+
+# Technical Architecture
+
+Open Infra Agent consists of five distinct layers:
+
+### 1. Agent Layer
+Any LLM-powered agent (such as GPT-4o/5, Claude 3.5, Gemini, Qwen, or DeepSeek) or custom developer frameworks (LangGraph, CrewAI).
+
+### 2. Execution Layer
+Provides the runtime interface: complete Ubuntu 22.04 environments, visual browsers (Firefox, Chrome), secure terminal shells, and local filesystems.
+
+### 3. Control Layer
+Exposes human intervention portals, active session lifecycle, input driver translation hooks, and human takeover mechanisms.
+
+### 4. Observability Layer
+Generates compressed video streams (integrated with `sharp`), raw command inputs, shell capture stdout/stderr, and compliance audit records.
+
+### 5. Governance Layer
+Enforces operational policies, directory permissions boundaries, input sanitization JSON schemas, and defense-in-depth container isolation.
+
+---
+
+# Use Cases
 
 ## DevOps Operations
-* Incident response: inspect logs, monitor server configurations, and safely restart services.
-* Service diagnostics: run diagnostic scripts inside isolated nodes.
-* Infrastructure validation: verify deployment metrics and dashboards visually.
+* **Incident response**: Inspect logs, monitor server configurations, and safely restart units.
+* **Service diagnostics**: Run troubleshooting scripts inside isolated sandbox containers.
+* **Infrastructure validation**: Visually audit network ports and monitoring dashboards.
 
 ## Security Operations
-* Configuration auditing: review internal system parameters in isolated testbeds.
-* Access reviews: audit active accounts and permissions securely.
-* Compliance verification: capture structured log trails for regulatory audits.
+* **Configuration auditing**: Review active settings and config files inside isolated testbeds.
+* **Access reviews**: Verify local user accounts and permissions boundaries.
+* **Compliance verification**: Capture structured trace files for regulatory audits.
 
 ## Software Development
-* Bug fixing: test local codebases and reproduce production issues safely.
-* Code review: visually navigate codebases and pull requests inside VS Code.
-* Test execution: run test pipelines and visually audit end-to-end layouts.
+* **Bug fixing**: Safely reproduce and debug production environment issues.
+* **Code review**: Visually navigate repositories inside an active VS Code instance.
+* **Test execution**: Run test suites and visually audit layouts.
 
 ## Browser Automation
-* Internal portal workflows: automate recurring administrative data entries.
-* Dashboard auditing: capture visual reports and analytical exports securely.
-* Data collection: securely compile reports from multiple internal sources.
+* **Internal portal workflows**: Automate recurring internal console operations.
+* **Dashboard auditing**: Safely download and compile analytical reports.
+* **Data collection**: Gather data from multiple internal network consoles.
 
 ## Operational Support
-* Routine maintenance: automate routine scripting operations safely.
-* Documentation updates: browse repositories and keep internal wikis in sync.
-* Process execution: execute administrative business workflows with human oversight.
+* **Routine maintenance**: Schedule routine scripting tasks in safe execution sandboxes.
+* **Documentation updates**: Keep internal documentation in sync with system configurations.
+* **Process execution**: Execute business processes visually with human oversight.
 
 ---
 
@@ -243,7 +228,7 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
    cd open-infro-agentc
    ```
 
-2. **Spin up the environment:**
+2. **Spin up the isolated runtime:**
    ```bash
    docker compose up --build -d
    ```
@@ -272,6 +257,37 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 ---
 
+# Roadmap
+
+### **v0.1**
+* [x] **Linux Workspace** sandboxing via Docker.
+* [x] **Browser Automation** natively through X11 and Firefox.
+* [x] **Human Supervision** over live noVNC streaming.
+* [x] **Visual Monitoring** and capture frame compression engine.
+
+### **v0.2**
+* [ ] **Multi-Agent Sessions** orchestration within the same desktop.
+* [ ] **Session Recording** for full operational playback and audits.
+* [ ] **Advanced Logging** for terminal processes and execution.
+
+### **v0.3**
+* [ ] **RBAC** for session access and tool execute permissions.
+* [ ] **Team Workspaces** to collaborate on active agent loops.
+* [ ] **API Layer** expansion for secure external system routing.
+
+### **v0.4**
+* [ ] **OIDC** integration for secure team auth.
+* [ ] **SAML** configuration support for enterprise directories.
+* [ ] **Enterprise Administration** dashboard.
+
+### **v1.0**
+* [ ] **Kubernetes Native** scaling for thousands of parallel agents workspaces.
+* [ ] **High Availability** orchestrations.
+* [ ] **Governance Engine** for strict policy enforcement.
+* [ ] **Compliance Frameworks** (SOC2, ISO 27001 readiness).
+
+---
+
 # Why It Matters
 
 The first generation of AI focused on content generation.
@@ -282,13 +298,7 @@ The next generation is autonomous execution.
 
 But autonomous execution requires more than intelligence.
 
-It requires visibility.
-
-It requires governance.
-
-It requires supervision.
-
-It requires trust.
+It requires visibility. It requires governance. It requires supervision. It requires trust.
 
 Open Infra Agent provides the operational infrastructure required to deploy autonomous AI agents safely at scale.
 
@@ -306,7 +316,7 @@ Open Infra Agent is building the control plane for autonomous AI operations.
 
 The infrastructure layer that enables organizations to safely deploy, supervise, govern, and scale AI agents across real-world operational environments.
 
-Just as containers standardized application deployment (Docker/Kubernetes), Agent Operating Environments may standardize autonomous execution.
+Just as containers standardized application deployment, Agent Operating Environments may standardize autonomous execution.
 
 ---
 
