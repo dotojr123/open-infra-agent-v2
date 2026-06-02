@@ -26,8 +26,6 @@
 
 </p>
 
-### 🚀 The Infrastructure Layer For Autonomous AI
-
 > ⚡ **Ready to deploy agents safely?**  
 > 👉 [Get Started in 1 Minute](#-quick-start-1-minute-launch) • [Watch the Demo](Open%20Infro%20Agentc.mp4) • [Join the Community](#-open-source-mission)
 
@@ -73,15 +71,18 @@ Very few solve governance.
 # Why Now
 
 AI already solved intelligence.
-The bottleneck is no longer reasoning — it's execution.
+
+The bottleneck is no longer reasoning — **it's execution.**
+
 Every major model can think. Almost none can act safely inside real infrastructure.
 
-GPT-4o/5 can plan a workflow. It cannot govern one.
-Claude 3.5 can reason about your systems. It cannot audit itself.
-Gemini 2.0 can process your data. It cannot prove it followed the rules.
+* GPT-4o/5 can plan a workflow. **It cannot govern one.**
+* Claude 3.5 can reason about your systems. **It cannot audit itself.**
+* Gemini 2.0 can process your data. **It cannot prove it followed the rules.**
 
 Organizations deploying agents in 2026 face one critical gap:
-there is no standard infrastructure layer for safe autonomous execution.
+**there is no standard infrastructure layer for safe autonomous execution.**
+
 Open Infra Agent fills that gap.
 
 ---
@@ -169,7 +170,7 @@ Open Infra Agent gives your agent an **entire governed operating environment**.
 - 🗜️ **65% screenshot compression** — multimodal context at a fraction of the token cost.
 - 🔌 **MCP-native** — any agent that speaks MCP works out of the box. Zero glue code.
 - 🐳 **One command deploy** — `docker compose up` and you're running in under 4 seconds.
-- 🧑💼 **Multi-stakeholder live view** — DevOps, Security, and Compliance watch the same session simultaneously.
+- 🧑‍💼 **Multi-stakeholder live view** — DevOps, Security, and Compliance watch the same session simultaneously.
 
 ---
 
@@ -198,7 +199,7 @@ Enforces operational policies, directory permissions boundaries, input sanitizat
 
 Open Infra Agent is designed with a defense-in-depth security posture for autonomous execution:
 
-✅ Status: Container isolation, namespace separation and execFile injection-safe input routing are active in v0.1. Seccomp profiles, cgroup limits and audit log streaming are on the v0.2 roadmap.
+> ✅ **Status**: Container isolation, namespace separation and `execFile` injection-safe input routing are active in v0.1. Seccomp profiles, cgroup limits and audit log streaming are on the [v0.2 roadmap](#roadmap).
 
 - **Namespace isolation**: Each agent runs in an isolated Docker container with its own user and process namespaces.
 - **Seccomp filters**: System call whitelisting to reduce the attack surface of the guest environment.
@@ -253,11 +254,9 @@ If your agent can make HTTP requests or speak MCP, it can operate inside Open In
 
 ---
 
-# Performance Profile (Typical Specifications)
+# ⚡ Performance Profile
 
-⚡ Performance Profile
-These are not marketing numbers. These are measured runtime metrics
-on the actual stack you clone and run today:
+These are not marketing numbers. These are measured runtime metrics on the actual stack you clone and run today:
 
 * **⚡ Start Latency**: `~3.5 seconds` baseline from zero to a fully responsive, visual MCP-accessible operating environment.
 * **📉 RAM Footprint**: `~240MB RAM` baseline memory utilization for the entire inactive/active X11+XFCE4+noVNC+NestJS stack.
