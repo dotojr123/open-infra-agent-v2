@@ -26,9 +26,6 @@
 
 </p>
 
-> ⚡ **Ready to deploy agents safely?**  
-> 👉 [Get Started in 1 Minute](#-quick-start-1-minute-launch) • [Watch the Demo](Open%20Infro%20Agentc.mp4) • [Join the Community](#-open-source-mission)
-
 <br/>
 
 > **The world's first open-source Autonomous Operating Environment (AOE).**  
@@ -37,9 +34,18 @@
 
 <br/>
 
-![Open Infra Agent Demo](demo.gif)
+> ⚡ **Ready to deploy agents safely?**  
+> 👉 [Get Started in 1 Minute](#-quick-start-1-minute-launch) • [Watch the Demo](Open%20Infro%20Agentc.mp4) • [Join the Community](#-open-source-mission)
 
-*(The animated demo above illustrates execution under full observability. The original high-definition video is available as [Open Infro Agentc.mp4](Open%20Infro%20Agentc.mp4)).*
+<br/>
+
+<p align="center">
+  <img src="demo.gif" alt="Open Infra Agent — AI agent controlling a full Linux desktop in real time" width="100%">
+</p>
+
+<sub>☝️ <em>A real AI agent — not a simulation. Controlling a full Ubuntu desktop via MCP, observed in real time through the browser.</em></sub>
+
+<br/>
 
 [🇺🇸 English](README.md) | [🇧🇷 Português (Brasil)](#-resumo-em-português)
 
@@ -103,28 +109,15 @@ The same way:
 * **Agent governance** (policy and permissions management)
 * **Agent observability** (auditable operations tracking)
 
-for autonomous AI systems. Nenhuma solução combina isolamento, observabilidade, governança, intervenção humana e execução operacional de agentes da forma como o Open Infra Agent faz.
+for autonomous AI systems.
 
 ---
 
-# Architecture Diagram
+# Architecture
 
 <p align="center">
   <img src="./assets/architecture.svg" alt="Open Infra Agent Architecture" width="100%">
 </p>
-
----
-
-# Screenshots
-
-### Agent Operations Dashboard
-![Dashboard](./assets/dashboard.png)
-
-### Live Agent Monitoring
-![Monitoring](./assets/live-monitoring.png)
-
-### Linux Workspace
-![Workspace](./assets/agent-session.png)
 
 ---
 
@@ -258,10 +251,10 @@ If your agent can make HTTP requests or speak MCP, it can operate inside Open In
 
 These are not marketing numbers. These are measured runtime metrics on the actual stack you clone and run today:
 
-* **⚡ Start Latency**: `~3.5 seconds` baseline from zero to a fully responsive, visual MCP-accessible operating environment.
-* **📉 RAM Footprint**: `~240MB RAM` baseline memory utilization for the entire inactive/active X11+XFCE4+noVNC+NestJS stack.
-* **🔄 Execution Roundtrip**: `~12ms` trigger speed from tool call parser to OS virtual input driver.
-* **🖥️ Context Ingestion Compression**: Integrated with `sharp` to scale and compress frame buffers, cutting context window ingestion payloads by `65%` on multimodal models.
+* **⚡ Start Latency**: `~3.5 seconds` — zero to fully responsive, visual MCP-accessible environment.
+* **📉 RAM Footprint**: `~240MB RAM` — entire X11+XFCE4+noVNC+NestJS stack, idle.
+* **🔄 Execution Roundtrip**: `~12ms` — from MCP tool call to OS-level input driver.
+* **🗜️ Context Compression**: `65% reduction` — frame buffers compressed via `sharp` before multimodal ingestion.
 
 ---
 
@@ -287,6 +280,12 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
    Open your browser and navigate to:
    👉 **`http://localhost:9990/vnc`**
 
+4. **Connect your agent via MCP:**
+   Point any MCP-compatible agent to:
+   ```
+   http://localhost:9990/mcp
+   ```
+
 ---
 
 # 📡 API & MCP Tool Reference
@@ -299,42 +298,44 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 | `/computer-use` | `POST` | Exposes low-level OS automation APIs |
 | `/mcp` | `GET/POST` | Standard MCP connection endpoint (SSE) |
 
-### Exposes High-Performance OS Automation Tools:
-* 🖱️ **Cursor Automation**: `computer_move_mouse`, `computer_click_mouse`, `computer_press_mouse`, `computer_drag_mouse`, `computer_cursor_position`, `computer_scroll`.
-* ⌨️ **Keyboard Automation**: `computer_type_text` (typing effect), `computer_paste_text` (instant clipboard injection), `computer_type_keys` (shortcuts like `Ctrl+C`, `Alt+Tab`).
-* 🖥️ **Application Controllers**: `computer_application` (launches/focuses VS Code, Terminal, Firefox, 1Password, etc.).
-* 📁 **Secure File System Tools**: `computer_write_file`, `computer_read_file` (handles base64 encoded streams safely).
+### MCP Tools Available
+* 🖱️ **Mouse**: `computer_move_mouse`, `computer_click_mouse`, `computer_press_mouse`, `computer_drag_mouse`, `computer_scroll`, `computer_cursor_position`
+* ⌨️ **Keyboard**: `computer_type_text`, `computer_paste_text`, `computer_type_keys`, `computer_press_keys`
+* 🖥️ **Apps**: `computer_application` — launches/focuses VS Code, Terminal, Firefox, 1Password, Thunderbird
+* 📁 **Files**: `computer_write_file`, `computer_read_file` — base64 streams, safe path handling
+* 📸 **Vision**: `computer_screenshot` — compressed PNG returned as MCP image block
 
 ---
 
 # Roadmap
 
-### **v0.1**
-* [x] **Linux Workspace** sandboxing via Docker.
-* [x] **Browser Automation** natively through X11 and Firefox.
-* [x] **Human Supervision** over live noVNC streaming.
-* [x] **Visual Monitoring** and capture frame compression engine.
+### **v0.1** ✅ Current
+* [x] Linux Workspace sandboxing via Docker
+* [x] Browser Automation natively through X11 and Firefox
+* [x] Human Supervision over live noVNC streaming
+* [x] Visual Monitoring and capture frame compression engine
+* [x] MCP server with full OS automation tool suite
 
 ### **v0.2**
-* [ ] **Multi-Agent Sessions** orchestration within the same desktop.
-* [ ] **Session Recording** for full operational playback and audits.
-* [ ] **Advanced Logging** for terminal processes and execution.
+* [ ] Multi-Agent Sessions orchestration within the same desktop
+* [ ] Session Recording for full operational playback and audits
+* [ ] Advanced Logging for terminal processes and execution
 
 ### **v0.3**
-* [ ] **RBAC** for session access and tool execute permissions.
-* [ ] **Team Workspaces** to collaborate on active agent loops.
-* [ ] **API Layer** expansion for secure external system routing.
+* [ ] RBAC for session access and tool execute permissions
+* [ ] Team Workspaces to collaborate on active agent loops
+* [ ] API Layer expansion for secure external system routing
 
 ### **v0.4**
-* [ ] **OIDC** integration for secure team auth.
-* [ ] **SAML** configuration support for enterprise directories.
-* [ ] **Enterprise Administration** dashboard.
+* [ ] OIDC integration for secure team auth
+* [ ] SAML configuration support for enterprise directories
+* [ ] Enterprise Administration dashboard
 
 ### **v1.0**
-* [ ] **Kubernetes Native** scaling for thousands of parallel agent workspaces.
-* [ ] **High Availability** orchestrations.
-* [ ] **Governance Engine** for strict policy enforcement.
-* [ ] **Compliance Frameworks** (SOC2, ISO 27001 readiness).
+* [ ] Kubernetes Native scaling for thousands of parallel agent workspaces
+* [ ] High Availability orchestrations
+* [ ] Governance Engine for strict policy enforcement
+* [ ] Compliance Frameworks (SOC2, ISO 27001 readiness)
 
 ---
 
