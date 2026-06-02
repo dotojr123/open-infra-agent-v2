@@ -121,6 +121,30 @@ for autonomous AI systems.
 
 ---
 
+# 📸 Visual Walkthrough
+
+### 🖥️ Live Agent Session Monitoring
+Observe every action, terminal command, and browser click in real-time. The visual workspace is streamed natively to any device, allowing immediate takeover and seamless human-in-the-loop governance.
+
+<p align="center">
+  <img src="./assets/agent-session.jpg" alt="Live Agent Session Monitoring" width="100%">
+</p>
+
+<sub>☝️ <em>A live agent session running <strong>Claude</strong> inside a sandboxed Linux terminal, fully monitored and interactive via the web interface.</em></sub>
+
+<br/>
+
+### 🛠️ Developer-Ready Environment
+Open Infra Agent packages a fully visual desktop complete with a built-in terminal, VS Code, Firefox, and system tools, making it ready to execute complex development, auditing, and DevOps workflows securely.
+
+<p align="center">
+  <img src="./assets/antigravity-ide.png" alt="Developer-Ready Environment" width="100%">
+</p>
+
+<sub>☝️ <em>The built-in desktop environment featuring <strong>Antigravity IDE</strong> and VS Code ready for secure, autonomous execution.</em></sub>
+
+---
+
 # Features
 
 ## 👁️ Complete Visibility
