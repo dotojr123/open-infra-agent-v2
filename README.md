@@ -28,11 +28,14 @@
 
 ### 🚀 The Infrastructure Layer For Autonomous AI
 
+> ⚡ **Ready to deploy agents safely?**  
+> 👉 [Get Started in 1 Minute](#-quick-start-1-minute-launch) • [Watch the Demo](Open%20Infro%20Agentc.mp4) • [Join the Community](#-open-source-mission)
+
 <br/>
 
 ![Open Infra Agent Demo](demo.gif)
 
-*(A demonstração animada acima ilustra a execução sob observabilidade total. O vídeo original em alta definição está disponível como [Open Infro Agentc.mp4](Open%20Infro%20Agentc.mp4))*
+*(The animated demo above illustrates execution under full observability. The original high-definition video is available as [Open Infro Agentc.mp4](Open%20Infro%20Agentc.mp4)).*
 
 [🇺🇸 English](README.md) | [🇧🇷 Português (Brasil)](#-resumo-em-português)
 
@@ -175,6 +178,34 @@ Enforces operational policies, directory permissions boundaries, input sanitizat
 
 ---
 
+# 🔒 Security Model
+
+Open Infra Agent is designed with a defense-in-depth security posture for autonomous execution:
+
+- **Namespace isolation**: Each agent runs in an isolated Docker container with its own user and process namespaces.
+- **Seccomp filters**: System call whitelisting to reduce the attack surface of the guest environment.
+- **cgroups v2**: CPU and memory limits to prevent resource exhaustion and noisy neighbors.
+- **Read-only mounts**: Critical host directories and base system layers can be mounted read-only by default.
+- **Network policies**: Outbound and inbound traffic can be restricted to approved endpoints only.
+- **Secrets management**: Ephemeral credentials injected at runtime via secret managers (e.g. Vault), never embedded in images.
+- **Audit logging**: All actions (inputs, commands, file operations) can be streamed to tamper-evident, append-only storage.
+
+This turns every agent-run workspace into a tightly controlled, fully observable, and auditable execution surface.
+
+---
+
+# 🌐 Model Agnostic by Design
+
+Open Infra Agent is completely model-agnostic:
+
+- **Proprietary models**: GPT-4o/5, Claude 3.5, Gemini 1.5/2.0, Nvidia, and others.
+- **Open-source models**: Qwen, DeepSeek, Llama 3, Mixtral and more via runtimes like Ollama, vLLM, or TGI.
+- **Self-hosted deployments**: Run everything inside your own infrastructure to keep full data sovereignty.
+
+If your agent can make HTTP requests or speak MCP, it can operate inside Open Infra Agent.
+
+---
+
 # Use Cases
 
 ## DevOps Operations
@@ -190,7 +221,7 @@ Enforces operational policies, directory permissions boundaries, input sanitizat
 ## Software Development
 * **Bug fixing**: Safely reproduce and debug production environment issues.
 * **Code review**: Visually navigate repositories inside an active VS Code instance.
-* **Test execution**: Run test suites and visually audit layouts.
+* **Test execution**: Run test pipelines and visually audit end-to-end layouts.
 
 ## Browser Automation
 * **Internal portal workflows**: Automate recurring internal console operations.
@@ -220,7 +251,7 @@ These representative metrics illustrate the highly optimized nature of the runti
 ### Prerequisites
 Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed.
 
-### Launch 
+### Launch
 
 1. **Clone the repository:**
    ```bash
@@ -281,7 +312,7 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 * [ ] **Enterprise Administration** dashboard.
 
 ### **v1.0**
-* [ ] **Kubernetes Native** scaling for thousands of parallel agents workspaces.
+* [ ] **Kubernetes Native** scaling for thousands of parallel agent workspaces.
 * [ ] **High Availability** orchestrations.
 * [ ] **Governance Engine** for strict policy enforcement.
 * [ ] **Compliance Frameworks** (SOC2, ISO 27001 readiness).
