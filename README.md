@@ -90,7 +90,7 @@ Tested on our standard runtime stack:
 
 ---
 
-## 🛠️ Quick Start (Under 4 Seconds)
+## 🛠️ Quick Start
 
 **1. Clone and Boot:**
 ```bash
