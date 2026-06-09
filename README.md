@@ -54,11 +54,11 @@ We mapped the biological necessities of a living organism into a highly performa
 | Biology | Technical Implementation | Function in the Organism |
 | :--- | :--- | :--- |
 | **🧠 The Brain** | **Any LLM / Agent** | The intelligence (Claude, Gemini, DeepSeek). You bring the mind, we do the rest. |
-| **👀 The Eyes** | [BrowserOS](file:///c:/Users/Doto/Desktop/PROJETOS-2026/open-infro-agentc/iagenciad/src/mcp/compressor.ts) Integration | Visual perception. 65% compressed multimodal context, saving massive token costs. |
+| **👀 The Eyes** | [BrowserOS Integration](iagenciad/src/mcp/compressor.ts) | Visual perception. 65% compressed multimodal context, saving massive token costs. |
 | **⚡ The Nervous System** | **MCP (Model Context Protocol)** | Connects the brain to the body. Zero glue code. 12ms execution roundtrip. |
-| **✋ The Hands** | [Shell & OS Automation APIs](file:///c:/Users/Doto/Desktop/PROJETOS-2026/open-infro-agentc/iagenciad/src/nut/nut.service.ts) | Real OS-level mouse, keyboard, and terminal manipulation capabilities. |
-| **🫁 The Body (Skin)** | [Docker Containers](file:///c:/Users/Doto/Desktop/PROJETOS-2026/open-infro-agentc/iagenciad/Dockerfile) | A fully isolated, disposable Ubuntu 22.04 workspace. Protects the host infrastructure. |
-| **👁️‍🗨️ The Conscience** | [Audit Logs & Video Capture](file:///c:/Users/Doto/Desktop/PROJETOS-2026/open-infro-agentc/iagenciad/src/input-tracking/input-tracking.service.ts) | Every click, command, and keystroke is structurally logged. No black boxes. |
+| **✋ The Hands** | [Shell & OS Automation APIs](iagenciad/src/nut/nut.service.ts) | Real OS-level mouse, keyboard, and terminal manipulation capabilities. |
+| **🫁 The Body (Skin)** | [Docker Containers](iagenciad/Dockerfile) | A fully isolated, disposable Ubuntu 22.04 workspace. Protects the host infrastructure. |
+| **👁️‍🗨️ The Conscience** | [Audit Logs & Video Capture](iagenciad/src/input-tracking/input-tracking.service.ts) | Every click, command, and keystroke is structurally logged. No black boxes. |
 | **🧑‍⚕️ The Supervision** | **Human-in-the-loop (noVNC)** | Watch the agent live in your browser. Pause, take over the mouse, and hand it back. |
 
 ---
