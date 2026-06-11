@@ -11,6 +11,7 @@ import {
 } from '@nut-tree-fork/nut-js';
 import { spawn } from 'child_process';
 import * as path from 'path';
+import * as sharp from 'sharp';
 
 /**
  * Enum representing key codes supported by nut-js.
@@ -463,34 +464,32 @@ export class NutService {
   }
 
   /**
-   * Takes a screenshot of the screen.
+   * Takes a screenshot of the screen in-memory without disk I/O.
    *
    * @returns A Promise that resolves with a Buffer containing the image.
    */
   async screendump(): Promise<Buffer> {
-    const filename = `screenshot-${Date.now()}.png`;
-    const filepath = path.join(this.screenshotDir, filename);
-    this.logger.log(`Taking screenshot to ${filepath}`);
+    this.logger.log(`Taking in-memory screenshot`);
 
     try {
-      // Take screenshot
-      await screen.capture(filename, FileType.PNG, this.screenshotDir);
+      // Grab screen content directly into memory
+      let image = await screen.grab();
 
-      // Read the file back and return as buffer
-      return await import('fs').then((fs) => fs.promises.readFile(filepath));
+      // Convert image to RGB format, as nut.js defaults to BGR and sharp expects RGB
+      image = await image.toRGB();
+
+      return await sharp(image.data, {
+        raw: {
+          width: image.width,
+          height: image.height,
+          channels: image.channels as 1 | 2 | 3 | 4,
+        },
+      })
+      .png()
+      .toBuffer();
     } catch (error) {
-      this.logger.error(`Error taking screenshot: ${error.message}`);
+      this.logger.error(`Error taking in-memory screenshot: ${error.message}`);
       throw error;
-    } finally {
-      // Clean up the temporary file
-      try {
-        await import('fs').then((fs) => fs.promises.unlink(filepath));
-      } catch (unlinkError) {
-        // Ignore if file doesn't exist
-        this.logger.warn(
-          `Failed to remove temporary screenshot file: ${unlinkError.message}`,
-        );
-      }
     }
   }
 

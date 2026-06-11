@@ -333,10 +333,25 @@ export function convertComputerActionToToolUseBlock(
       return convertWriteFileActionToToolUseBlock(action, toolUseId);
     case "read_file":
       return convertReadFileActionToToolUseBlock(action, toolUseId);
+    case "bash_execute":
+      return convertBashExecuteActionToToolUseBlock(action, toolUseId);
     default:
       const exhaustiveCheck: never = action;
       throw new Error(
         `Unknown action type: ${(exhaustiveCheck as any).action}`
       );
   }
+}
+
+export function convertBashExecuteActionToToolUseBlock(
+  action: ComputerAction,
+  toolUseId: string
+): ComputerToolUseContentBlock {
+  if (action.action !== "bash_execute") {
+    throw new Error("Invalid action type");
+  }
+
+  return createToolUseBlock("computer_bash", toolUseId, {
+    command: action.command,
+  });
 }
