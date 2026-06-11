@@ -26,10 +26,19 @@ import {
 @Injectable()
 export class ComputerUseService {
   private readonly logger = new Logger(ComputerUseService.name);
+  private humanOverrideUntil: number = 0;
 
   constructor(private readonly nutService: NutService) {}
 
+  public lockForHuman(durationMs: number = 2000): void {
+    this.humanOverrideUntil = Date.now() + durationMs;
+  }
+
   async action(params: ComputerAction): Promise<any> {
+    if (Date.now() < this.humanOverrideUntil && params.action !== 'screenshot' && params.action !== 'read_file') {
+      throw new Error('Human is currently interacting with the system. Please wait before executing actions.');
+    }
+
     this.logger.log(`Executing computer action: ${params.action}`);
 
     switch (params.action) {
@@ -80,7 +89,7 @@ export class ComputerUseService {
         break;
       }
       case 'screenshot':
-        return this.screenshot();
+        return this.screenshot((params as any).show_grid);
 
       case 'cursor_position':
         return this.cursor_position();
@@ -255,9 +264,9 @@ export class ComputerUseService {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  async screenshot(): Promise<{ image: string }> {
-    this.logger.log(`Taking screenshot`);
-    const buffer = await this.nutService.screendump();
+  async screenshot(showGrid?: boolean): Promise<{ image: string }> {
+    this.logger.log(`Taking screenshot${showGrid ? ' with grid overlay' : ''}`);
+    const buffer = await this.nutService.screendump(showGrid);
     return { image: `${buffer.toString('base64')}` };
   }
 

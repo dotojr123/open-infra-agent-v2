@@ -101,6 +101,7 @@ export class InputTrackingService implements OnModuleDestroy {
 
   private registerListeners() {
     uIOhook.on('mousemove', (e: UiohookMouseEvent) => {
+      this.computerUseService.lockForHuman(2000);
       if (this.isDragging && this.dragMouseAction) {
         this.dragMouseAction.path.push({ x: e.x, y: e.y });
       } else {
@@ -114,6 +115,7 @@ export class InputTrackingService implements OnModuleDestroy {
     });
 
     uIOhook.on('click', (e: UiohookMouseEvent) => {
+      this.computerUseService.lockForHuman(2000);
       const action: ClickMouseAction = {
         action: 'click_mouse',
         button: this.mapButton(e.button),
@@ -144,6 +146,7 @@ export class InputTrackingService implements OnModuleDestroy {
     });
 
     uIOhook.on('mousedown', (e: UiohookMouseEvent) => {
+      this.computerUseService.lockForHuman(2000);
       this.isDragging = true;
       this.dragMouseAction = {
         action: 'drag_mouse',
@@ -170,6 +173,7 @@ export class InputTrackingService implements OnModuleDestroy {
     });
 
     uIOhook.on('wheel', async (e: UiohookWheelEvent) => {
+      this.computerUseService.lockForHuman(2000);
       const direction =
         e.direction === WheelDirection.VERTICAL
           ? e.rotation > 0
@@ -202,6 +206,7 @@ export class InputTrackingService implements OnModuleDestroy {
     });
 
     uIOhook.on('keydown', async (e: UiohookKeyboardEvent) => {
+      this.computerUseService.lockForHuman(2000);
       if (!keyInfoMap[e.keycode]) {
         this.logger.warn(`Unknown key: ${e.keycode}`);
         return;

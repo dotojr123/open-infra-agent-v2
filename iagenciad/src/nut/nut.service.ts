@@ -468,7 +468,7 @@ export class NutService {
    *
    * @returns A Promise that resolves with a Buffer containing the image.
    */
-  async screendump(): Promise<Buffer> {
+  async screendump(showGrid?: boolean): Promise<Buffer> {
     this.logger.log(`Taking in-memory screenshot`);
 
     try {
@@ -478,7 +478,7 @@ export class NutService {
       // Convert image to RGB format, as nut.js defaults to BGR and sharp expects RGB
       image = await image.toRGB();
 
-      return await sharp(image.data, {
+      const buffer = await sharp(image.data, {
         raw: {
           width: image.width,
           height: image.height,
@@ -487,10 +487,55 @@ export class NutService {
       })
       .png()
       .toBuffer();
+
+      if (showGrid) {
+        return await this.drawGridOverlay(buffer, image.width, image.height);
+      }
+
+      return buffer;
     } catch (error) {
       this.logger.error(`Error taking in-memory screenshot: ${error.message}`);
       throw error;
     }
+  }
+
+  /**
+   * Draws a visual accessibility grid overlay over the screenshot
+   */
+  private async drawGridOverlay(imageBuffer: Buffer, width: number, height: number): Promise<Buffer> {
+    const cols = 10;
+    const rows = 10;
+    const cellWidth = width / cols;
+    const cellHeight = height / rows;
+
+    let svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">`;
+
+    // Draw grid lines and labels
+    for (let i = 0; i <= cols; i++) {
+      const x = i * cellWidth;
+      svg += `<line x1="${x}" y1="0" x2="${x}" y2="${height}" stroke="rgba(255, 0, 0, 0.5)" stroke-width="2"/>`;
+    }
+    for (let i = 0; i <= rows; i++) {
+      const y = i * cellHeight;
+      svg += `<line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="rgba(255, 0, 0, 0.5)" stroke-width="2"/>`;
+    }
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const id = r * cols + c;
+        const x = c * cellWidth + cellWidth / 2;
+        const y = r * cellHeight + cellHeight / 2;
+        svg += `<rect x="${x - 15}" y="${y - 15}" width="30" height="30" fill="rgba(0,0,0,0.6)" rx="5"/>`;
+        svg += `<text x="${x}" y="${y}" font-family="Arial" font-size="16" fill="white" font-weight="bold" text-anchor="middle" dominant-baseline="middle">${id}</text>`;
+      }
+    }
+
+    svg += '</svg>';
+
+    return sharp(imageBuffer)
+      .composite([{ input: Buffer.from(svg), blend: 'over' }])
+      .png()
+      .toBuffer();
   }
 
   async getCursorPosition(): Promise<{ x: number; y: number }> {

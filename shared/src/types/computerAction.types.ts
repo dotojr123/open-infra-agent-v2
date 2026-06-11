@@ -83,6 +83,7 @@ export type WaitAction = {
 
 export type ScreenshotAction = {
   action: "screenshot";
+  show_grid?: boolean;
 };
 
 export type CursorPositionAction = {

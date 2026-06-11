@@ -549,11 +549,15 @@ V, W, X, Y, Z
   @Tool({
     name: 'computer_screenshot',
     description: 'Captures a screenshot of the current screen.',
+    parameters: z.object({
+      show_grid: z.boolean().optional().describe('Optional flag to overlay a visual grid. Useful when fine-grained coordinates are needed.'),
+    }).optional(),
   })
-  async screenshot() {
+  async screenshot(params?: { show_grid?: boolean }) {
     try {
       const shot = (await this.computerUse.action({
         action: 'screenshot',
+        show_grid: params?.show_grid,
       })) as { image: string };
       return {
         content: [
