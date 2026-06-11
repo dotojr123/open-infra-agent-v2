@@ -20,6 +20,7 @@ import {
   PasteTextAction,
   WriteFileAction,
   ReadFileAction,
+  BashExecuteAction,
 } from '@iagencia/shared';
 
 @Injectable()
@@ -95,6 +96,10 @@ export class ComputerUseService {
 
       case 'read_file': {
         return this.readFile(params);
+      }
+
+      case 'bash_execute': {
+        return this.bashExecute(params);
       }
 
       default:
@@ -504,6 +509,30 @@ export class ComputerUseService {
       return {
         success: false,
         message: `Error reading file: ${error.message}`,
+      };
+    }
+  }
+
+  private async bashExecute(
+    action: BashExecuteAction,
+  ): Promise<{ success: boolean; stdout?: string; stderr?: string }> {
+    this.logger.log(`Executing bash command: ${action.command}`);
+    const execAsync = promisify(exec);
+
+    try {
+      // Execute the bash command with a timeout to prevent hanging forever
+      const { stdout, stderr } = await execAsync(action.command, { timeout: 30000 });
+      return {
+        success: true,
+        stdout: stdout,
+        stderr: stderr,
+      };
+    } catch (error: any) {
+      this.logger.error(`Error executing bash command: ${error.message}`, error.stack);
+      return {
+        success: false,
+        stdout: error.stdout,
+        stderr: error.stderr || error.message,
       };
     }
   }
