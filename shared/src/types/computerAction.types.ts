@@ -105,6 +105,11 @@ export type ReadFileAction = {
   path: string;
 };
 
+export type BashExecuteAction = {
+  action: "bash_execute";
+  command: string;
+};
+
 // Define the union type using the individual action types
 export type ComputerAction =
   | MoveMouseAction
@@ -122,4 +127,5 @@ export type ComputerAction =
   | CursorPositionAction
   | ApplicationAction
   | WriteFileAction
-  | ReadFileAction;
+  | ReadFileAction
+  | BashExecuteAction;

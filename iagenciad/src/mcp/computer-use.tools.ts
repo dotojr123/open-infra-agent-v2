@@ -695,4 +695,38 @@ V, W, X, Y, Z
       };
     }
   }
+
+  @Tool({
+    name: 'computer_bash',
+    description: 'Executes a bash command and returns stdout. Use this for quickly executing system commands without UI.',
+    parameters: z.object({
+      command: z.string().describe('The bash command to execute.'),
+    }),
+  })
+  async bashExecute({ command }: { command: string }) {
+    try {
+      const result = await this.computerUse.action({
+        action: 'bash_execute',
+        command,
+      });
+
+      return {
+        content: [
+          {
+            type: 'text',
+            text: result.stdout || result.stderr || 'Command executed successfully without output.',
+          },
+        ],
+      };
+    } catch (err) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Error executing command: ${(err as Error).message}`,
+          },
+        ],
+      };
+    }
+  }
 }
