@@ -123,11 +123,17 @@ RUN ARCH=$(dpkg --print-architecture) && \
         wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/ms_vscode.gpg && \
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ms_vscode.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list && \
         apt-get update && apt-get install -y code && \
+        if [ -f /usr/share/applications/code.desktop ]; then \
+            sed -i 's|Exec=/usr/bin/code|Exec=/usr/bin/code --no-sandbox|g' /usr/share/applications/code.desktop; \
+        fi && \
         apt-get clean && rm -rf /var/lib/apt/lists/* ; \
     elif [ "$ARCH" = "arm64" ]; then \
         apt-get update && apt-get install -y wget gpg && \
         wget -qO /tmp/code_arm64.deb https://update.code.visualstudio.com/latest/linux-deb-arm64/stable && \
         apt-get install -y /tmp/code_arm64.deb && \
+        if [ -f /usr/share/applications/code.desktop ]; then \
+            sed -i 's|Exec=/usr/bin/code|Exec=/usr/bin/code --no-sandbox|g' /usr/share/applications/code.desktop; \
+        fi && \
         rm -f /tmp/code_arm64.deb && \
         apt-get clean && rm -rf /var/lib/apt/lists/* ; \
     else \

@@ -4,10 +4,10 @@
   "description": "IAgencia Desktop - AI-powered desktop automation agent in a containerized Linux environment",
   "private": true,
   "license": "Apache-2.0",
-  "homepage": "https://github.com/iagencia/iagencia-desktop",
+  "homepage": "https://github.com/dotojr123/open-infro-agent-v2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iagencia/iagencia-desktop.git"
+    "url": "https://github.com/dotojr123/open-infro-agent-v2.git"
   },
   "author": {
     "name": "IAgencia",
