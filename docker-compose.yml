@@ -7,6 +7,7 @@ services:
     container_name: iagencia-desktop
     ports:
       - "9990:9990"
+      - "9000:9000"
     restart: unless-stopped
     environment:
       - DISPLAY=:0
@@ -14,21 +15,5 @@ services:
       - iagencia-data:/home/user
     shm_size: '2gb'
 
-  iagencia-desktop-v2:
-    build:
-      context: .
-      dockerfile: iagenciad/Dockerfile
-    image: iagencia-desktop-v2:latest
-    container_name: iagencia-desktop-v2
-    ports:
-      - "8990:9990"
-    restart: unless-stopped
-    environment:
-      - DISPLAY=:0
-    volumes:
-      - iagencia-data-v2:/home/user
-    shm_size: '2gb'
-
 volumes:
   iagencia-data:
-  iagencia-data-v2:
