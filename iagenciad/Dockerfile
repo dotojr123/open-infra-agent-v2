@@ -143,6 +143,20 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 # Upgrade pip
 RUN pip3 install --upgrade pip
 
+# Install BrowserOS
+RUN BROWSEROS_DEB_URL=$(curl -s https://api.github.com/repos/browseros-ai/BrowserOS/releases/latest | grep browser_download_url | grep -o 'https://.*\.deb') && \
+    if [ -n "$BROWSEROS_DEB_URL" ]; then \
+        echo "Downloading BrowserOS from $BROWSEROS_DEB_URL" && \
+        curl -sSL "$BROWSEROS_DEB_URL" -o /tmp/browseros.deb && \
+        apt-get update && \
+        apt-get install -y /tmp/browseros.deb && \
+        rm -f /tmp/browseros.deb && \
+        apt-get clean && rm -rf /var/lib/apt/lists/*; \
+    else \
+        echo "BrowserOS download URL not found" && exit 1; \
+    fi
+
+
 # -----------------------------------------------------------------------------
 # 4. VNC and remote access setup
 # -----------------------------------------------------------------------------
@@ -234,6 +248,10 @@ RUN mkdir -p /home/user/Desktop && \
     cp -f /usr/share/applications/1password.desktop /home/user/Desktop/ 2>/dev/null || true && \
     cp -f /usr/share/applications/code.desktop /home/user/Desktop/ 2>/dev/null || true && \
     cp -f /usr/share/applications/terminal.desktop /home/user/Desktop/ && \
+    cp -f /usr/share/applications/browseros.desktop /home/user/Desktop/ 2>/dev/null || true && \
+    if [ -f /home/user/Desktop/browseros.desktop ]; then \
+        sed -i 's|Exec=/usr/bin/browseros|Exec=/usr/bin/browseros --no-sandbox|g' /home/user/Desktop/browseros.desktop; \
+    fi && \
     chmod +x /home/user/Desktop/*.desktop && \
     chown user:user /home/user/Desktop/*.desktop
 
