@@ -7,20 +7,20 @@
 
 <p>
 
-<a href="https://github.com/dotojr123/open-infro-agentc/stargazers">
-<img src="https://img.shields.io/github/stars/dotojr123/open-infro-agentc?style=for-the-badge&logo=github&color=F59E0B">
+<a href="https://github.com/dotojr123/open-infro-agent-v2/stargazers">
+<img src="https://img.shields.io/github/stars/dotojr123/open-infro-agent-v2?style=for-the-badge&logo=github&color=F59E0B">
 </a>
 
 <a href="LICENSE">
-<img src="https://img.shields.io/github/license/dotojr123/open-infro-agentc?style=for-the-badge&logo=apache&color=10B981">
+<img src="https://img.shields.io/github/license/dotojr123/open-infro-agent-v2?style=for-the-badge&logo=apache&color=10B981">
 </a>
 
-<a href="https://github.com/dotojr123/open-infro-agentc/issues">
-<img src="https://img.shields.io/github/issues/dotojr123/open-infro-agentc?style=for-the-badge&logo=github&color=3B82F6">
+<a href="https://github.com/dotojr123/open-infro-agent-v2/issues">
+<img src="https://img.shields.io/github/issues/dotojr123/open-infro-agent-v2?style=for-the-badge&logo=github&color=3B82F6">
 </a>
 
-<a href="https://github.com/dotojr123/open-infro-agentc/actions">
-<img src="https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agentc/ci.yml?style=for-the-badge&logo=github-actions&color=8B5CF6">
+<a href="https://github.com/dotojr123/open-infro-agent-v2/actions">
+<img src="https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agent-v2/ci.yml?style=for-the-badge&logo=github-actions&color=8B5CF6">
 </a>
 
 </p>
@@ -44,7 +44,7 @@ In 2026, building an intelligent AI agent is easy. Deploying one safely inside r
 
 Models like GPT-4o, Claude 3.5, and Gemini are incredibly smart, but they are essentially "brains in a jar". They can reason, but they lack a governable, physical-like environment to act. Most current frameworks attempt to solve this by either restricting the agent to a headless browser sandbox, or giving it dangerous, unauditable access to the host system.
 
-**Open Infra Agent** is the world's first open-source **Autonomous Operating Environment (AOE)**. We don't build the intelligence; we provide the **digital organism** where your AI lives, works, and acts safely.
+**Open Infra Agent** is a governed, containerized **Autonomous Operating Environment (AOE)** for AI agents. We don't build the intelligence; we provide the **digital organism** where your AI lives, works, and acts safely.
 
 ---
 
@@ -94,8 +94,8 @@ Tested on our standard runtime stack:
 
 **1. Clone and Boot:**
 ```bash
-git clone https://github.com/dotojr123/open-infro-agentc.git
-cd open-infro-agentc
+git clone https://github.com/dotojr123/open-infro-agent-v2.git
+cd open-infro-agent-v2
 docker compose up --build -d
 ```
 
@@ -104,8 +104,28 @@ Open your browser and navigate to:
 👉 **`http://localhost:9990/vnc`**
 
 **3. Connect Your Agent (The Brain):**  
-Point any MCP-compatible agent (Claude Desktop, OpenClaw, Gemini CLI) to the nervous system:  
+Choose your preferred MCP connection:
+
+#### A. BrowserOS MCP Server (Recommended)
+Exposes 60+ advanced browser automation tools (tab management, navigation, interactions) directly from the agentic browser:
+👉 **`http://localhost:9000/mcp`**
+
+**Claude Desktop Configuration (`claude_desktop_config.json`):**
+```json
+{
+  "mcpServers": {
+    "browseros": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-http", "http://localhost:9000/mcp"]
+    }
+  }
+}
+```
+
+#### B. System Controller MCP Server
+Exposes OS-level tools (mouse, keyboard, and terminal control):
 👉 **`http://localhost:9990/mcp`**
+
 
 ---
 
