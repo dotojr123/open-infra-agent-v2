@@ -150,6 +150,9 @@ RUN BROWSEROS_DEB_URL=$(curl -s https://api.github.com/repos/browseros-ai/Browse
         curl -sSL "$BROWSEROS_DEB_URL" -o /tmp/browseros.deb && \
         apt-get update && \
         apt-get install -y /tmp/browseros.deb && \
+        if [ -f /usr/share/applications/browseros.desktop ]; then \
+            sed -i 's|Exec=/usr/bin/browseros|Exec=/usr/bin/browseros --no-sandbox|g' /usr/share/applications/browseros.desktop; \
+        fi && \
         rm -f /tmp/browseros.deb && \
         apt-get clean && rm -rf /var/lib/apt/lists/*; \
     else \
