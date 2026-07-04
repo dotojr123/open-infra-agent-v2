@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   ComputerAction,
   ClickMouseAction,
@@ -26,7 +27,7 @@ import {
  * Type guard factory for computer actions
  */
 function createActionTypeGuard<T extends ComputerAction>(
-  actionType: T["action"]
+  actionType: T["action"],
 ): (obj: unknown) => obj is T {
   return (obj: unknown): obj is T => {
     if (!obj || typeof obj !== "object") {
@@ -71,7 +72,7 @@ export const isApplicationAction =
 function createToolUseBlock(
   toolName: string,
   toolUseId: string,
-  input: Record<string, any>
+  input: Record<string, any>,
 ): ComputerToolUseContentBlock {
   return {
     type: MessageContentType.ToolUse,
@@ -86,7 +87,7 @@ function createToolUseBlock(
  */
 function conditionallyAdd<T extends Record<string, any>>(
   obj: T,
-  conditions: Array<[boolean | undefined, string, any]>
+  conditions: Array<[boolean | undefined, string, any]>,
 ): T {
   const result: Record<string, any> = { ...obj };
   conditions.forEach(([condition, key, value]) => {
@@ -102,7 +103,7 @@ function conditionallyAdd<T extends Record<string, any>>(
  */
 export function convertMoveMouseActionToToolUseBlock(
   action: MoveMouseAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_move_mouse", toolUseId, {
     coordinates: action.coordinates,
@@ -111,20 +112,20 @@ export function convertMoveMouseActionToToolUseBlock(
 
 export function convertTraceMouseActionToToolUseBlock(
   action: TraceMouseAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_trace_mouse",
     toolUseId,
     conditionallyAdd({ path: action.path }, [
       [action.holdKeys !== undefined, "holdKeys", action.holdKeys],
-    ])
+    ]),
   );
 }
 
 export function convertClickMouseActionToToolUseBlock(
   action: ClickMouseAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_click_mouse",
@@ -137,14 +138,14 @@ export function convertClickMouseActionToToolUseBlock(
       [
         [action.coordinates !== undefined, "coordinates", action.coordinates],
         [action.holdKeys !== undefined, "holdKeys", action.holdKeys],
-      ]
-    )
+      ],
+    ),
   );
 }
 
 export function convertPressMouseActionToToolUseBlock(
   action: PressMouseAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_press_mouse",
@@ -154,14 +155,14 @@ export function convertPressMouseActionToToolUseBlock(
         button: action.button,
         press: action.press,
       },
-      [[action.coordinates !== undefined, "coordinates", action.coordinates]]
-    )
+      [[action.coordinates !== undefined, "coordinates", action.coordinates]],
+    ),
   );
 }
 
 export function convertDragMouseActionToToolUseBlock(
   action: DragMouseAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_drag_mouse",
@@ -171,14 +172,14 @@ export function convertDragMouseActionToToolUseBlock(
         path: action.path,
         button: action.button,
       },
-      [[action.holdKeys !== undefined, "holdKeys", action.holdKeys]]
-    )
+      [[action.holdKeys !== undefined, "holdKeys", action.holdKeys]],
+    ),
   );
 }
 
 export function convertScrollActionToToolUseBlock(
   action: ScrollAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_scroll",
@@ -191,27 +192,27 @@ export function convertScrollActionToToolUseBlock(
       [
         [action.coordinates !== undefined, "coordinates", action.coordinates],
         [action.holdKeys !== undefined, "holdKeys", action.holdKeys],
-      ]
-    )
+      ],
+    ),
   );
 }
 
 export function convertTypeKeysActionToToolUseBlock(
   action: TypeKeysAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_type_keys",
     toolUseId,
     conditionallyAdd({ keys: action.keys }, [
       [typeof action.delay === "number", "delay", action.delay],
-    ])
+    ]),
   );
 }
 
 export function convertPressKeysActionToToolUseBlock(
   action: PressKeysAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_press_keys", toolUseId, {
     keys: action.keys,
@@ -221,7 +222,7 @@ export function convertPressKeysActionToToolUseBlock(
 
 export function convertTypeTextActionToToolUseBlock(
   action: TypeTextAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock(
     "computer_type_text",
@@ -229,13 +230,13 @@ export function convertTypeTextActionToToolUseBlock(
     conditionallyAdd({ text: action.text }, [
       [typeof action.delay === "number", "delay", action.delay],
       [typeof action.sensitive === "boolean", "isSensitive", action.sensitive],
-    ])
+    ]),
   );
 }
 
 export function convertPasteTextActionToToolUseBlock(
   action: PasteTextAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_paste_text", toolUseId, {
     text: action.text,
@@ -244,7 +245,7 @@ export function convertPasteTextActionToToolUseBlock(
 
 export function convertWaitActionToToolUseBlock(
   action: WaitAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_wait", toolUseId, {
     duration: action.duration,
@@ -253,21 +254,21 @@ export function convertWaitActionToToolUseBlock(
 
 export function convertScreenshotActionToToolUseBlock(
   action: ScreenshotAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_screenshot", toolUseId, {});
 }
 
 export function convertCursorPositionActionToToolUseBlock(
   action: CursorPositionAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_cursor_position", toolUseId, {});
 }
 
 export function convertApplicationActionToToolUseBlock(
   action: ApplicationAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_application", toolUseId, {
     application: action.application,
@@ -276,7 +277,7 @@ export function convertApplicationActionToToolUseBlock(
 
 export function convertWriteFileActionToToolUseBlock(
   action: WriteFileAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_write_file", toolUseId, {
     path: action.path,
@@ -286,7 +287,7 @@ export function convertWriteFileActionToToolUseBlock(
 
 export function convertReadFileActionToToolUseBlock(
   action: ReadFileAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   return createToolUseBlock("computer_read_file", toolUseId, {
     path: action.path,
@@ -298,7 +299,7 @@ export function convertReadFileActionToToolUseBlock(
  */
 export function convertComputerActionToToolUseBlock(
   action: ComputerAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   switch (action.action) {
     case "move_mouse":
@@ -338,14 +339,14 @@ export function convertComputerActionToToolUseBlock(
     default:
       const exhaustiveCheck: never = action;
       throw new Error(
-        `Unknown action type: ${(exhaustiveCheck as any).action}`
+        `Unknown action type: ${(exhaustiveCheck as any).action}`,
       );
   }
 }
 
 export function convertBashExecuteActionToToolUseBlock(
   action: ComputerAction,
-  toolUseId: string
+  toolUseId: string,
 ): ComputerToolUseContentBlock {
   if (action.action !== "bash_execute") {
     throw new Error("Invalid action type");

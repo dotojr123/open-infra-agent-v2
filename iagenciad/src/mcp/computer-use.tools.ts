@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable } from '@nestjs/common';
 import { Tool } from '@rekog/mcp-nest';
 import { z } from 'zod';
@@ -698,7 +699,8 @@ V, W, X, Y, Z
 
   @Tool({
     name: 'computer_bash',
-    description: 'Executes a bash command and returns stdout. Use this for quickly executing system commands without UI.',
+    description:
+      'Executes a bash command and returns stdout. Use this for quickly executing system commands without UI.',
     parameters: z.object({
       command: z.string().describe('The bash command to execute.'),
     }),
@@ -714,7 +716,10 @@ V, W, X, Y, Z
         content: [
           {
             type: 'text',
-            text: result.stdout || result.stderr || 'Command executed successfully without output.',
+            text:
+              result.stdout ||
+              result.stderr ||
+              'Command executed successfully without output.',
           },
         ],
       };

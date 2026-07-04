@@ -7,20 +7,20 @@
 
 <p>
 
-<a href="https://github.com/dotojr123/open-infro-agent-v2/stargazers">
-<img src="https://img.shields.io/github/stars/dotojr123/open-infro-agent-v2?style=for-the-badge&logo=github&color=F59E0B">
+<a href="https://github.com/dotojr123/open-infro-agent-v04/stargazers">
+<img src="https://img.shields.io/github/stars/dotojr123/open-infro-agent-v04?style=for-the-badge&logo=github&color=F59E0B">
 </a>
 
 <a href="LICENSE">
-<img src="https://img.shields.io/github/license/dotojr123/open-infro-agent-v2?style=for-the-badge&logo=apache&color=10B981">
+<img src="https://img.shields.io/github/license/dotojr123/open-infro-agent-v04?style=for-the-badge&logo=apache&color=10B981">
 </a>
 
-<a href="https://github.com/dotojr123/open-infro-agent-v2/issues">
-<img src="https://img.shields.io/github/issues/dotojr123/open-infro-agent-v2?style=for-the-badge&logo=github&color=3B82F6">
+<a href="https://github.com/dotojr123/open-infro-agent-v04/issues">
+<img src="https://img.shields.io/github/issues/dotojr123/open-infro-agent-v04?style=for-the-badge&logo=github&color=3B82F6">
 </a>
 
-<a href="https://github.com/dotojr123/open-infro-agent-v2/actions">
-<img src="https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agent-v2/ci.yml?style=for-the-badge&logo=github-actions&color=8B5CF6">
+<a href="https://github.com/dotojr123/open-infro-agent-v04/actions">
+<img src="https://img.shields.io/github/actions/workflow/status/dotojr123/open-infro-agent-v04/ci.yml?style=for-the-badge&logo=github-actions&color=8B5CF6">
 </a>
 
 </p>
@@ -94,8 +94,8 @@ Tested on our standard runtime stack:
 
 **1. Clone and Boot:**
 ```bash
-git clone https://github.com/dotojr123/open-infro-agent-v2.git
-cd open-infro-agent-v2
+git clone https://github.com/dotojr123/open-infro-agent-v04.git
+cd open-infro-agent-v04
 docker compose up --build -d
 ```
 
@@ -129,13 +129,28 @@ Exposes OS-level tools (mouse, keyboard, and terminal control):
 
 ---
 
-## 📡 API & MCP Tools Available Out-of-the-Box
-Once connected, your agent instantly gains access to:
-* 🖱️ `computer_move_mouse`, `computer_click_mouse`, `computer_drag_mouse`, `computer_scroll`
-* ⌨️ `computer_type_text`, `computer_type_keys`
-* 📸 `computer_screenshot` (Optimized for LLM vision)
-* 📁 `computer_read_file`, `computer_write_file`
-* 🖥️ `computer_application` (Launch VS Code, Terminal, Firefox natively)
+## 🏗️ Architecture: Execution Runtime Platform (v4)
+
+**Open Infra Agent** has been completely refactored to support a modular 3-tier architecture. Docker is no longer mandatory; the platform operates on multiple environments (Docker, Linux, Windows, macOS, Android/Termux, SSH, PRoot, etc.) via dynamic runtime capability negotiation.
+
+```
+       [ Mission Layer ]         <-- Objective planning, agent tool logic
+               │
+               ▼
+      [ Execution Layer ]        <-- Sessions, Event Bus, Command Pipelines, Failover
+               │
+               ▼
+       [ Runtime Layer ]         <-- Local, Docker, PRoot, SSH execution plugins
+```
+
+### Core Architecture Components:
+- **Mission Layer**: Defines goals and MCP tools (`computer_*`).
+- **Execution Layer**:
+  - **Execution Sessions**: Provides workspace isolation for concurrent runs, preventing directory conflict.
+  - **Command Pipeline**: Intercepts, validates, and logs commands against a safety blacklist.
+  - **Event Bus**: Publishes telemetry and lifecycle events (`SessionCreated`, `FailoverTriggered`).
+- **Runtime Layer**: Conforms runtime hosts (`LocalRuntime`, `DockerRuntime`, etc.) to unified specialized engines (`FilesystemEngine`, `ProcessRunner`, `InputController`, `DisplayController`).
+- **Auto-Failover**: Automatically checks active runtime health and transitions to fallback runtimes without state disruption.
 
 ---
 
