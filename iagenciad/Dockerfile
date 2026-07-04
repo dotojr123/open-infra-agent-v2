@@ -48,97 +48,6 @@ RUN mkdir -p /run/dbus && \
 # -----------------------------------------------------------------------------
 # 3. Additional software installation
 # -----------------------------------------------------------------------------
-# Install Firefox
-RUN apt-get update && apt-get install -y \
-    # Install necessary for adding PPA
-    software-properties-common apt-transport-https wget gnupg \
-    # Install Additional Graphics Libraries
-    mesa-utils \
-    libgl1-mesa-dri \
-    libgl1-mesa-glx \
-    # Install Sandbox Capabilities
-    libcap2-bin \
-    # Install Fonts
-    fontconfig \
-    fonts-dejavu \
-    fonts-liberation \
-    fonts-freefont-ttf \
-    && add-apt-repository -y ppa:mozillateam/ppa \
-    && apt-get update \
-    && apt-get install -y firefox-esr thunderbird \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    # Set Firefox as default browser system-wide
-    && update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/firefox-esr 200 \
-    && update-alternatives --set x-www-browser /usr/bin/firefox-esr \
-    && fc-cache -f -v
-
-
-# Install 1Password based on architecture
-RUN ARCH=$(dpkg --print-architecture) && \
-    if [ "$ARCH" = "amd64" ]; then \
-    # Install from APT repository for AMD64
-    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-    gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main" | \
-    tee /etc/apt/sources.list.d/1password.list && \
-    mkdir -p /etc/debsig/policies/AC2D62742012EA22/ && \
-    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
-    tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
-    mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
-    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-    gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
-    apt-get update && apt-get install -y 1password && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*; \
-    elif [ "$ARCH" = "arm64" ]; then \
-    # Install from tar.gz for ARM64
-    apt-get update && apt-get install -y \
-    libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils \
-    libatspi2.0-0 libdrm2 libgbm1 libxcb-dri3-0 libxkbcommon0 \
-    libsecret-1-0 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    curl -sSL https://downloads.1password.com/linux/tar/beta/aarch64/1password-latest.tar.gz -o /tmp/1password.tar.gz && \
-    mkdir -p /opt/1password && \
-    tar -xzf /tmp/1password.tar.gz -C /opt/1password --strip-components=1 && \
-    ln -sf /opt/1password/1password /usr/bin/1password && \
-    chmod +x /opt/1password/1password && \
-    mkdir -p /usr/share/pixmaps /usr/share/icons/hicolor/512x512/apps /usr/share/icons/hicolor/256x256/apps && \
-    find /opt/1password -name "*1password*.png" -o -name "*1password*.svg" | while read icon; do \
-    if [[ "$icon" == *"512"* ]]; then \
-    cp "$icon" /usr/share/icons/hicolor/512x512/apps/1password.png 2>/dev/null || true; \
-    elif [[ "$icon" == *"256"* ]]; then \
-    cp "$icon" /usr/share/icons/hicolor/256x256/apps/1password.png 2>/dev/null || true; \
-    fi; \
-    cp "$icon" /usr/share/pixmaps/1password.png 2>/dev/null || true; \
-    done && \
-    rm -rf /tmp/1password.tar.gz && \
-    gtk-update-icon-cache -f -t /usr/share/icons/hicolor 2>/dev/null || true; \
-    else \
-    echo "1Password is not available for $ARCH architecture."; \
-    fi
-
-# Install Visual Studio Code
-RUN ARCH=$(dpkg --print-architecture) && \
-    if [ "$ARCH" = "amd64" ]; then \
-    apt-get update && apt-get install -y wget gpg apt-transport-https software-properties-common && \
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/ms_vscode.gpg && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ms_vscode.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list && \
-    apt-get update && apt-get install -y code && \
-    if [ -f /usr/share/applications/code.desktop ]; then \
-    sed -i 's|Exec=/usr/bin/code|Exec=/usr/bin/code --no-sandbox|g' /usr/share/applications/code.desktop; \
-    fi && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* ; \
-    elif [ "$ARCH" = "arm64" ]; then \
-    apt-get update && apt-get install -y wget gpg && \
-    wget -qO /tmp/code_arm64.deb https://update.code.visualstudio.com/latest/linux-deb-arm64/stable && \
-    apt-get install -y /tmp/code_arm64.deb && \
-    if [ -f /usr/share/applications/code.desktop ]; then \
-    sed -i 's|Exec=/usr/bin/code|Exec=/usr/bin/code --no-sandbox|g' /usr/share/applications/code.desktop; \
-    fi && \
-    rm -f /tmp/code_arm64.deb && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* ; \
-    else \
-    echo "VSCode is not available for $ARCH architecture."; \
-    fi
 
 # Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -252,10 +161,6 @@ RUN chown -R user:user /home/user
 RUN chmod -R 755 /home/user
 
 RUN mkdir -p /home/user/Desktop && \
-    cp -f /usr/share/applications/firefox.desktop /home/user/Desktop/ && \
-    cp -f /usr/share/applications/thunderbird.desktop /home/user/Desktop/ && \
-    cp -f /usr/share/applications/1password.desktop /home/user/Desktop/ 2>/dev/null || true && \
-    cp -f /usr/share/applications/code.desktop /home/user/Desktop/ 2>/dev/null || true && \
     cp -f /usr/share/applications/terminal.desktop /home/user/Desktop/ && \
     cp -f /usr/share/applications/browseros.desktop /home/user/Desktop/ 2>/dev/null || true && \
     if [ -f /home/user/Desktop/browseros.desktop ]; then \
