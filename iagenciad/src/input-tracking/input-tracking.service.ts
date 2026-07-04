@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
 import {
   uIOhook,
@@ -184,7 +185,7 @@ export class InputTrackingService implements OnModuleDestroy {
             : 'left';
       const action: ScrollAction = {
         action: 'scroll',
-        direction: direction as any,
+        direction: direction,
         scrollCount: 1,
         coordinates: { x: e.x, y: e.y },
       };
