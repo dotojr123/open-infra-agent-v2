@@ -12,6 +12,7 @@ import { ExecutionRuntimeV1, EXECUTION_RUNTIME } from './runtime-v1.interface';
 import { ExecutionSession } from './execution-layer/session';
 import { EventBus } from './execution-layer/event-bus';
 import { CommandPipeline } from './execution-layer/command-pipeline';
+import { SessionManager } from './execution-layer/session-manager';
 
 @Injectable()
 export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
@@ -20,6 +21,7 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
   private activeRuntime: ExecutionRuntimeV1 | null = null;
   private defaultSession: ExecutionSession | null = null;
   private healthCheckInterval: NodeJS.Timeout | null = null;
+  private readonly sessionManager: SessionManager;
 
   constructor(
     @Inject(EXECUTION_RUNTIME)
@@ -27,7 +29,9 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
     private readonly configService: ConfigService,
     private readonly eventBus: EventBus,
     private readonly commandPipeline: CommandPipeline,
-  ) {}
+  ) {
+    this.sessionManager = new SessionManager(this.eventBus);
+  }
 
   async onModuleInit() {
     await this.selectActiveRuntime();
@@ -134,6 +138,11 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
               `Runtime "${runtime.name}" does not support screenshot capture.`,
             );
           }
+          if (!runtime.getDisplayController) {
+            throw new Error(
+              `Runtime "${runtime.name}" does not implement DisplayController.`,
+            );
+          }
           result = await runtime.getDisplayController().screenshot();
           break;
 
@@ -143,6 +152,11 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
               `Runtime "${runtime.name}" does not support display coordinates.`,
             );
           }
+          if (!runtime.getDisplayController) {
+            throw new Error(
+              `Runtime "${runtime.name}" does not implement DisplayController.`,
+            );
+          }
           result = await runtime.getDisplayController().cursorPosition();
           break;
 
@@ -150,6 +164,11 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
           if (!runtime.capabilities.gui) {
             throw new Error(
               `Runtime "${runtime.name}" does not support application launching.`,
+            );
+          }
+          if (!runtime.getDisplayController) {
+            throw new Error(
+              `Runtime "${runtime.name}" does not implement DisplayController.`,
             );
           }
           result = await runtime
@@ -175,6 +194,11 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
               `Runtime "${runtime.name}" does not support mouse input simulation.`,
             );
           }
+          if (!runtime.getInputController) {
+            throw new Error(
+              `Runtime "${runtime.name}" does not implement InputController.`,
+            );
+          }
           const input = runtime.getInputController();
           if (action.action === 'move_mouse')
             result = await input.moveMouse(action);
@@ -197,6 +221,11 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
           if (!runtime.capabilities.keyboard) {
             throw new Error(
               `Runtime "${runtime.name}" does not support keyboard input simulation.`,
+            );
+          }
+          if (!runtime.getInputController) {
+            throw new Error(
+              `Runtime "${runtime.name}" does not implement InputController.`,
             );
           }
           const input = runtime.getInputController();
@@ -354,5 +383,60 @@ export class ExecutionEngine implements OnModuleInit, OnModuleDestroy {
     this.logger.error(
       'CRITICAL: All fallback execution runtimes are unavailable!',
     );
+  }
+
+  // ============================================================
+  // Session Management API (Multi-VNC / Multi-User Support)
+  // ============================================================
+
+  getSessionManager(): SessionManager {
+    return this.sessionManager;
+  }
+
+  async createSession(
+    sessionId: string,
+    runtimeName?: string,
+  ): Promise<ExecutionSession> {
+    let runtime: ExecutionRuntimeV1;
+
+    if (runtimeName) {
+      const found = this.getRuntimes().find(
+        (r) => r.name.toLowerCase() === runtimeName.toLowerCase(),
+      );
+      if (!found) {
+        throw new Error(`Runtime "${runtimeName}" not found.`);
+      }
+      runtime = found;
+    } else {
+      runtime = this.getActiveRuntime();
+    }
+
+    const vncResources = this.sessionManager.allocateVncResources();
+
+    const config = {
+      sessionId,
+      runtimeName: runtime.name,
+      vncDisplay: vncResources.display,
+      vncPort: vncResources.vncPort,
+      webPort: vncResources.webPort,
+    };
+
+    return this.sessionManager.createSession(config, runtime);
+  }
+
+  getSession(sessionId: string): ExecutionSession | null {
+    return this.sessionManager.getSession(sessionId);
+  }
+
+  getSessionInfo(sessionId: string) {
+    return this.sessionManager.getSessionInfo(sessionId);
+  }
+
+  listSessions() {
+    return this.sessionManager.listSessions();
+  }
+
+  async destroySession(sessionId: string): Promise<boolean> {
+    return this.sessionManager.destroySession(sessionId);
   }
 }

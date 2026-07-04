@@ -20,8 +20,8 @@ export interface ExecutionRuntimeV1 {
   getEnvironment(): EnvironmentService;
   getFilesystem(): FilesystemEngine;
   getProcessRunner(): ProcessRunnerEngine;
-  getInputController(): InputController;
-  getDisplayController(): DisplayController;
+  getInputController?(): InputController;
+  getDisplayController?(): DisplayController;
 }
 
 export const EXECUTION_RUNTIME = 'EXECUTION_RUNTIME';
