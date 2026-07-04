@@ -7,6 +7,7 @@ services:
     container_name: iagencia-desktop
     ports:
       - "9990:9990"
+      - "9000:9000"
     restart: unless-stopped
     environment:
       - DISPLAY=:0
