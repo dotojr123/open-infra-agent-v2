@@ -150,7 +150,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 RUN pip3 install --upgrade pip
 
 # Install BrowserOS
-RUN BROWSEROS_DEB_URL=$(curl -s https://api.github.com/repos/browseros-ai/BrowserOS/releases/latest | grep browser_download_url | grep -o 'https://.*\.deb') && \
+RUN BROWSEROS_DEB_URL=$(curl -s https://api.github.com/repos/browseros-ai/BrowserOS/releases | grep browser_download_url | grep -o 'https://.*\.deb' | head -n 1) && \
     if [ -n "$BROWSEROS_DEB_URL" ]; then \
     echo "Downloading BrowserOS from $BROWSEROS_DEB_URL" && \
     curl -sSL "$BROWSEROS_DEB_URL" -o /tmp/browseros.deb && \
