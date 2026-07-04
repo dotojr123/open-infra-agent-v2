@@ -55,9 +55,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip using break-system-packages (PEP 668 on Ubuntu 24.04)
+# Enable break-system-packages (PEP 668 on Ubuntu 24.04)
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
-RUN pip3 install --upgrade pip
 
 # Install BrowserOS
 RUN BROWSEROS_DEB_URL=$(curl -s https://api.github.com/repos/browseros-ai/BrowserOS/releases | grep browser_download_url | grep -o 'https://.*\.deb' | head -n 1) && \
