@@ -7,7 +7,7 @@
 # -----------------------------------------------------------------------------
 
 # Base image
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # -----------------------------------------------------------------------------
 # 1. Environment setup
@@ -55,7 +55,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip
+# Upgrade pip using break-system-packages (PEP 668 on Ubuntu 24.04)
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
 RUN pip3 install --upgrade pip
 
 # Install BrowserOS
@@ -178,7 +179,10 @@ WORKDIR /home/user
 # 8. Port configuration and runtime
 # -----------------------------------------------------------------------------
 # - Port 9990: iagenciad and external noVNC websocket
-EXPOSE 9990
+# - Port 6080: Agent 0 websockify
+# - Port 6081: Agent 1 websockify
+# - Port 6091: Agent 2 websockify
+EXPOSE 9990 6080 6081 6091
 
 # Health check to verify the NestJS API is responding
 HEALTHCHECK --interval=30s --timeout=10s --start-period=45s --retries=3 \
