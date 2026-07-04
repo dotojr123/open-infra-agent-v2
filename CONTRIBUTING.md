@@ -29,8 +29,8 @@ IAgencia Desktop uses a **monorepo** structure powered by **npm Workspaces**.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dotojr123/open-infro-agent-v2.git
-   cd open-infro-agent-v2
+   git clone https://github.com/dotojr123/open-infro-agent-v04.git
+   cd open-infro-agent-v04
    ```
 2. Install monorepo dependencies and link packages:
    ```bash

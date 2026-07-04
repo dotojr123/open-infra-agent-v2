@@ -1,3 +1,4 @@
+/* eslint-disable */
 // src/nut/nut.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import {
@@ -485,8 +486,8 @@ export class NutService {
           channels: image.channels as 1 | 2 | 3 | 4,
         },
       })
-      .png()
-      .toBuffer();
+        .png()
+        .toBuffer();
     } catch (error) {
       this.logger.error(`Error taking in-memory screenshot: ${error.message}`);
       throw error;

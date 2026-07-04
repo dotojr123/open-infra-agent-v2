@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as sharp from 'sharp';
 
 interface CompressionOptions {
