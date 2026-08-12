@@ -70,6 +70,30 @@ graph TD
 
 ---
 
+---
+
+## 🧠 Cockpit — Cérebro + Cabine de Comando (Novo)
+
+Com o Mapeamento da Infraestrutura Visual consolidado, adicionamos a camada que faltava: o **Cockpit** (`cockpit/`), rodando como um quarto container (`cockpit`) na mesma rede Docker dos três Ambientes VNC.
+
+Ele conecta como **cliente MCP** ao `iagenciad` (porta `9990`), reaproveitando as 18 ferramentas `computer_*` já existentes, e expõe:
+
+- **Chat com loop de agente multi-provedor**: NVIDIA NIM, Anthropic, OpenAI ou Google, trocável em tempo real direto na interface — sem precisar reiniciar o container.
+- **noVNC embutido ao vivo** na mesma tela do chat, mostrando cada ação do agente conforme ela acontece.
+- **Nenhuma ferramenta invisível**: `computer_bash`, `computer_read_file` e `computer_write_file` são deliberadamente ocultadas do agente. Para rodar um comando, o agente é obrigado a abrir o Terminal visível, digitar o comando com `computer_type_text` e apertar Enter com `computer_type_keys` — exatamente como uma pessoa faria, e sempre visível no VNC.
+
+```mermaid
+graph TD
+    Você -->|chat| Cockpit
+    Cockpit -->|streamText + tools| Brain[LLM: NVIDIA/Anthropic/OpenAI/Google]
+    Cockpit -->|cliente MCP, SSE| MCP[iagenciad :9990/mcp]
+    MCP --> Ambiente1[Display :0 - Admin]
+    Cockpit -->|iframe| NoVNC[noVNC :9990/novnc]
+    NoVNC --> Ambiente1
+```
+
+Detalhes completos — variáveis de ambiente, o bug de imagem em mensagens `tool` que quebrava provedores compatíveis com OpenAI, e o guia de deploy em VPS — estão em [`cockpit/README.md`](cockpit/README.md).
+
 ## 🛡️ Princípios de Design Imutáveis
 
 Para garantir que a plataforma permaneça sustentável e atinja a visão final de ser o *SO dos Agentes*, toda modificação deve passar por este crivo:

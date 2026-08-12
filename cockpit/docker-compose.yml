@@ -1,0 +1,23 @@
+services:
+  cockpit:
+    build: .
+    container_name: cockpit
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - LLM_PROVIDER=${LLM_PROVIDER:-nvidia}
+      - LLM_MODEL=${LLM_MODEL:-}
+      - NVIDIA_BASE_URL=${NVIDIA_BASE_URL:-https://integrate.api.nvidia.com/v1}
+      - NVIDIA_API_KEY=${NVIDIA_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - MCP_URL=${MCP_URL:-http://iagencia-desktop:9990/mcp}
+    networks:
+      - open-infra-agent-v2_default
+    restart: unless-stopped
+
+networks:
+  open-infra-agent-v2_default:
+    external: true

@@ -129,6 +129,20 @@ Exposes OS-level tools (mouse, keyboard, and terminal control):
 
 ---
 
+---
+
+## 🧭 Cockpit — The Reference Brain + Cockpit Implementation
+
+The Quick Start above gets you the **body** (the desktop) and exposes MCP endpoints for **your own** brain to connect to. [`cockpit/`](cockpit/README.md) is our reference implementation of everything above that: a multi-provider LLM agent loop plus a chat UI with the live noVNC feed embedded side by side — the same experience as Gemini Spark or Manus.io, pointed at this project's desktop instead of a headless browser sandbox.
+
+```bash
+cd cockpit
+cp .env.example .env   # set LLM_PROVIDER, LLM_MODEL and an API key
+docker compose up -d --build
+```
+
+Open `http://localhost:8080`. Full details, environment variables, and the two provider-compatibility issues we had to design around (image content in tool messages, and why direct shell/file tools are intentionally hidden from the agent) are documented in **[cockpit/README.md](cockpit/README.md)**.
+
 ## 🏗️ Architecture: Execution Runtime Platform (v4)
 
 **Open Infra Agent** has been completely refactored to support a modular 3-tier architecture. Docker is no longer mandatory; the platform operates on multiple environments (Docker, Linux, Windows, macOS, Android/Termux, SSH, PRoot, etc.) via dynamic runtime capability negotiation.
@@ -161,6 +175,8 @@ Exposes OS-level tools (mouse, keyboard, and terminal control):
 Hoje, modelos como ChatGPT e Claude são apenas "cérebros presos em uma jarra". Eles têm a inteligência, mas não têm um corpo para agir com segurança no mundo real. Nós resolvemos isso fornecendo um Ambiente Operacional Autônomo (AOE) completo.
 
 Nós entregamos o corpo (contêineres Ubuntu isolados), o sistema nervoso (MCP nativo), as mãos (APIs de automação de mouse/teclado) e os olhos (BrowserOS). Tudo isso com Supervisão Humana em Tempo Real (Human-in-the-Loop) via navegador, permitindo que equipes de DevOps e Segurança auditem e assumam o controle do agente a qualquer momento.
+
+Em [`cockpit/`](cockpit/README.md) entregamos também o cérebro e o cockpit de referência: um loop de agente multi-provedor (NVIDIA, Anthropic, OpenAI, Google, trocável em tempo real) conversando com essas ferramentas via MCP, com uma interface de chat que mostra o desktop ao vivo lado a lado — o mesmo tipo de experiência do Gemini Spark ou Manus.io, mas apontado para um desktop Linux completo em vez de um navegador headless isolado.
 
 ---
 
