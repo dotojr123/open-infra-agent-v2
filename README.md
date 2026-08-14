@@ -39,6 +39,22 @@
 
 ---
 
+## 📚 Índice de documentação
+
+Ponto de partida único — qualquer doc do projeto está a no máximo 2 cliques daqui.
+
+| Documento | Cobre |
+|---|---|
+| **[README.md](README.md)** *(este arquivo)* | Visão geral, arquitetura, quick start |
+| [DOCUMENTACAO_PLATAFORMA.md](DOCUMENTACAO_PLATAFORMA.md) | Mapeamento de infra, VNC, decisões de design da plataforma |
+| [cockpit/README.md](cockpit/README.md) | Cockpit: chat multi-provider, voz, sessões, deploy atrás de reverse proxy |
+| [control-plane/README.md](control-plane/README.md) | Control Plane do SaaS: auth, aprovação de acesso, modelo de dados (Etapa 1) |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Como contribuir, convenção de documentação |
+
+**Tags:** `#infra` `#agents` `#mcp` `#docker`
+
+---
+
 ## 🧠 The Disembodied Intelligence Problem
 In 2026, building an intelligent AI agent is easy. Deploying one safely inside real-world infrastructure is not. 
 

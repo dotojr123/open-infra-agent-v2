@@ -1,4 +1,8 @@
+← [Índice de documentação](README.md)
+
 # 🚀 iAgência: O Sistema Operacional para Agentes de IA
+
+**Tags:** `#infra` `#vnc` `#docker` `#design-principles`
 
 > **A missão:** Evoluir continuamente a plataforma iAgência para se tornar a melhor e mais autônoma infraestrutura de execução para agentes de IA do mundo.
 
@@ -109,3 +113,11 @@ Para garantir que a plataforma permaneça sustentável e atinja a visão final d
 
 > [!IMPORTANT]
 > **A Regra de Ouro:** Não crie uma solução específica se uma infraestrutura genérica pode resolver. A plataforma evolui criando "Capacidades", não remendos temporários.
+
+---
+
+## Relacionados
+
+- [cockpit/README.md](cockpit/README.md) — a camada de chat/voz que consome essa infra
+- [control-plane/README.md](control-plane/README.md) — provisionamento multi-tenant dessa mesma infra
+- ↑ [Índice de documentação](README.md)

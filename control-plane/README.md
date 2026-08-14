@@ -1,4 +1,8 @@
+← [Índice de documentação](../README.md)
+
 # Control Plane — SaaS multi-tenant (Etapa 1)
+
+**Tags:** `#control-plane` `#saas` `#auth` `#etapa-1` `#status/em-andamento`
 
 Backend de autenticação + aprovação de acesso para transformar o [`cockpit/`](../cockpit/README.md) (hoje single-tenant) num SaaS onde cada cliente ganha seu próprio workspace isolado.
 
@@ -53,3 +57,10 @@ npm start
 - **Etapa 2**: `WorkspaceProvisioner` (dockerode) — `provision`/`start`/`stop`/`getStatus`, com cgroups (`2 CPU`/`4GB` por spec original, a rever contra a capacidade real do host) e hibernação automática.
 - **Etapa 3**: painel admin (`/admin`) e portal do cliente (`/workspace`) no frontend.
 - **Etapa 4**: `docker-compose.saas.yml`, deploy do Control Plane atrás do Caddy compartilhado.
+
+---
+
+## Relacionados
+
+- [cockpit/README.md](../cockpit/README.md) — a imagem que este serviço vai provisionar por cliente
+- ↑ [Índice de documentação](../README.md)

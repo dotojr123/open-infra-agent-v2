@@ -1,4 +1,8 @@
+← [Índice de documentação](../README.md)
+
 # Cockpit — The Brain + Cockpit Layer for Open Infra Agent
+
+**Tags:** `#cockpit` `#voice` `#stt-tts` `#multi-provider`
 
 > **The missing "eyes and a steering wheel" for your agent.** Cockpit pairs any tool-calling LLM with the Open Infra Agent's computer-use MCP server and a live noVNC feed, so you watch every click, keystroke, and command happen on a real desktop in real time — the same experience as Gemini Spark or Manus.io, but pointed at a full Linux desktop instead of a sandboxed headless browser.
 
@@ -136,3 +140,11 @@ cockpit.iagencia.app {
 ## License
 
 Apache-2.0, matching the parent [Open Infra Agent](../README.md) project.
+
+---
+
+## Relacionados
+
+- [control-plane/README.md](../control-plane/README.md) — vai passar a provisionar uma instância disso por cliente (Etapa 2, ainda não implementada)
+- [DOCUMENTACAO_PLATAFORMA.md](../DOCUMENTACAO_PLATAFORMA.md) — infra de base (VNC, MCP) que o Cockpit consome
+- ↑ [Índice de documentação](../README.md)

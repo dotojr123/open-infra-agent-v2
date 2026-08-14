@@ -1,3 +1,5 @@
+← [Índice de documentação](README.md)
+
 # Contributing to IAgencia Desktop
 
 First off, thank you for considering contributing to **IAgencia Desktop**! It's people like you who make this a world-class open-source automation framework.
@@ -79,6 +81,19 @@ The codebase is split into two packages under the root directory:
 
 * `/shared`: Typings, schema validation, and shared data objects.
 * `/iagenciad`: The core NestJS daemon running the API, MCP endpoints, and interacting with native layers (`@nut-tree-fork/nut-js` and `uiohook-napi`).
+
+---
+
+## 📚 Documentation Convention
+
+Every new `.md` doc added to this repo (new module README, design doc, etc.) must include:
+
+1. **Backlink at the top**: `← [Índice de documentação](<relative path to root README.md>)`
+2. **A `Tags:` line** right under the title — a short, reused set (`#cockpit`, `#control-plane`, `#saas`, `#auth`, `#infra`, `#status/em-andamento`, ...). Don't invent a new tag per file; reuse what's already used elsewhere.
+3. **A `## Relacionados` section at the bottom**, linking to sibling/parent docs it's conceptually connected to, plus `↑ [Índice de documentação](...)`.
+4. **A row added to the "Índice de documentação" table near the top of the root [README.md](README.md)**, so it's discoverable from the entry point.
+
+Goal: from the root README, any doc in the repo is reachable in 2–3 clicks, and every doc links back out instead of being a dead end. This is deliberately lightweight (plain relative markdown links, not a full wiki/vault system) — it only needs to work in GitHub's renderer.
 
 ---
 
