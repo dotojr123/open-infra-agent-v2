@@ -1,11 +1,14 @@
 services:
   cockpit:
-    build: .
+    build:
+      context: ..
+      dockerfile: cockpit/Dockerfile
     container_name: cockpit
     ports:
       - "8080:8080"
     environment:
       - PORT=8080
+      - COCKPIT_PASSWORD=${COCKPIT_PASSWORD:-changeme}
       - LLM_PROVIDER=${LLM_PROVIDER:-nvidia}
       - LLM_MODEL=${LLM_MODEL:-}
       - NVIDIA_BASE_URL=${NVIDIA_BASE_URL:-https://integrate.api.nvidia.com/v1}
@@ -13,6 +16,10 @@ services:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - TTS_PROVIDER=${TTS_PROVIDER:-edge}
+      - TTS_VOICE=${TTS_VOICE:-pt-BR-AntonioNeural}
+      - TTS_RATE=${TTS_RATE:-+20%}
+      - WHISPER_MODEL=${WHISPER_MODEL:-base}
       - MCP_URL=${MCP_URL:-http://iagencia-desktop:9990/mcp}
     networks:
       - open-infra-agent-v2_default

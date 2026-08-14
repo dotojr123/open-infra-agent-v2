@@ -8,21 +8,23 @@ export type ModelOverride = {
   model?: string;
 };
 
+// NVIDIA NIM — OpenAI-compatible endpoint
 const nvidia = createOpenAI({
   baseURL: process.env.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1',
-  apiKey: process.env.NVIDIA_API_KEY,
+  apiKey: process.env.NVIDIA_API_KEY || '',
 });
 
 export function getDefaultConfig() {
   return {
-    provider: (process.env.LLM_PROVIDER || 'anthropic').toLowerCase(),
-    model: process.env.LLM_MODEL || '',
+    provider: (process.env.LLM_PROVIDER || 'codex').toLowerCase(),
+    model: process.env.LLM_MODEL || 'z-ai/glm-5.2',
   };
 }
 
 export function getModel(override?: ModelOverride) {
-  const provider = (override?.provider || process.env.LLM_PROVIDER || 'anthropic').toLowerCase();
-  const modelName = override?.model || process.env.LLM_MODEL;
+  const cfg = getDefaultConfig();
+  const provider = (override?.provider || cfg.provider).toLowerCase();
+  const modelName = override?.model || cfg.model;
 
   switch (provider) {
     case 'nvidia':
@@ -33,6 +35,6 @@ export function getModel(override?: ModelOverride) {
       return google(modelName || 'gemini-2.0-flash');
     case 'anthropic':
     default:
-      return anthropic(modelName || 'claude-sonnet-5');
+      return anthropic(modelName || 'claude-sonnet-4-5');
   }
 }
