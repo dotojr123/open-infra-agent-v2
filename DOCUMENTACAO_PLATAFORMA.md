@@ -78,15 +78,19 @@ Com o Mapeamento da Infraestrutura Visual consolidado, adicionamos a camada que 
 
 Ele conecta como **cliente MCP** ao `iagenciad` (porta `9990`), reaproveitando as 18 ferramentas `computer_*` já existentes, e expõe:
 
-- **Chat com loop de agente multi-provedor**: NVIDIA NIM, Anthropic, OpenAI ou Google, trocável em tempo real direto na interface — sem precisar reiniciar o container.
-- **noVNC embutido ao vivo** na mesma tela do chat, mostrando cada ação do agente conforme ela acontece.
-- **Nenhuma ferramenta invisível**: `computer_bash`, `computer_read_file` e `computer_write_file` são deliberadamente ocultadas do agente. Para rodar um comando, o agente é obrigado a abrir o Terminal visível, digitar o comando com `computer_type_text` e apertar Enter com `computer_type_keys` — exatamente como uma pessoa faria, e sempre visível no VNC.
+- **Chat com loop de agente multi-provedor**: NVIDIA NIM, Anthropic, OpenAI, Google ou Codex CLI, trocável em tempo real direto na interface — sem precisar reiniciar o container.
+- **Login por senha** (`COCKPIT_PASSWORD`) e **histórico persistente**: cada conversa é salva em disco e sobrevive a restart; uma barra lateral lista as conversas anteriores pelo primeiro texto, com opção de minimizar.
+- **Voz de entrada e saída**: respostas do agente podem ser ouvidas (Edge TTS, velocidade ajustável via `TTS_RATE`); o botão de microfone grava e transcreve localmente via `faster-whisper` — sem depender dos servidores de voz do Google, que falham em redes/VPNs que os bloqueiam.
+- **Markdown renderizado** nas respostas do agente e **colar imagem** (Ctrl+V) para providers multimodais.
+- **noVNC embutido ao vivo** na mesma tela do chat, mostrando cada ação do agente conforme ela acontece. Painéis com divisórias arrastáveis e barra lateral minimizável.
+- **Nenhuma ferramenta invisível**: `computer_bash_execute`, `computer_read_file` e `computer_write_file` são deliberadamente ocultadas do agente. Para rodar um comando, o agente é obrigado a abrir o Terminal visível, digitar o comando com `computer_type_text` e apertar Enter com `computer_type_keys` — exatamente como uma pessoa faria, e sempre visível no VNC.
 
 ```mermaid
 graph TD
-    Você -->|chat| Cockpit
-    Cockpit -->|streamText + tools| Brain[LLM: NVIDIA/Anthropic/OpenAI/Google]
+    Você -->|chat + voz| Cockpit
+    Cockpit -->|streamText + tools| Brain[LLM: NVIDIA/Anthropic/OpenAI/Google/Codex]
     Cockpit -->|cliente MCP, SSE| MCP[iagenciad :9990/mcp]
+    Cockpit -->|/api/tts, /api/transcribe| Voz[Edge TTS + faster-whisper]
     MCP --> Ambiente1[Display :0 - Admin]
     Cockpit -->|iframe| NoVNC[noVNC :9990/novnc]
     NoVNC --> Ambiente1

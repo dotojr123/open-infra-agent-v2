@@ -133,15 +133,15 @@ Exposes OS-level tools (mouse, keyboard, and terminal control):
 
 ## 🧭 Cockpit — The Reference Brain + Cockpit Implementation
 
-The Quick Start above gets you the **body** (the desktop) and exposes MCP endpoints for **your own** brain to connect to. [`cockpit/`](cockpit/README.md) is our reference implementation of everything above that: a multi-provider LLM agent loop plus a chat UI with the live noVNC feed embedded side by side — the same experience as Gemini Spark or Manus.io, pointed at this project's desktop instead of a headless browser sandbox.
+The Quick Start above gets you the **body** (the desktop) and exposes MCP endpoints for **your own** brain to connect to. [`cockpit/`](cockpit/README.md) is our reference implementation of everything above that: a password-gated, multi-provider LLM agent loop (NVIDIA / Anthropic / OpenAI / Google / Codex CLI) plus a chat UI with the live noVNC feed embedded side by side, persistent multi-conversation history, and voice in and out — the same experience as Gemini Spark or Manus.io, pointed at this project's desktop instead of a headless browser sandbox.
 
 ```bash
 cd cockpit
-cp .env.example .env   # set LLM_PROVIDER, LLM_MODEL and an API key
+cp .env.example .env   # set COCKPIT_PASSWORD, LLM_PROVIDER, LLM_MODEL and an API key
 docker compose up -d --build
 ```
 
-Open `http://localhost:8080`. Full details, environment variables, and the two provider-compatibility issues we had to design around (image content in tool messages, and why direct shell/file tools are intentionally hidden from the agent) are documented in **[cockpit/README.md](cockpit/README.md)**.
+Open `http://localhost:8080`. Full details, environment variables, and the design decisions we had to make around provider compatibility (image content in tool messages), voice input (local STT via a `faster-whisper` subprocess instead of a resident model), and why direct shell/file tools are intentionally hidden from the agent are documented in **[cockpit/README.md](cockpit/README.md)**.
 
 ## 🏗️ Architecture: Execution Runtime Platform (v4)
 
@@ -176,7 +176,7 @@ Hoje, modelos como ChatGPT e Claude são apenas "cérebros presos em uma jarra".
 
 Nós entregamos o corpo (contêineres Ubuntu isolados), o sistema nervoso (MCP nativo), as mãos (APIs de automação de mouse/teclado) e os olhos (BrowserOS). Tudo isso com Supervisão Humana em Tempo Real (Human-in-the-Loop) via navegador, permitindo que equipes de DevOps e Segurança auditem e assumam o controle do agente a qualquer momento.
 
-Em [`cockpit/`](cockpit/README.md) entregamos também o cérebro e o cockpit de referência: um loop de agente multi-provedor (NVIDIA, Anthropic, OpenAI, Google, trocável em tempo real) conversando com essas ferramentas via MCP, com uma interface de chat que mostra o desktop ao vivo lado a lado — o mesmo tipo de experiência do Gemini Spark ou Manus.io, mas apontado para um desktop Linux completo em vez de um navegador headless isolado.
+Em [`cockpit/`](cockpit/README.md) entregamos também o cérebro e o cockpit de referência: um loop de agente multi-provedor (NVIDIA, Anthropic, OpenAI, Google, ou Codex CLI, trocável em tempo real) conversando com essas ferramentas via MCP, com login por senha, histórico de conversas persistente e organizado numa barra lateral, entrada e saída de voz, e uma interface de chat que mostra o desktop ao vivo lado a lado — o mesmo tipo de experiência do Gemini Spark ou Manus.io, mas apontado para um desktop Linux completo em vez de um navegador headless isolado.
 
 ---
 
