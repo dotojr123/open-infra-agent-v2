@@ -43,6 +43,10 @@ pnpm-lock.yaml
 # Temp
 tmp/
 temp/
+scratch/
+
+# Agent session transcripts (can contain secrets typed/echoed during a session)
+[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*-goal-*.txt
 
 # Original large raw video files
 Open Infro Agentc.mp4
