@@ -12,6 +12,7 @@
     "@libsql/client": "^0.17.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dockerode": "^5.0.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.45.2",
     "express": "^4.21.2"
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
+    "@types/dockerode": "^4.0.1",
     "@types/express": "^5.0.0",
     "@types/node": "^24.0.0",
     "drizzle-kit": "^0.30.2",

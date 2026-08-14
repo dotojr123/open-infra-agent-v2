@@ -4,6 +4,8 @@ import cors from 'cors';
 import { runMigrations } from './db/client';
 import authRoutes from './routes/auth';
 import adminRoutes from './routes/admin';
+import workspaceRoutes from './routes/workspace';
+import { startHibernationLoop } from './provisioner/workspaceProvisioner';
 
 async function main() {
   await runMigrations();
@@ -15,6 +17,9 @@ async function main() {
   app.get('/api/health', (_req, res) => res.json({ ok: true }));
   app.use('/api/auth', authRoutes);
   app.use('/api/admin', adminRoutes);
+  app.use('/api/workspace', workspaceRoutes);
+
+  startHibernationLoop();
 
   const port = Number(process.env.PORT) || 8090;
   app.listen(port, '0.0.0.0', () => {

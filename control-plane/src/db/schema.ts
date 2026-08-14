@@ -25,22 +25,28 @@ export const sessions = sqliteTable('sessions', {
   expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
 });
 
-// status ainda não cobre provisionamento real (isso é Etapa 2) — toda conta
-// nasce com uma linha NOT_PROVISIONED, o provisionador só atualiza depois.
+// Cada workspace de cliente = 2 containers (desktop + cockpit) numa network
+// isolada por tenant. Toda conta nasce com uma linha NOT_PROVISIONED; o
+// WorkspaceProvisioner (Etapa 2) preenche o resto ao provisionar/iniciar.
 export const workspaces = sqliteTable('workspaces', {
   id: text('id').primaryKey(),
   userId: text('user_id')
     .notNull()
     .unique()
     .references(() => users.id, { onDelete: 'cascade' }),
-  containerId: text('container_id'),
+  desktopContainerId: text('desktop_container_id'),
+  cockpitContainerId: text('cockpit_container_id'),
+  networkName: text('network_name'),
   status: text('status', {
     enum: ['NOT_PROVISIONED', 'STOPPED', 'RUNNING', 'ERROR'],
   })
     .notNull()
     .default('NOT_PROVISIONED'),
   port: integer('port'),
+  // lastActiveAt reseta a cada heartbeat (ociosidade); startedAt não reseta
+  // (teto duro de duração de sessão) — os dois alimentam o loop de hibernação.
   lastActiveAt: integer('last_active_at', { mode: 'timestamp' }),
+  startedAt: integer('started_at', { mode: 'timestamp' }),
   createdAt: integer('created_at', { mode: 'timestamp' })
     .notNull()
     .default(sql`(unixepoch())`),

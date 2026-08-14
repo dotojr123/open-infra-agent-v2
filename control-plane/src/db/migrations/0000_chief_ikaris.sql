@@ -19,10 +19,13 @@ CREATE UNIQUE INDEX `users_email_unique` ON `users` (`email`);--> statement-brea
 CREATE TABLE `workspaces` (
 	`id` text PRIMARY KEY NOT NULL,
 	`user_id` text NOT NULL,
-	`container_id` text,
+	`desktop_container_id` text,
+	`cockpit_container_id` text,
+	`network_name` text,
 	`status` text DEFAULT 'NOT_PROVISIONED' NOT NULL,
 	`port` integer,
 	`last_active_at` integer,
+	`started_at` integer,
 	`created_at` integer DEFAULT (unixepoch()) NOT NULL,
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE cascade
 );
