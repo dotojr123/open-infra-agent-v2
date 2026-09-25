@@ -44,6 +44,8 @@ pnpm-lock.yaml
 tmp/
 temp/
 scratch/
+.reversa/
+*.db
 
 # Agent session transcripts (can contain secrets typed/echoed during a session)
 [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*-goal-*.txt

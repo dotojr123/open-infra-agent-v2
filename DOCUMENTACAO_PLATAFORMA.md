@@ -34,21 +34,21 @@ O ambiente mestre, utilizado para gerência global e acesso privilegiado.
 - **Display:** `:0`
 - **Usuário:** `roberto`
 - **Porta Interna VNC:** `5900`
-- **Porta Web (NoVNC):** `6080` (Acessível via Browser)
+- **Porta Web (NoVNC):** `6080` (Acessível via `http://<IP>:6080/` ou `http://<IP>:6080/vnc.html`)
 
 ### 🤖 Ambiente 2: Agente 1 (Worker Isolado)
 Ambiente completamente segregado (Sandbox) dedicado à execução de automações visuais via UI.
 - **Display:** `:1`
 - **Usuário:** `agent1` (Isolado)
 - **Porta Interna VNC:** `5901`
-- **Porta Web (NoVNC):** `6081`
+- **Porta Web (NoVNC):** `6081` (Acessível via `http://<IP>:6081/` ou `http://<IP>:6081/vnc.html`)
 
 ### 🤖 Ambiente 3: Agente 2 (Worker Alternativo)
 Segundo ambiente de execução em massa, preparado para receber delegações de tarefas paralelas (Multi-Threading Visual).
 - **Display:** `:11`
 - **Usuário:** `roberto` (Sessão Secundária)
 - **Porta Interna VNC:** `5911`
-- **Porta Web (NoVNC):** `6011`
+- **Porta Web (NoVNC):** `6091` (Acessível via `http://<IP>:6091/` ou `http://<IP>:6091/vnc.html`)
 
 ---
 
@@ -65,12 +65,16 @@ graph TD
     D -->|Executa no Desktop| F[Display :1 - VNC 5901]
     E -->|Executa no Desktop| G[Display :11 - VNC 5911]
     
-    F -->|WebSocket| H[NoVNC Porta 6081]
-    G -->|WebSocket| I[NoVNC Porta 6011]
+    F -->|WebSocket + Web| H[NoVNC Porta 6081]
+    G -->|WebSocket + Web| I[NoVNC Porta 6091]
     
     H -.->|Acesso Web Browser| J[Monitoramento Externo]
     I -.->|Acesso Web Browser| J
 ```
+
+> [!NOTE]
+> **WebSockify + noVNC Web Server (`--web=/opt/noVNC/`):**
+> Para permitir acesso web direto via browser nas portas `6080`, `6081` e `6091`, o comando do WebSockify no `supervisord.conf` deve sempre incluir `--web=/opt/noVNC/` (ex: `websockify --web=/opt/noVNC/ 6080 localhost:5900`). Sem essa flag, o WebSockify opera apenas como socket proxy e recusa requisições HTTP GET de páginas estáticas com erro `405 Method Not Allowed`. O symlink `/opt/noVNC/index.html -> vnc.html` permite abrir diretamente pela URL raiz `/`.
 
 ---
 
